@@ -1,0 +1,10 @@
+preçoproduto = float(input('Quanto custa o produto que voce quer?'))
+quantiproduto = int(input('Quantos exemplares voce deseja desse produto?'))
+calculo = preçoproduto * quantiproduto
+if calculo > 100.00 :
+    print('Voce mereçe um desconte de 5%')
+    desconto = (calculo * 5) / 100
+    subdesconto = calculo - desconto
+    print('O valor ja descontado da: %3.2f'%subdesconto)
+else :
+    print('O preço do seu produto e %3.2f'%calculo)
