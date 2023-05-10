@@ -20,40 +20,37 @@
     #calculo = calculo - desconto
 #print('O preço do seu produto e %.2f'%calculo)
 
-#preçoproduto = float(input('Quanto custa o produto que voce quer?'))
-#quantiproduto = int(input('Quantos exemplares voce deseja desse produto?'))
-#calculo = preçoproduto * quantiproduto
-#if calculo >= 100.00 :
-    #print('Voce mereçe um desconte de 3%')
-    #desconto = (calculo * 3) / 100
-    #calculo = calculo - desconto
-#if  calculo >= 200.00 :
-    #print('Voce mereçe um desconte de 5%')
-    #desconto = (calculo * 5) / 100
-    #calculo = calculo - desconto
-#else:
-    #print('Voce mereçe um desconte de 10%')
-    #desconto = (calculo * 10) / 100
-    #calculo = calculo - desconto
-#print('O preço do seu produto e %.2f'%calculo)
+preçoproduto = float(input('Quanto custa o produto que voce quer?'))
+quantiproduto = int(input('Quantos exemplares voce deseja desse produto?'))
+calculo = preçoproduto * quantiproduto
+if calculo <= 100.00 :
+    print('Voce mereçe um desconte de 3%')
+    desconto = (calculo * 3) / 100
+    if  calculo <= 200.00 :
+        print('Voce mereçe um desconte de 5%')
+        desconto = (calculo * 5) / 100
+    else:
+    print('Voce mereçe um desconte de 10%')
+    desconto = (calculo * 10) / 100
+calculo = calculo - desconto
+print('O preço do seu produto e %.2f'%calculo)
 
 preçoproduto = float(input('Quanto custa o produto que voce quer?'))
 quantiproduto = int(input('Quantos exemplares voce deseja desse produto?'))
 calculo = preçoproduto * quantiproduto
-if calculo >= 100.00 :
+if calculo <= 100.00 :
     print('Voce mereçe um desconte de 3%')
     desconto = (calculo * 3) / 100
-    calculo = calculo - desconto
-if  calculo >= 200.00 :
+else:
+    if  calculo <= 200.00 :
     print('Voce mereçe um desconte de 5%')
     desconto = (calculo * 5) / 100
-    calculo = calculo - desconto
-if  calculo >= 300.00 :
-    print('Voce mereçe um desconte de 10%')
-    desconto = (calculo * 10) / 100
-    calculo = calculo - desconto
-else:
-    print('Voce mereçe um desconte de 15%')
-    desconto = (calculo * 15) / 100
-    calculo = calculo - desconto
+    else:
+        if  calculo <= 300.00 :
+        print('Voce mereçe um desconte de 10%')
+        desconto = (calculo * 10) / 100
+        else:
+        print('Voce mereçe um desconte de 15%')
+        desconto = (calculo * 15) / 100
+calculo = calculo - desconto
 print('O preço do seu produto e %.2f'%calculo)
