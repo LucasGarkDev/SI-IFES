@@ -9,7 +9,7 @@ Sao divididos em 6 categorias:
 
 */
 
-var valor1, valor2, valor3;
+//var valor1, valor2, valor3;
 //valor1 = 5;
 //valor2 = 2;
 //valor3 = 8;
@@ -28,13 +28,24 @@ var valor1, valor2, valor3;
 //valor2 = 'Macaco';
 //total = valor1 + valor2;
 
-valor1 = 5;
-valor2 = 3;
-valor3 = '5';
+//valor1 = 5;
+//valor2 = 3;
+//valor3 = '5';
 
-total = (valor1 == valor2); //true or false
-total2 = (valor1 == valor3);
-total3 = (valor1 === valor3);
-total4 = (valor1 != valor2);
-alert(total4);
+//total = (valor1 == valor2); //true or false
+//total2 = (valor1 == valor3);
+//total3 = (valor1 === valor3);
+//total4 = (valor1 != valor2);
+//total5 = (valor1 >= valor2);
+
+var idade, eleitor, resultado, confir;
+idade = 63;
+eleitor = (idade <= 16) ? ' Nao tem idade':' Esse pode ser eleitor';
+
+resultado = (idade > 60 && idade < 70);//true //false
+confir = (idade === 63 || idade === 72);
+//alert('O individuo que voce me falou a idade e' + eleitor);
+
+alert('o cadastro 1 esta validade em :' + resultado);
+alert('o cadastro 2 foi confirmado em: ' + confir);
 
