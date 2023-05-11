@@ -1,0 +1,63 @@
+1)
+(a) ((q v p) Λ ~q) → p 
+
+fof(exercicio1a,conjecture,(
+((q|p)&~q)=>p
+)).
+% RESULT: SOT_uSu3v2 - Z3---4.8.9.0 says Theorem - CPU = 0.00 WC = 0.06
+ 
+(b) (p Λ ~p) v r 
+
+fof(exercicio1b,conjecture,(
+(p&~p)|r
+)).
+% RESULT: SOT_xJ4ioE - Z3---4.8.9.0 says CounterSatisfiable - CPU = 0.00 WC = 0.06 
+
+(c) (p Λ ~q) Λ ( ~q → ~p)
+
+fof(exercicio1c,conjecture,(
+(p|~q)&(~q=>~p)
+)).
+% RESULT: SOT_1ZSCas - Z3---4.8.9.0 says CounterSatisfiable - CPU = 0.00 WC = 0.07 
+
+2)
+(a) ~p ⇒ p → q 
+
+fof(exercicio2a,conjecture,(
+((~p=>p)=>q)
+)).
+% RESULT: SOT_0KCp_5 - Z3---4.8.9.0 says CounterSatisfiable - CPU = 0.00 WC = 0.05 
+
+(b) p Λ q Λ (p →r) ⇒ q Λ r 
+
+fof(exercicio2b,conjecture,(
+((p&q)&(p=>r)=>(q&r)
+)).
+
+
+(c) (p → r) Λ ( r→ q) ⇒ p Λ q
+
+fof(exercicio2c,conjecture,(
+(p=>r)&(r=>q)=>(p&q)
+)).
+
+3)
+(a) ~(p v q) ⇔ ~p Λ ~q 
+
+fof(exercicio3a,conjecture,(
+~(p|q)<=>(~p&~q)
+)).
+% RESULT: SOT_SNSwxt - Z3---4.8.9.0 says Theorem - CPU = 0.00 WC = 0.07 
+
+
+(b) (p → r) V (q → r) ⇔ (p V q) → r
+ 
+fof(exercicio3a,conjecture,(
+(p=>r)|(q=>r)<=>(p|q)=>r
+)).
+
+(c) (p → r) Λ (p → q) ⇔ p → (r Λ q)
+
+fof(exercicio3a,conjecture,(
+(p=>r)&(p=>q)<=>(p=>(r&q))
+)).
