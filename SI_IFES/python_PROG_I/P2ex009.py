@@ -1,15 +1,15 @@
 produto = int(input('Voce deseja comprar um produto?,insira seu codigo(1 a 40)'))
 if produto <= 10 :
-    preço = 10.00
+    preco = 10.00
     preco = 10.00
 elif produto <= 20 :
-    preço = 15.00
+    preco = 15.00
     preco = 15.00
 elif produto <= 30 :
-    preço = 20.00
+    preco = 20.00
     preco = 20.00
 elif produto < 40 :
-    preço = 30.00
+    preco = 30.00
 pergadicionar = str(input('Voce deseja adicionar outro produto?')).lower()
 if pergadicionar == 'sim' :
     adicionar = int(input('Qual seria ele?'))
