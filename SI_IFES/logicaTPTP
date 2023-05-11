@@ -31,8 +31,9 @@ fof(exercicio2a,conjecture,(
 (b) p Λ q Λ (p →r) ⇒ q Λ r 
 
 fof(exercicio2b,conjecture,(
-((p&q)&(p=>r)=>(q&r)
+((p&q)&(p=>r))=>(q&r)
 )).
+% RESULT: SOT_IYzT1A - Z3---4.8.9.0 says Theorem - CPU = 0.00 WC = 0.06 
 
 
 (c) (p → r) Λ ( r→ q) ⇒ p Λ q
@@ -40,6 +41,8 @@ fof(exercicio2b,conjecture,(
 fof(exercicio2c,conjecture,(
 (p=>r)&(r=>q)=>(p&q)
 )).
+% RESULT: SOT_NlWFpr - Z3---4.8.9.0 says CounterSatisfiable - CPU = 0.00 WC = 0.06 
+
 
 3)
 (a) ~(p v q) ⇔ ~p Λ ~q 
@@ -53,11 +56,14 @@ fof(exercicio3a,conjecture,(
 (b) (p → r) V (q → r) ⇔ (p V q) → r
  
 fof(exercicio3a,conjecture,(
-(p=>r)|(q=>r)<=>(p|q)=>r
+((p=>r)|(q=>r))<=>((p|q)=>r)
 )).
+% RESULT: SOT_AGbRrA - Z3---4.8.9.0 says CounterSatisfiable - CPU = 0.00 WC = 0.06
 
 (c) (p → r) Λ (p → q) ⇔ p → (r Λ q)
 
 fof(exercicio3a,conjecture,(
-(p=>r)&(p=>q)<=>(p=>(r&q))
+((p=>r)&(p=>q))<=>(p=>(r&q))
 )).
+% RESULT: SOT_hGRvLM - Z3---4.8.9.0 says Theorem - CPU = 0.00 WC = 0.07
+
