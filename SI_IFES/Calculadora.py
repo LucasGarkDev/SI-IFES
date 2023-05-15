@@ -25,6 +25,27 @@ elif num1 == "NOVE" :
 
 #------------------------
 
+if num2 == "UM" :
+    num2 = int(1)
+elif num2 == "DOIS" :
+    num1 = int(2)
+elif num1 == "TRES" :
+    num1 = int(3)
+elif num1 == "QUATRO" :
+    num1 = int(4)
+elif num1 == "CINCO" :
+    num1 = int(5)
+elif num1 == "SEIS" :
+    num1 = int(6)
+elif num1 == "SETE" :
+    num1 = int(7)
+elif num1 == "OITO" :
+    num1 = int(8)
+elif num1 == "NOVE" :
+    num1 = int(9)
+
+#------------------------
+
 if operacao == 'SOMA' :
     calculo = num1 + num2
 elif operacao == 'SUBTRAÇAO' :
