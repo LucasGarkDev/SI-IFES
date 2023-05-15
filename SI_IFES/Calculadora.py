@@ -1,7 +1,7 @@
 #---------MAIN----------
-num1 = str(input('Insira um numero por extenso:'))
+num1 = str(input('Insira um numero por extenso:')).upper()
 operacao = str(input('Insira a operaçao que voce deseja(soma,subtraçao,multiplicaçao,divisao):')).upper()
-num2 = str(input('Insira outro numero para a operaçao:'))
+num2 = str(input('Insira outro numero para a operaçao:')).upper()
 #------------------------
 
 if num1 == "UM" :
@@ -39,4 +39,3 @@ else :
 #---------------------------
 
 print('O valor da operaçao que voce pediu e %d'%calculo)
-
