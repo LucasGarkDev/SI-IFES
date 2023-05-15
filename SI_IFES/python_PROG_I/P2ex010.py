@@ -1,35 +1,19 @@
-import math
-
-# Perguntando idade e peso do paciente
-idade = int(input("Digite a idade do paciente: "))
-peso = float(input("Digite o peso do paciente (em kg): "))
-
-# Calculando a dosagem do medicamento
-if idade >= 12:
-    if peso >= 60:
-        dosagem = 1000
-    else:
-        dosagem = 875
-else:
-    if peso >= 5 and peso < 9.1:
-        dosagem = 125
-    elif peso >= 9.1 and peso < 16.1:
-        dosagem = 250
-    elif peso >= 16.1 and peso < 24.1:
-        dosagem = 375
-    elif peso >= 24.1 and peso < 30:
-        dosagem = 500
-    elif peso >= 30:
-        dosagem = 750
-    else:
-        print("Peso inválido!")
-        exit()
-
-# Calculando a quantidade de gotas por dose
-ml_por_dose = dosagem / 500
-gotas_por_dose = ml_por_dose * 20
-
-# Imprimindo a receita com as informações
-print("\nReceita:\n")
-print(f"Dosagem: {dosagem} mg")
-print(f"Gotas por dose: {gotas_por_dose}")
+idade = int(input('Qual e a sua idade meu bom(a) senhor(a)?'))
+peso = float(input('Qual e o seu peso atual?Em kilogramas por gentileza'))
+if idade >= 12 and peso >= 60 :
+    gotas = 40
+elif idade >= 12 and peso < 60 :
+    gotas = 35
+elif idade < 12 and peso < 5 :
+    print('Sinto lhe informar mais voce esta morrendo fi...')
+elif idade < 12 and peso <= 9 :
+    gotas = 5
+elif idade < 12 and peso <= 16 :
+    gotas = 10
+elif idade < 12 and peso <= 24 :
+    gotas = 15
+elif idade < 12 and peso <= 30 :
+    gotas = 20
+else :
+    gotas = 30
+print('O(a) senhor(a) devera tomar %d gotas do medicamento nas horas de medicaçao'%gotas)
