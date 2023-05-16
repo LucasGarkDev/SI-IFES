@@ -6,8 +6,7 @@ elementos = perguntacompleta.split(" ")
 repetir = True
 num1 = elementos[0]
 operacao = elementos[1]
-complemento = elementos[2]
-num2 = elementos[3]
+num2 = elementos[2]
 if elementos[1] == 'DIVIDIDO':
     num2 = elementos[3]
     complemento = 'POR'
@@ -79,16 +78,20 @@ elif num2 == "NOVE" :
 
 if (operacao == 'MAIOR') and (complemento == 'QUE') :
     if num1 > num2 :
+        calculo = True
         print('Isso esta correto....')
     else :
+        calculo = False
         print('Ta errado isso ai individuo....')
 elif (operacao == 'MENOR') and (complemento == 'QUE') :
     if num1 < num2 :
+        calculo = True
         print('Isso esta correto...')
     else:
-       print('Ta errado isso ai individuo....')
+        calculo = False
+        print('Ta errado isso ai individuo....')
 else :
-    print('Operaçao nao conhecida')
+ print(' ')
 
 
 
@@ -106,7 +109,7 @@ elif operacao == 'ELEVADO' and complemento == 'A':
 elif operacao == 'RAIZ' and complemento == 'DE' :
     calculo = num1 ** (1/num2)
 else :
-    print('Operaçao nao conhecida')
+    print(' ')
 
 #---------------------------
 
