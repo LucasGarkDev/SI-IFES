@@ -4,23 +4,23 @@ nota2 = float(input('Qual foi a nota do segundo jurado?'))
 nota3 = float(input('Qual foi a nota do terceiro jurado?'))
 nota4 = float(input('Qual foi a nota do quarto jurado?'))
 nota5 = float(input('Qual foi a nota do quinto jurado?'))
-if (nota1 > nota2) and (nota1 > nota3) and (nota1 > nota4) and (nota1 > nota5) :
+if (nota1 >= nota2) and (nota1 >= nota3) and (nota1 >= nota4) and (nota1 >= nota5) :
     nota_maior = nota1
-elif (nota2 > nota3) and (nota2 > nota4) and (nota2 > nota5) :
+elif (nota2 >= nota3) and (nota2 >= nota4) and (nota2 >= nota5) :
     nota_maior = nota2
-elif (nota3 > nota4) and (nota3 > nota5) :
+elif (nota3 >= nota4) and (nota3 >= nota5) :
     nota_maior = nota3
-elif(nota4 > nota5) :
+elif(nota4 >= nota5) :
     nota_maior = nota4
 else:
      nota_maior = nota5
-if (nota1 < nota2) and (nota1 < nota3) and (nota1 < nota4) and (nota1 < nota5) :
+if (nota1 <= nota2) and (nota1 <= nota3) and (nota1 <= nota4) and (nota1 <= nota5) :
     nota_menor = nota1
-elif (nota2 < nota3) and (nota2 < nota4) and (nota2 < nota5) :
+elif (nota2 <= nota3) and (nota2 <= nota4) and (nota2 <= nota5) :
     nota_menor = nota2
-elif (nota3 < nota4) and (nota3 < nota5) :
+elif (nota3 <= nota4) and (nota3 <= nota5) :
     nota_menor = nota3
-elif (nota4 < nota5) :
+elif (nota4 <= nota5) :
      nota_menor = nota4
 else:
      nota_menor = nota5
