@@ -1,27 +1,37 @@
 #---------MAIN----------
-
+print('Ola eu sou a calculadora que calculo atravez de String, voce gostaria de fazer alguma conta?')
+print('Se estiver se prepare eu vou perguntar ja ja...so uma observaçao eu so tenho conheço numeros ate o numero 20, ok?!')
 perguntacompleta = str(input('Insira por extenso uma operaçao matematica que voce queira:')).upper()
 elementos = perguntacompleta.split(" ")
-repetir = False
+repetir = True
 num1 = elementos[0]
 operacao = elementos[1]
-num2 = elementos[2]
-complemento = elementos['POR','A','DE']
-if elementos[2] == 'DIVIDIDO':
-    num2 = elementos[4]
+complemento = elementos[2]
+num2 = elementos[3]
+if elementos[1] == 'DIVIDIDO':
+    num2 = elementos[3]
     complemento = 'POR'
-    complemento = elementos[3]
-elif elementos[2] == 'ELEVADO' :
-    num2 = elementos[4]
+    complemento = elementos[2]
+elif elementos[1] == 'ELEVADO' :
+    num2 = elementos[3]
     complemento = 'A'
-    complemento = elementos[3]
-elif elementos[2] == 'RAIZ' :
-    num2 = elementos[4]
+    complemento = elementos[2]
+elif elementos[1] == 'RAIZ' :
+    num2 = elementos[3]
     complemento = 'DE'
-    complemento = elementos[3]
+    complemento = elementos[2]
+elif elementos[1] == 'MAIOR' :
+    num2 = elementos[3]
+    complemento = 'QUE'
+    complemento = elementos[2]
+elif elementos[1] == 'MENOR' :
+    num2 = elementos[3]
+    complemento = 'QUE'
+    complemento = elementos[2]
 else :
-    while repetir:
-    if (num2 != 'DIVIDIDO') or (num2 != 'ELEVADO') or (num2 != 'RAIZ') :
+    num2 = elementos[2]
+
+    
 
 #------------------------
 
@@ -67,17 +77,18 @@ elif num2 == "NOVE" :
 
 #------------------------
 
-if operacao == 'MAIOR QUE' :
+if (operacao == 'MAIOR') and (complemento == 'QUE') :
     if num1 > num2 :
         print('Isso esta correto....')
     else :
         print('Ta errado isso ai individuo....')
-elif operacao == 'MENOR QUE' :
+elif (operacao == 'MENOR') and (complemento == 'QUE') :
     if num1 < num2 :
         print('Isso esta correto...')
     else:
        print('Ta errado isso ai individuo....')
-
+else :
+    print('Operaçao nao conhecida')
 
 
 
@@ -88,14 +99,14 @@ elif operacao == 'MENOS' :
     calculo = num1 - num2
 elif operacao == 'VEZES' :
     calculo = num1 * num2
-elif operacao == 'DIVIDIDO POR' :
+elif operacao == 'DIVIDIDO' and complemento == 'POR' :
     calculo = num1 / num2
-elif operacao == 'ELEVADO A' :
+elif operacao == 'ELEVADO' and complemento == 'A':
     calculo = num1 ** num2
-elif operacao == 'RAIZ DE' :
+elif operacao == 'RAIZ' and complemento == 'DE' :
     calculo = num1 ** (1/num2)
 else :
-    print('Operaçao nao conhecida, por acaso voce nao leu?')
+    print('Operaçao nao conhecida')
 
 #---------------------------
 
