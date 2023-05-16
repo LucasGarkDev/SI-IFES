@@ -3,7 +3,6 @@ print('Ola eu sou a calculadora que calculo atravez de String, voce gostaria de 
 print('Se estiver se prepare eu vou perguntar ja ja...so uma observaçao eu so tenho conheço numeros ate o numero 20, ok?!')
 perguntacompleta = str(input('Insira por extenso uma operaçao matematica que voce queira:')).upper()
 elementos = perguntacompleta.split(" ")
-repetir = True
 num1 = elementos[0]
 operacao = elementos[1]
 num2 = elementos[2]
@@ -29,8 +28,6 @@ elif elementos[1] == 'MENOR' :
     complemento = elementos[2]
 else :
     num2 = elementos[2]
-
-    
 
 #------------------------
 
@@ -76,7 +73,19 @@ elif num2 == "NOVE" :
 
 #------------------------
 
-if (operacao == 'MAIOR') and (complemento == 'QUE') :
+if operacao == 'MAIS' :
+    calculo = num1 + num2
+elif operacao == 'MENOS' :
+    calculo = num1 - num2
+elif operacao == 'VEZES' :
+    calculo = num1 * num2
+elif operacao == 'DIVIDIDO' and complemento == 'POR' :
+    calculo = num1 / num2
+elif operacao == 'ELEVADO' and complemento == 'A':
+    calculo = num1 ** num2
+elif operacao == 'RAIZ' and complemento == 'DE' :
+    calculo = num1 ** (1/num2)
+elif (operacao == 'MAIOR') and (complemento == 'QUE') :
     if num1 > num2 :
         calculo = True
         print('Isso esta correto....')
@@ -91,25 +100,7 @@ elif (operacao == 'MENOR') and (complemento == 'QUE') :
         calculo = False
         print('Ta errado isso ai individuo....')
 else :
- print(' ')
-
-
-
-#------------------------
-if operacao == 'MAIS' :
-    calculo = num1 + num2
-elif operacao == 'MENOS' :
-    calculo = num1 - num2
-elif operacao == 'VEZES' :
-    calculo = num1 * num2
-elif operacao == 'DIVIDIDO' and complemento == 'POR' :
-    calculo = num1 / num2
-elif operacao == 'ELEVADO' and complemento == 'A':
-    calculo = num1 ** num2
-elif operacao == 'RAIZ' and complemento == 'DE' :
-    calculo = num1 ** (1/num2)
-else :
-    print(' ')
+    print('Operaçao nao conhecida')
 
 #---------------------------
 
