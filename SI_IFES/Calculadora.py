@@ -49,6 +49,9 @@ elif num1 == "OITO" :
     num1 = int(8)
 elif num1 == "NOVE" :
     num1 = int(9)
+elif num1 == "DEZ" :
+    num1 = int(10)
+
 
 #------------------------
 
@@ -70,6 +73,8 @@ elif num2 == "OITO" :
     num2 = int(8)
 elif num2 == "NOVE" :
     num2 = int(9)
+elif num2 == "DEZ" :
+    num2 = int(10)
 
 #------------------------
 
