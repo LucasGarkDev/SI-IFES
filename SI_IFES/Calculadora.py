@@ -3,11 +3,9 @@ print('Ola eu sou a calculadora que calculo atravez de String, voce gostaria de 
 print('Se estiver se prepare eu vou perguntar ja ja...so uma observaçao eu so tenho conheço numeros ate o numero 20, ok?!')
 perguntacompleta = str(input('Insira por extenso uma operaçao matematica que voce queira:')).upper()
 elementos = perguntacompleta.split(" ")
-repetir = True
 num1 = elementos[0]
 operacao = elementos[1]
-complemento = elementos[2]
-num2 = elementos[3]
+num2 = elementos[2]
 if elementos[1] == 'DIVIDIDO':
     num2 = elementos[3]
     complemento = 'POR'
@@ -31,8 +29,6 @@ elif elementos[1] == 'MENOR' :
 else :
     num2 = elementos[2]
 
-    
-
 #------------------------
 
 if num1 == "UM" :
@@ -53,6 +49,9 @@ elif num1 == "OITO" :
     num1 = int(8)
 elif num1 == "NOVE" :
     num1 = int(9)
+elif num1 == "DEZ" :
+    num1 = int(10)
+
 
 #------------------------
 
@@ -74,25 +73,11 @@ elif num2 == "OITO" :
     num2 = int(8)
 elif num2 == "NOVE" :
     num2 = int(9)
+elif num2 == "DEZ" :
+    num2 = int(10)
 
 #------------------------
 
-if (operacao == 'MAIOR') and (complemento == 'QUE') :
-    if num1 > num2 :
-        print('Isso esta correto....')
-    else :
-        print('Ta errado isso ai individuo....')
-elif (operacao == 'MENOR') and (complemento == 'QUE') :
-    if num1 < num2 :
-        print('Isso esta correto...')
-    else:
-       print('Ta errado isso ai individuo....')
-else :
-    print('Operaçao nao conhecida')
-
-
-
-#------------------------
 if operacao == 'MAIS' :
     calculo = num1 + num2
 elif operacao == 'MENOS' :
@@ -105,6 +90,20 @@ elif operacao == 'ELEVADO' and complemento == 'A':
     calculo = num1 ** num2
 elif operacao == 'RAIZ' and complemento == 'DE' :
     calculo = num1 ** (1/num2)
+elif (operacao == 'MAIOR') and (complemento == 'QUE') :
+    if num1 > num2 :
+        calculo = True
+        print('Isso esta correto....')
+    else :
+        calculo = False
+        print('Ta errado isso ai individuo....')
+elif (operacao == 'MENOR') and (complemento == 'QUE') :
+    if num1 < num2 :
+        calculo = True
+        print('Isso esta correto...')
+    else:
+        calculo = False
+        print('Ta errado isso ai individuo....')
 else :
     print('Operaçao nao conhecida')
 
