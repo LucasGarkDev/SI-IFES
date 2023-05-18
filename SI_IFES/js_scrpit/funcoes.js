@@ -1,11 +1,11 @@
 /* e um bloco de codigo projetado para uma tarefa especifica
 como se fosse mini-programinhas para contrinuir para o codigo*/
 //Funçao de soma:
-function soma(valor1,valor2){
+function soma(valor1, valor2) {
     return valor1 + valor2;
 }
-
-document.getElementById("texto").innerHTML = soma(10, 10);
+document.getElementById("texto").innerHTML = "Apenas um texto";
+document.getElementById("macaco").innerHTML = soma(10, 10);
 // function soma(valor1,valor2){
 //     return valor1 + valor2;
 // }
