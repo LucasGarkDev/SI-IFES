@@ -1,21 +1,38 @@
-# Faça um programa para ler vários números positivos entre 1 e 1000, 
-# validar e só parar quando o usuário digitar -1. 
-# No final imprima o maior número, a quantidade de números
-# pares e a quantidade de números ímpares, 
-# a média dos números pares e a média dos
-# números ímpares e a soma total de todos os números lidos.
-
-#leitura e soma dos numeros
-acumulador = 0
-contador = 1
+#Inicializar
+numerosPares = 0
+numerosImpares = 0
 num = int(input("Digite um numero: "))
+while num > 1000 :
+    print("Numero Invalido")
+    num = int(input("Digite outro numero: "))
+maiorNum = num
+#Loop de escrita dos numeros
 while num > 0 :
+    #par
+    if (num % 2) == 0 :
+        somaPares = somaPares + num
+        numerosPares = numerosPares + 1
+    #impar
+    else :
+        somaImpares = somaImpares + num
+        numerosImpares = numerosImpares + 1
+
+    #para ver se o numero e maior
+    if num > maiorNum :
+        maiorNum = num
+
+    #leitura do numero
     num = int(input("Digite um numero: "))
-    soma = soma + acumulador
-    contador = contador + 1
+    while num > 1000 :
+        print("Numero Invalido")
+        num = int(input("Digite outro numero: "))
 
+mediaPares = somaPares / numerosPares
+mediaImpares = somaImpares / numerosImpares
+total = somaPares + somaImpares
 
-#lembrar de tentar usar o contador como divisor da media, pois voce vai ter que fazer esse codigo
-#todo dentro de um While, alem disso o acumulador devera valer o mesmo valor de "num"
-
-
+print("")
+print("")
+print("")
+print("")
+print("")
