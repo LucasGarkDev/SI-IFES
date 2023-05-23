@@ -15,4 +15,7 @@ while num > 0 :
     contador = contador + 1
 
 
+#lembrar de tentar usar o contador como divisor da media, pois voce vai ter que fazer esse codigo
+#todo dentro de um While, alem disso o acumulador devera valer o mesmo valor de "num"
+
 
