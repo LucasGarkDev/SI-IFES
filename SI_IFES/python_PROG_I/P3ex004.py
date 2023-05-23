@@ -6,6 +6,7 @@ while num > 1000 :
     print("Numero Invalido")
     num = int(input("Digite outro numero: "))
 maiorNum = num
+menorNum = 99999
 #Loop de escrita dos numeros
 while num > 0 :
     #par
@@ -20,6 +21,9 @@ while num > 0 :
     #para ver se o numero e maior
     if num > maiorNum :
         maiorNum = num
+        
+     if num < menorNum :
+        menorNum = num
 
     #leitura do numero
     num = int(input("Digite um numero: "))
