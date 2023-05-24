@@ -2,7 +2,7 @@
 numDigitado = int(input("Digite um numero inteiro para determinar o tamanho da sequencia de fibonacci"))
 
 #montar a sequencia de fibonaticci
-cont = 3
+cont = 4
 if numDigitado > 3 :
     if numDigitado == 3 :
         if numDigitado == 2 or numDigitado > 2:
