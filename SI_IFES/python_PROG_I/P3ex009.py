@@ -39,13 +39,12 @@ while acabouClientes == "sim" :
         print("Peso invalido")
         peso = float(input("Digite o peso desse cliente,novamente: "))
     #calculo
-    imc = peso / pow(altura,2)
-    if imc <= maisGordo :
-        imc = codigo
-        maisGordo = imc
-    if imc >= maisMagro :
-        imc = codigo
-        maisMagro = imc
+    if peso <= maisGordo :
+        peso = codigo
+        maisGordo = peso
+    if peso >= maisMagro :
+        peso = codigo
+        maisMagro = peso
     somaPesos = somaPesos + peso
     contP = contP + 1
 
