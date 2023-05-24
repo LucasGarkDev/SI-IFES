@@ -12,14 +12,17 @@ while num2 < 0 :
 
 #calcular o MDC
 divisor = 2
-mdc = 1
-quantidadeDeDivisoes = 0
-while (divisor > 1) and (divisor % divisor != 0) :
-    if (num1 % divisor == 0) and (num2 % divisor == 0) :
-        mdc = mdc * divisor
-        quantidadeDeDivisoes = quantidadeDeDivisoes + 1
-        divisor = divisor + 1
-    divisor = divisor + 1  
-mdcReal = mdc / quantidadeDeDivisoes
-print("o MDC desses numeros e: %d"%mdcReal)
-    
+cont = 0
+quantidadeDeNumeros = 1
+while num1 != 0 and num2 != 0 :
+    if (divisor > 1) and (divisor // (2 ** (1/2)) == False) :
+        if (num1 % divisor == 0) and (num2 % divisor == 0):
+            acumulo = acumulo * divisor
+            cont = cont + 1
+            quantidadeDeNumeros = quantidadeDeNumeros + 1
+        else :
+            cont = cont + 1
+    else :
+        cont = cont + 1
+mdc = acumulo ** (1/quantidadeDeNumeros)
+print("O MDC desses dois numeros e: %.2f"%mdc)
