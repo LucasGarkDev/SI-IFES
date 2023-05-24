@@ -14,12 +14,10 @@ while num2 < 0 :
 anterior = num1
 atual = num2
 resto = anterior % atual
-
 while resto != 0:
     anterior = atual
     atual = resto
     resto = anterior % atual
-
 print("MDC(%d,%d)=%d" %(num1,num2,atual))
 # divisor = 2
 # cont = 0
