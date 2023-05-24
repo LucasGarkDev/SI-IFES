@@ -1,42 +1,56 @@
-#Inicializar
-numerosPares = 0
-numerosImpares = 0
-num = int(input("Digite um numero: "))
-while num > 1000 :
-    print("Numero Invalido")
-    num = int(input("Digite outro numero: "))
-maiorNum = num
-menorNum = 99999
-#Loop de escrita dos numeros
+#INICIALIZAÇÃO
+contPares = 0
+contImpares = 0
+somaPares = 0
+somaImpares = 0
+
+maior = -1
+menor = 9999999
+
+# LER O PRIMEIRO NUMERO
+num = int ( input("Número: "))
+while num > 1000:
+    print("Número inválido!")
+    num = int ( input("Número: "))
+
+#maior = num
+#menor = num
+
 while num > 0 :
-    #par
-    if (num % 2) == 0 :
+
+    # CALCULOS
+    if num%2 == 0:
+        #PAR
         somaPares = somaPares + num
-        numerosPares = numerosPares + 1
-    #impar
-    else :
+        contPares = contPares + 1
+    else:
+        #IMPAR
         somaImpares = somaImpares + num
-        numerosImpares = numerosImpares + 1
+        contImpares = contImpares + 1
 
-    #para ver se o numero e maior
-    if num > maiorNum :
-        maiorNum = num
-        
-     if num < menorNum :
-        menorNum = num
+    # MAIOR
+    if num > maior:
+        maior = num
 
-    #leitura do numero
-    num = int(input("Digite um numero: "))
-    while num > 1000 :
-        print("Numero Invalido")
-        num = int(input("Digite outro numero: "))
+    # MENOR
+    if num < menor:
+        menor = num
 
-mediaPares = somaPares / numerosPares
-mediaImpares = somaImpares / numerosImpares
-total = somaPares + somaImpares
+    # LER O NUMERO
+    num = int ( input("Número: "))
+    while num > 1000:
+        print("Número inválido!")
+        num = int ( input("Número: "))
 
-print("")
-print("")
-print("")
-print("")
-print("")
+# RESULTADO
+mediaPares = somaPares / contPares
+mediaImpares = somaImpares / contImpares
+
+print("Resultado: ")
+print("Pares: %d" %contPares)
+print("Ímpares: %d" %contImpares)
+print("Média dos Pares: %.1f" %mediaPares)
+print("Média dos Ímpares: %.1f" %mediaImpares)
+print("Soma total: %d" %(somaPares + somaImpares) )
+print("Maior: %.d" %maior)
+print("Menor: %.d" %menor)
