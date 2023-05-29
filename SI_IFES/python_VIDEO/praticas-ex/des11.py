@@ -10,19 +10,21 @@ while num < 0 :
 
 #validando se ele e primo ou nao
 numPrimo = 0
-
+divisor = 2
+numPrimo = True
 if num > 1 :
-    divisor = 2
+
     while divisor < num :
         if num % divisor == 0 :
             print("O numero %d, não e primo."%num)
-            num = int(input("Digite novamente: "))
-        divisor = divisor + 1
-    else :
-        print("O numero %d, e primo."%num)
-        numPrimo = num
+            numPrimo = False
+            divisor = num + 1
+        else :
+            divisor = divisor + 1
+    
+    if numPrimo == True :
+        print("O numero %d, e primo."%num) 
+
 else :
     print("O numero tem que ser maior que 1.")
     um = int(input("Digite novamente: "))
-
-
