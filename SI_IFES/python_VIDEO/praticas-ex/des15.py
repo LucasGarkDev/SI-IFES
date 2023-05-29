@@ -9,18 +9,20 @@ while numInformado < 2 :
 
 #validar se o numero e primo ou nao
 num = 2
-numPrimo = 0
-numNaoPrimo = 0
+divisor = 2
+numPrimo = True
 while num <= numInformado:
-    if num > 1 :
-        divisor = 2
-        while divisor < num :
-            if num % divisor == 0 :
-                numNaoPrimo = num
-            divisor = divisor + 1
+
+    while divisor < num :
+        if num % divisor == 0 :
+            numPrimo = False
+            divisor = num + 1
         else :
-            numPrimo = num
-            print(numPrimo)
+            divisor = divisor + 1
+    
+    if numPrimo == True :
+        print(num)
+    
     num = num + 1
     
 
