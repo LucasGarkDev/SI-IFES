@@ -17,9 +17,7 @@ if num > 1 :#toda a funçao abaixo apenas diz que o numero nao e primo, se nao c
         if num % divisor == 0 :#caso ele caia aqui nos ja sabemos que ele nao e primo
             numPrimo = False
             print("O numero %d nao e Primo"%num)
-            divisor = num + 1 #isso vai servir para quebrar esse loop
-        else :
-            divisor = divisor + 1
+        divisor = divisor + 1
     
     if numPrimo == True :
         print("O numero %d e primo"%num)       
