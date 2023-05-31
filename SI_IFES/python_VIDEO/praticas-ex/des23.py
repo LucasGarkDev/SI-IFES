@@ -5,12 +5,12 @@
 
 #loop para repetir o processo 10 vezes
 alunoMaisAlto = 0
-maiorAltura = 0
+maiorAltura = 1.50
 alunoMaisBaixo = 0
-menorAltura = 0
+menorAltura = 1.50
 cont = 1 
-while cont <= 3 :
-    #pedidindo a altura e o numero de 10 alunos
+while cont <= 10 :
+    #pedidindo a altura e o numero dos alunos
     numAluno = int(input("Digite o numero do aluno: "))
     while numAluno <= 0 :
         print("Numero Invalido")
@@ -26,11 +26,9 @@ while cont <= 3 :
     if altura > maiorAltura :
         maiorAltura = altura
         alunoMaisAlto = numAluno
-    elif altura < menorAltura :
+    if altura < menorAltura :
         menorAltura = altura
         alunoMaisBaixo = numAluno
-    
-
     
 
     cont = cont + 1
