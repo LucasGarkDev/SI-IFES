@@ -5,11 +5,11 @@
 #-------funçoes------------------
 #funçao para pedir um numero e validar ele
 def pedirNum():
-    num = int(input("Digite um numero"))
+    num = int(input("Digite um numero: "))
     while num <= 0 :
         print("Numero Invalido")
         num = int(input("Digite outro numero: "))
-    print(num)
+    print("Passei no pedirNum")
     return num
 
 
@@ -17,7 +17,7 @@ def pedirNum():
 def maior(numCompara, maiorNum):
     if numCompara > maiorNum :
         maiorNum = numCompara
-
+    print("Passei no maior")
     return maiorNum
 
 
@@ -25,24 +25,27 @@ def maior(numCompara, maiorNum):
 def menor(numCompara, menorNum):
     if numCompara < menorNum :
         menorNum = numCompara
-    
+    print("Passei no menor")
     return menorNum
 
 #---------------main------------------
-#inicializar
-maiorNum = 0
-menorNum = 3
-cont = 0
+def main() :
+    #inicializar
+    maiorNum = 0
+    menorNum = 3
+    cont = 1
 
-#leitura
+    #leitura
 
-numCompara = pedirNum()
-maior(numCompara,maiorNum)
-menor(numCompara,menorNum)
-while cont < 3 :
     numCompara = pedirNum()
-    maxNum = maior(numCompara,maiorNum)
-    minNum = menor(numCompara,menorNum)
-    cont = cont + 1
-print("O maior numero e: %d"%maxNum)
-print("O menor numero e: %d"%minNum)
+    maior(numCompara,maiorNum)
+    menor(numCompara,menorNum)
+    while cont < 3 :
+        numCompara = pedirNum()
+        maxNum = maior(numCompara,maiorNum)
+        minNum = menor(numCompara,menorNum)
+        cont = cont + 1
+    print("O maior numero e: %d"%maxNum)
+    print("O menor numero e: %d"%minNum)
+
+main()
