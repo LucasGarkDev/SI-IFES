@@ -14,22 +14,28 @@ def nomePedir() :
         print("Nome invalido")
         nomeUsuario = str(input("Digite o nome do usuario: ")).title()
         contagemNome = len(nomeUsuario)
+    return nomeUsuario
     
 
 #funçao para pedir e validar a senha
-def senhaPedir(nomeUsuario) :
+def senhaPedir(recebeNome) :
     senha = str(input("Digite a senha do usuario: "))
     contagemSenha = len(senha)
-    while senha == nomeUsuario or contagemSenha < 6 :
+    while senha == recebeNome or contagemSenha < 6 :
         print("Senha invalida")
         senha = str(input("Digite a senha do usuario: "))
         contagemSenha = len(senha)
+    return senha
 
-
-
-
-
-print("O usuario possui o nome: %s"%nomeUsuario)
-print("A senha e: %s"%senha)
 
 #----------------main----------------------------------
+
+def main() :
+    outroUsuario = "SIM"
+    while outroUsuario == "SIM" :
+        recebeNome = nomePedir()
+        recebeSenha = senhaPedir(recebeNome)
+        print("O nome do usuario e: %s"%recebeNome)
+        print("A senha do usuario e: %s"%recebeSenha)
+        outroUsuario = str(input("Voce deseja fazer login de outro usuario?")).upper()
+main()
