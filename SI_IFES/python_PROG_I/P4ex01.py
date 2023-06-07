@@ -18,10 +18,10 @@ def nomePedir() :
     
 
 #funçao para pedir e validar a senha
-def senhaPedir(recebeNome) :
+def senhaPedir() :
     senha = str(input("Digite a senha do usuario: "))
     contagemSenha = len(senha)
-    while senha == recebeNome or contagemSenha < 6 :
+    while senha == contagemSenha < 6 :
         print("Senha invalida")
         senha = str(input("Digite a senha do usuario: "))
         contagemSenha = len(senha)
@@ -34,8 +34,11 @@ def main() :
     outroUsuario = "SIM"
     while outroUsuario == "SIM" :
         recebeNome = nomePedir()
-        recebeSenha = senhaPedir(recebeNome)
+        recebeSenha = senhaPedir()
+        while recebeSenha == recebeNome :
+            print("Senha invalida")
+            recebeSenha = str(input("Digite a senha do usuario: "))
         print("O nome do usuario e: %s"%recebeNome)
         print("A senha do usuario e: %s"%recebeSenha)
-        outroUsuario = str(input("Voce deseja fazer login de outro usuario?")).upper()
+        outroUsuario = str(input("Voce deseja fazer login de outro usuario? ")).upper()
 main()
