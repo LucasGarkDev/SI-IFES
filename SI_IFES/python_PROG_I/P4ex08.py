@@ -18,16 +18,13 @@
 #-----------------funçoes--------------------
 #funçao valor pagamento
 def valorPagamento(valor,dias) :
-    if valor > 0 :
-        if dias <= 0:
-            calculo = valor * (0.03 * valor)
-            return calculo
-        else:
-            acrescimo = dias * 0.001
-            calculo = valor * acrescimo
-            return calculo
-    else :
-        relatorio()
+    if dias <= 0:
+        calculo = valor + (0.03 * valor)
+        return calculo
+    else:
+        acrescimo = dias * 0.001
+        calculo = valor + (valor * acrescimo)
+        return calculo
 
 #funçao para pedir o valor da prestaçao
 def valorPrestaçao() :
@@ -54,7 +51,18 @@ def relatorio(valor,dias) :
     print("A quantidade de dias atrasados atualmente e: %d"%diasDoDia)
     print("----------------------------")
 #-----------------main-----------------------
-valorDaPrestaçao = valorPrestaçao()
-diasAtraso = numDiasAtraso()
-dadosRelatorio = relatorio(valorDaPrestaçao,diasAtraso)
-pagamento = valorPagamento(valorDaPrestaçao,diasAtraso)
+def main() :
+    somaPrestaçao = 0
+    somaDias = 0
+    valorDaPrestaçao = 1
+    while valorDaPrestaçao != 0:
+        valorDaPrestaçao = valorPrestaçao()
+        diasAtraso = numDiasAtraso()
+        somaPrestaçao = somaPrestaçao + valorDaPrestaçao
+        somaDias = somaDias + diasAtraso
+        pagamento = valorPagamento(valorDaPrestaçao,diasAtraso)
+        print("O valor do pagamento foi: %.2f"%pagamento)
+    relatorio(somaPrestaçao,somaDias) 
+      
+
+main()
