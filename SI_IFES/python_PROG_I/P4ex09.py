@@ -79,6 +79,7 @@ def guardarPonto(ponto) :
 #-----------------------main---------------------------
 def main():
     rodar = 1
+    turno = False
     while turno == False:
         cont = 1
         turno = vezJogador(cont,rodar)
