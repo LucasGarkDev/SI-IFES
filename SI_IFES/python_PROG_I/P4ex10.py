@@ -11,7 +11,7 @@ def lancarDado():
  return random.randint(1,6)
 
 #funçao para fazer a primeira vez
-def vezJogador(primeiraVez,saldo,aposta):
+def vezJogador(saldo,aposta):
     print("------------Vez do jogador---------------") 
     input("Pressione ENTER para lançar os dados.")
     d1 = lancarDado()
@@ -21,14 +21,31 @@ def vezJogador(primeiraVez,saldo,aposta):
     print("Dado 2: %d" %d2)
     print("SOMA: %d" %soma)
     print("---------------------")
-    guardar = guardarPonto(soma,primeiraVez,saldo,aposta)
-    if guardar == 0:
+    guardar = guardarPonto(soma,saldo,aposta)
+    if guardar == True :
         encerra = True
         return encerra
     return guardar
 
+#funçao para guardar os pontos:
+def guardarPonto(ponto,saldo,aposta) :
+    if ponto == 11 or ponto == 7 :
+        print("Voce ganhou!!!")
+        i = saldoAjuste(saldo,aposta)
+        return i
+    elif ponto == 2 or ponto == 3 or ponto == 12 :
+        print("Voce perdeu!!!")
+        i = saldoAjuste(saldo,-aposta)
+        return i
+    else :
+        pontoAtual = ponto
+        print("--------------------------------")
+        print("      O SEU PONTO E %d      "%ponto)
+        print("--------------------------------")
+        return pontoAtual
+
 #funçao para as proximas vezes
-def proximasVezes(pontoGuardado,primeiraVez,saldo,aposta) :
+def proximasVezes(pontoGuardado,saldo,aposta) :
     encerra = False
     input("Pressione ENTER para lançar os dados.")
     d1 = lancarDado()
@@ -38,7 +55,7 @@ def proximasVezes(pontoGuardado,primeiraVez,saldo,aposta) :
     print("Dado 2: %d" %d2)
     print("SOMA: %d" %soma)
     print("---------------------")
-    decisao = ganhouPerdeu(soma,pontoGuardado,primeiraVez,saldo,aposta)
+    decisao = ganhouPerdeu(soma,pontoGuardado,saldo,aposta)
     if decisao == True:
         encerra = True
         return encerra
@@ -46,44 +63,27 @@ def proximasVezes(pontoGuardado,primeiraVez,saldo,aposta) :
 
 
 #funçao pare verificar se ganhou ou perdeu
-def ganhouPerdeu(rolagem,ponto,primeiraVez,saldo,aposta) :
+def ganhouPerdeu(rolagem,ponto,saldo,aposta) :
     if rolagem == 7:
         encerra = True
         print("Voce perdeu!!!")
-        derrota = perdeuAposta(primeiraVez,saldo,aposta)
+        calculo = saldoAjuste(saldo,-aposta)
+        registraSaldo(calculo,saldo)
         return encerra
     elif rolagem == ponto :
         encerra = True
         print("Voce ganhou!!!")
-        vitoria = ganhouAposta(primeiraVez,saldo,aposta)
+        calculo = saldoAjuste(saldo,aposta)
+        registraSaldo(calculo,saldo)
         return encerra
     else :
         encerra = False
         return encerra
 
-    
-#funçao para guardar os pontos:
-def guardarPonto(ponto,primeiraVez,saldo,aposta) :
-    if ponto == 11 or ponto == 7 :
-        encerra = True
-        print("Voce ganhou!!!")
-        vitoria = ganhouAposta(primeiraVez,saldo,aposta)
-        return encerra
-    elif ponto == 2 or ponto == 3 or ponto == 12 :
-        perdeu = 0
-        print("Voce perdeu!!!")
-        derrota = perdeuAposta(primeiraVez,saldo,aposta)
-        return perdeu
-    else :
-        pontoAtual = ponto
-        print("--------------------------------")
-        print("      O SEU PONTO E %d      "%ponto)
-        print("--------------------------------")
-        return pontoAtual
 
 #funçao para guardar o valor apostado
 def valorInicial(saldo) :
-    saldo = 100.00
+    saldo = saldo
     valorAposta = float(input("Digite o valor da aposta: "))
     while valorAposta > saldo :
         print("Voce nao tem dinheiro para a aposta")
@@ -93,36 +93,34 @@ def valorInicial(saldo) :
 #funçao para perguntar se quer continuar
 def outroN() :
     again = str(input("Voce deseja continuar? ")).upper()
-    while again != "sim" and again != "nao" :
+    while again != "SIM" and again != "NAO" :
         print("Impossivel operaçao")
         again = str(input("Voce deseja continuar? ")).upper()
     return again
 
-#funçao perdeu 
-def perdeuAposta(primeiraVez,saldo,aposta):
-    if primeiraVez == 0 :
-        saldo = saldo - aposta
-        print("Voce esta %.2f reais"%saldo)
+#funçao para adicionar ou retirar saldo
+def saldoAjuste(saldo,soma) :
+    saldo = saldo + (soma)
+    print("Voce esta com %.2f"%saldo)
     return saldo
 
-#funçao ganhou
-def ganhouAposta(primeiraVez,saldo,aposta):
-    if primeiraVez == True :
-        saldo = saldo + aposta
-        print("Voce esta %.2f reais"%saldo)
-    return saldo
-
+#funçao para guardar saldo
+def registraSaldo(saldo,saldoRegistrado) :
+    saldoRegistrado = saldoRegistrado + saldo
+    return saldoRegistrado
 #-----------------------main---------------------------
 def main():
     outraVez = "SIM"
     primeiraVez = False
+    saldo = 100.00
     while outraVez == "SIM" :
-        saldo = 100.00
+        registrarSaldo = registraSaldo(saldo,saldo)
+        saldo = registrarSaldo
         aposta = valorInicial(saldo)
-        primeiraVez = vezJogador(primeiraVez,saldo,aposta)
+        primeiraVez = vezJogador(saldo,aposta)
         proximaVez = False
         while proximaVez == False :
-            proximaVez = proximasVezes(primeiraVez,primeiraVez,saldo,aposta)
+            proximaVez = proximasVezes(primeiraVez,saldo,aposta)
         outraVez = outroN()
        
 main()
