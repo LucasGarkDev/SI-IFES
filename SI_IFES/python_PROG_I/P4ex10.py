@@ -113,14 +113,13 @@ def main():
     primeiraVez = False
     saldo = 100.00
     registrarSaldo = 0
+    aposta = valorInicial(saldo)
+    primeiraVez = vezJogador(saldo,aposta)
     while outraVez == "SIM" :
-        saldor = registrarSaldo
-        aposta = valorInicial(saldo)
-        primeiraVez = vezJogador(saldo,aposta)
         proximaVez = False
         while proximaVez == False :
             proximaVez = proximasVezes(primeiraVez,saldo,aposta)
-        registrarSaldo = registraSaldo(saldor,saldor)
+        registrarSaldo = registraSaldo(registrarSaldo,saldo)
         outraVez = outroN()
        
 main()
