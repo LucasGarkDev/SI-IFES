@@ -22,21 +22,20 @@ def vezJogador(saldo,aposta):
     print("SOMA: %d" %soma)
     print("---------------------")
     guardar = guardarPonto(soma,saldo,aposta)
-    if guardar == True :
-        encerra = True
-        return encerra
     return guardar
 
 #funçao para guardar os pontos:
 def guardarPonto(ponto,saldo,aposta) :
     if ponto == 11 or ponto == 7 :
+        ganhou = True
         print("Voce ganhou!!!")
-        i = saldoAjuste(saldo,aposta)
-        return i
+        saldoAjuste(saldo,aposta)
+        return ganhou
     elif ponto == 2 or ponto == 3 or ponto == 12 :
+        perdeu = True
         print("Voce perdeu!!!")
-        i = saldoAjuste(saldo,-aposta)
-        return i
+        saldoAjuste(saldo,-aposta)
+        return perdeu
     else :
         pontoAtual = ponto
         print("--------------------------------")
@@ -69,12 +68,14 @@ def ganhouPerdeu(rolagem,ponto,saldo,aposta) :
         print("Voce perdeu!!!")
         calculo = saldoAjuste(saldo,-aposta)
         registraSaldo(calculo,saldo)
+        outroN()
         return encerra
     elif rolagem == ponto :
         encerra = True
         print("Voce ganhou!!!")
         calculo = saldoAjuste(saldo,aposta)
         registraSaldo(calculo,saldo)
+        outroN()
         return encerra
     else :
         encerra = False
@@ -113,14 +114,15 @@ def main():
     outraVez = "SIM"
     primeiraVez = False
     saldo = 100.00
+    registrarSaldo = 0
     while outraVez == "SIM" :
-        registrarSaldo = registraSaldo(saldo,saldo)
-        saldo = registrarSaldo
+        saldor = registrarSaldo
         aposta = valorInicial(saldo)
         primeiraVez = vezJogador(saldo,aposta)
         proximaVez = False
         while proximaVez == False :
             proximaVez = proximasVezes(primeiraVez,saldo,aposta)
+        registrarSaldo = registraSaldo(saldor,saldo)
         outraVez = outroN()
        
 main()
