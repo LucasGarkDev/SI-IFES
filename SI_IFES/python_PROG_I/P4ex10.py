@@ -11,75 +11,105 @@ def lancarDado():
  return random.randint(1,6)
 
 #funçao para fazer a primeira vez
-def vezJogador(rodar):
-    print("------------Vez do jogador---------------")
+def vezJogador():
+    print("------------Vez do jogador---------------") 
     input("Pressione ENTER para lançar os dados.")
     d1 = lancarDado()
     d2 = lancarDado()
     soma = d1 + d2
-    win = deuVitoria(soma)
-    guarda = win 
-    guardarPonto(win,rodar,guarda)
-    encerra = False
     print("Dado 1: %d" %d1)
     print("Dado 2: %d" %d2)
     print("SOMA: %d" %soma)
     print("---------------------")
-    return encerra
-
-#funçao para as proximas vezes
-def proximasVezes() :
-    
-
-#funçao de verificar se teve ganhador
-def verificaGanhou(ponto) :
-    pontoAtual = ponto
-    return pontoAtual
-
-
-#funçao de verficar se deu ponto
-def deuVitoria(soma) :
-    if soma == 11  or soma == 7 :
-        ganhou = True
-        return ganhou
-    if soma == 4 or soma == 5 or soma == 6 or soma == 8 or soma == 9 or soma == 10 :
-        ponto = soma
-        return ponto
-
-#função para ver se deu craps
-def craps(d) :
-    if d == 3 or d == 2 :
-        perdeu = True
-        if perdeu == True :
-            print("Voce perdeu!!!,voce tirou: %d"%d)
-            encerra = True
-            return encerra
-    
-#funçao para guardar os pontos:
-def guardarPonto(ponto,rodar,pontoAtual) :
-    if ponto == True :
-        print("Voce ganhou!!!")
+    guardar = guardarPonto(soma)
+    if guardar == 0:
         encerra = True
         return encerra
+    return guardar
+
+#funçao para as proximas vezes
+def proximasVezes(pontoGuardado) :
+    encerra = False
+    input("Pressione ENTER para lançar os dados.")
+    d1 = lancarDado()
+    d2 = lancarDado()
+    soma = d1 + d2
+    print("Dado 1: %d" %d1)
+    print("Dado 2: %d" %d2)
+    print("SOMA: %d" %soma)
+    print("---------------------")
+    decisao = ganhouPerdeu(soma,pontoGuardado)
+    if decisao == True:
+        encerra = True
+        return encerra
+    return encerra
+
+
+#funçao pare verificar se ganhou ou perdeu
+def ganhouPerdeu(rolagem,ponto) :
+    if rolagem == 7:
+        encerra = True
+        print("Voce perdeu!!!")
+        return encerra
+    elif rolagem == ponto :
+        encerra = True
+        print("Voce ganhou!!!")
+        return encerra
     else :
-        if rodar == 1:
-            pontoAtual = ponto
-            return pontoAtual
-        else :
-            if ponto == pontoAtual :
-                print("Voce ganhou!!!")
-                encerra = True
-                return encerra
+        encerra = False
+        return encerra
+
+    
+#funçao para guardar os pontos:
+def guardarPonto(ponto) :
+    if ponto == 11 or ponto == 7 :
+        encerra = True
+        print("Voce ganhou!!!")
+        return encerra
+    elif ponto == 2 or ponto == 3 or ponto == 12 :
+        perdeu = 0
+        print("Voce perdeu!!!")
+        return perdeu
+    else :
+        pontoAtual = ponto
+        print("--------------------------------")
+        print("      O SEU PONTO E %d      "%ponto)
+        print("--------------------------------")
+        return pontoAtual
+
+#funçao para guardar o valor apostado
+def valorInicial(saldo) :
+    saldo = 100.00
+    valorAposta = float(input("Digite o valor da aposta: "))
+    while valorAposta > saldo :
+        print("Voce nao tem dinheiro para a aposta")
+        valorAposta = float(input("Digite o valor da aposta: "))
+    return valorAposta
+
 
 #-----------------------main---------------------------
 def main():
-    rodar = 1
-    turno = False
-    # saldo1 = 100.00
-    # saldo2 = 100.00
-    while turno == False:
-        cont = 1
-        turno = vezJogador(rodar)
-    print("Jogo encerrado.")
-
+    saldo = 100.00
+    aposta = valorInicial(saldo)
+    primeiraVez = vezJogador()
+    if primeiraVez == True :
+        saldo = saldo * aposta
+        print("Voce esta %.2f reais"%saldo)
+        encerra = True
+        return encerra
+    proximaVez = False
+    if primeiraVez == 0 :
+        saldo = saldo - aposta
+        print("Voce esta %.2f reais"%saldo)
+    while proximaVez == False :
+        proximaVez = proximasVezes(primeiraVez)
+        if proximaVez == True :
+            saldo = saldo * aposta
+            print("Voce esta %.2f reais"%saldo)
+            encerra = True
+            return encerra
+        if proximaVez == 0 :
+            saldo = saldo - aposta
+            print("Voce esta %.2f reais"%saldo)
+       
 main()

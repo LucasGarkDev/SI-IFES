@@ -12,80 +12,79 @@ import random
 def lancarDado():
  return random.randint(1,6)
 
-#funçao para fazer a vez de cada jogador
-def vezJogador(cont,rodar):
-    print("------------Vez do jogador %d---------------"%cont)
+#funçao para fazer a primeira vez
+def vezJogador():
+    print("------------Vez do jogador---------------")
     input("Pressione ENTER para lançar os dados.")
     d1 = lancarDado()
-    derrota = craps(d1)
-    if derrota == True :
-        print("Voce perdeu!!!,voce tirou: %d"%d1)
-        encerra = True
-        return encerra
     d2 = lancarDado()
-    derrota = craps(d2)
-    if derrota == True :
-        print("Voce perdeu!!!,voce tirou: %d"%d2)
-        encerra = True
-        return encerra
     soma = d1 + d2
-    win = deuVitoria(soma)
-    if win == True :
-        print("Voce ganhou!!!")
-        encerra = True
-        return encerra
-    else :
-        if rodar == 1:
-            pontoAtual = guardarPonto(win)
-        else :
-            if win == pontoAtual :
-                print("Voce ganhou!!!")
-                encerra = True
-                return encerra  
-    encerra = False
     print("Dado 1: %d" %d1)
     print("Dado 2: %d" %d2)
     print("SOMA: %d" %soma)
     print("---------------------")
+    guardar = guardarPonto(soma)
+    return guardar
+
+#funçao para as proximas vezes
+def proximasVezes(pontoGuardado) :
+    encerra = False
+    input("Pressione ENTER para lançar os dados.")
+    d1 = lancarDado()
+    d2 = lancarDado()
+    soma = d1 + d2
+    print("Dado 1: %d" %d1)
+    print("Dado 2: %d" %d2)
+    print("SOMA: %d" %soma)
+    print("---------------------")
+    decisao = ganhouPerdeu(soma,pontoGuardado)
+    if decisao == True:
+        encerra = True
+        return encerra
     return encerra
 
-#funçao de verificar se teve ganhador
-def verificaGanhou(ponto) :
-    pontoAtual = ponto
-    return pontoAtual
 
+#funçao pare verificar se ganhou ou perdeu
+def ganhouPerdeu(rolagem,ponto) :
+    if rolagem == 7:
+        encerra = True
+        print("Voce perdeu!!!")
+        return encerra
+    elif rolagem == ponto :
+        encerra = True
+        print("Voce ganhou!!!")
+        return encerra
+    else :
+        encerra = False
+        return encerra
 
-#funçao de verficar se deu ponto
-def deuVitoria(soma) :
-    if soma == 11  or soma == 7 :
-        ganhou = True
-        return ganhou
-    if soma == 4 or soma == 5 or soma == 6 or soma == 8 or soma == 9 or soma == 10 :
-        ponto = soma
-        return ponto
-
-#função para ver se deu craps
-def craps(d) :
-    if d == 3 or d == 2:
-        perdeu = True
-        return perdeu
     
 #funçao para guardar os pontos:
 def guardarPonto(ponto) :
-    if ponto == 4 or ponto == 5 or ponto == 6 or ponto == 8 or ponto == 9 or ponto == 10 :
+    if ponto == 11 or ponto == 7 :
+        encerra = True
+        print("Voce ganhou!!!")
+        return encerra
+    elif ponto == 2 or ponto == 3 or ponto == 12 :
+        perdeu = True
+        print("Voce perdeu!!!")
+        return perdeu
+    else :
         pontoAtual = ponto
+        print("--------------------------------")
+        print("      O SEU PONTO E %d      "%ponto)
+        print("--------------------------------")
         return pontoAtual
+
 
 #-----------------------main---------------------------
 def main():
-    rodar = 1
-    turno = False
-    while turno == False:
-        cont = 1
-        turno = vezJogador(cont,rodar)
-        cont = 2
-        turno = vezJogador(cont,rodar)
-        rodar = rodar + 1
-    print("Jogo encerrado.")
-
+    primeiraVez = vezJogador()
+    if primeiraVez == True :
+        encerra = True
+        return encerra
+    proximaVez = False
+    while proximaVez == False :
+        proximaVez = proximasVezes(primeiraVez)
+       
 main()
