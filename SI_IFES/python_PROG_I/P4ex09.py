@@ -12,7 +12,7 @@ import random
 def lancarDado():
  return random.randint(1,6)
 
-#funçao para fazer a primeira vez
+#funçao principal
 def vezJogador():
     print("------------Vez do jogador---------------")
     input("Pressione ENTER para lançar os dados.")
@@ -23,20 +23,18 @@ def vezJogador():
     print("Dado 2: %d" %d2)
     print("SOMA: %d" %soma)
     print("---------------------")
+    return soma
+
+#funçao para fazer a primeira vez
+def primeiraVezs():
+    soma = vezJogador()
     guardar = guardarPonto(soma)
     return guardar
 
 #funçao para as proximas vezes
 def proximasVezes(pontoGuardado) :
     encerra = False
-    input("Pressione ENTER para lançar os dados.")
-    d1 = lancarDado()
-    d2 = lancarDado()
-    soma = d1 + d2
-    print("Dado 1: %d" %d1)
-    print("Dado 2: %d" %d2)
-    print("SOMA: %d" %soma)
-    print("---------------------")
+    soma = vezJogador()
     decisao = ganhouPerdeu(soma,pontoGuardado)
     if decisao == True:
         encerra = True
@@ -79,7 +77,7 @@ def guardarPonto(ponto) :
 
 #-----------------------main---------------------------
 def main():
-    primeiraVez = vezJogador()
+    primeiraVez = primeiraVezs()
     if primeiraVez == True :
         encerra = True
         return encerra
