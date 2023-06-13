@@ -86,30 +86,40 @@ def valorInicial(saldo) :
         valorAposta = float(input("Digite o valor da aposta: "))
     return valorAposta
 
+#funçao para perguntar se quer continuar
+def outroN() :
+    again = str(input("Voce deseja continuar? ")).upper()
+    while again != "sim" and again != "nao" :
+        print("Impossivel operaçao")
+        again = str(input("Voce deseja continuar? ")).upper()
+    return again
 
 #-----------------------main---------------------------
 def main():
-    saldo = 100.00
-    aposta = valorInicial(saldo)
-    primeiraVez = vezJogador()
-    if primeiraVez == True :
-        saldo = saldo * aposta
-        print("Voce esta %.2f reais"%saldo)
-        encerra = True
-        return encerra
-    proximaVez = False
-    if primeiraVez == 0 :
-        saldo = saldo - aposta
-        print("Voce esta %.2f reais"%saldo)
-    while proximaVez == False :
-        proximaVez = proximasVezes(primeiraVez)
-        if proximaVez == True :
-            saldo = saldo * aposta
+    outraVez = "SIM"
+    while outraVez == "SIM" :
+        saldo = 100.00
+        aposta = valorInicial(saldo)
+        primeiraVez = vezJogador()
+        if primeiraVez == True :
+            saldo = saldo + aposta
             print("Voce esta %.2f reais"%saldo)
             encerra = True
             return encerra
-        if proximaVez == 0 :
+        proximaVez = False
+        if primeiraVez == 0 :
             saldo = saldo - aposta
             print("Voce esta %.2f reais"%saldo)
+        while proximaVez == False :
+            proximaVez = proximasVezes(primeiraVez)
+            if proximaVez == True :
+                saldo = saldo + aposta
+                print("Voce esta %.2f reais"%saldo)
+                encerra = True
+                return encerra
+            if proximaVez == 0 :
+                saldo = saldo - aposta
+                print("Voce esta %.2f reais"%saldo)
+        outraVez = outroN()
        
 main()
