@@ -68,14 +68,12 @@ def ganhouPerdeu(rolagem,ponto,saldo,aposta) :
         print("Voce perdeu!!!")
         calculo = saldoAjuste(saldo,-aposta)
         registraSaldo(calculo,saldo)
-        outroN()
         return encerra
     elif rolagem == ponto :
         encerra = True
         print("Voce ganhou!!!")
         calculo = saldoAjuste(saldo,aposta)
         registraSaldo(calculo,saldo)
-        outroN()
         return encerra
     else :
         encerra = False
@@ -122,7 +120,7 @@ def main():
         proximaVez = False
         while proximaVez == False :
             proximaVez = proximasVezes(primeiraVez,saldo,aposta)
-        registrarSaldo = registraSaldo(saldor,saldo)
+        registrarSaldo = registraSaldo(saldor,saldor)
         outraVez = outroN()
        
 main()
