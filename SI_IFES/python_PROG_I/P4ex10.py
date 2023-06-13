@@ -103,14 +103,14 @@ def perdeuAposta(primeiraVez,saldo,aposta):
     if primeiraVez == 0 :
         saldo = saldo - aposta
         print("Voce esta %.2f reais"%saldo)
-        return saldo
+    return saldo
 
 #funçao ganhou
 def ganhouAposta(primeiraVez,saldo,aposta):
     if primeiraVez == True :
         saldo = saldo + aposta
         print("Voce esta %.2f reais"%saldo)
-        return saldo
+    return saldo
 
 #-----------------------main---------------------------
 def main():
