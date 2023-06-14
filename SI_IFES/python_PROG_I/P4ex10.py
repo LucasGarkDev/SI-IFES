@@ -119,9 +119,7 @@ def encerra(outraVez) :
 def main():
     saldo = 100.00
     encerramento = "sim"
-    primeiraVez = 100.00
     while encerramento == "sim" :
-        saldo = primeiraVez
         aposta = valorAposta(saldo)
         primeiraVez = primeiraVezs(saldo,aposta)
         outraVez = outroN()
