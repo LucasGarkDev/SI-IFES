@@ -28,61 +28,49 @@ def vezJogador():
 #funçao para fazer a primeira vez
 def primeiraVezs():
     soma = vezJogador()
-    guardar = guardarPonto(soma)
-    return guardar
+    comparar = comparando(soma)
+    return comparar
 
-#funçao para as proximas vezes
-def proximasVezes(pontoGuardado) :
-    encerra = False
-    soma = vezJogador()
-    decisao = ganhouPerdeu(soma,pontoGuardado)
-    if decisao == True:
-        encerra = True
-        return encerra
-    return encerra
-
-
-#funçao pare verificar se ganhou ou perdeu
-def ganhouPerdeu(rolagem,ponto) :
-    if rolagem == 7:
-        encerra = True
-        print("Voce perdeu!!!")
-        return encerra
-    elif rolagem == ponto :
-        encerra = True
-        print("Voce ganhou!!!")
-        return encerra
-    else :
-        encerra = False
-        return encerra
-
-    
 #funçao para guardar os pontos:
-def guardarPonto(ponto) :
+def comparando(ponto) :
     if ponto == 11 or ponto == 7 :
         encerra = True
-        print("Voce ganhou!!!")
         return encerra
     elif ponto == 2 or ponto == 3 or ponto == 12 :
-        perdeu = True
-        print("Voce perdeu!!!")
+        perdeu = False
         return perdeu
     else :
-        pontoAtual = ponto
         print("--------------------------------")
         print("      O SEU PONTO E %d      "%ponto)
         print("--------------------------------")
-        return pontoAtual
+        r = proximasVezes(ponto)
+        return r
+        
+#funçao para as proximas vezes
+def proximasVezes(ponto) :
+    soma = vezJogador()
+    decisao = ganhouPerdeu(soma,ponto)
+    while soma != 7 and soma != ponto :
+        soma = vezJogador()
+        decisao = ganhouPerdeu(soma,ponto)
+    return decisao
+        
 
-
+#funçao compara ganhou ou perdeu
+def ganhouPerdeu(soma,ponto):
+    if soma == 7 :
+        res = False
+        return res
+    elif soma == ponto:
+        res = True
+        return res
+        
 #-----------------------main---------------------------
 def main():
-    primeiraVez = primeiraVezs()
-    if primeiraVez == True :
-        encerra = True
-        return encerra
-    proximaVez = False
-    while proximaVez == False :
-        proximaVez = proximasVezes(primeiraVez)
+    resposta = primeiraVezs()
+    if resposta == True:
+        print("Voce ganhou!!!")
+    else :
+        print("Voce perdeu!!!")
        
 main()
