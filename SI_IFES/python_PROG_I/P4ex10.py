@@ -41,27 +41,23 @@ def comparando(ponto) :
         print("--------------------------------")
         print("      O SEU PONTO E %d      "%ponto)
         print("--------------------------------")
-        r = proximasVezes(ponto)
-        return r
+        return proximasVezes(ponto)
+        
         
 #funçao para as proximas vezes
 def proximasVezes(ponto) :
     soma = vezJogador()
-    decisao = ganhouPerdeu(soma,ponto)
     while soma != 7 and soma != ponto :
         soma = vezJogador()
-        decisao = ganhouPerdeu(soma,ponto)
-    return decisao
+    return ganhouPerdeu(soma,ponto)
         
 
 #funçao compara ganhou ou perdeu
 def ganhouPerdeu(soma,ponto):
     if soma == 7 :
-        res = False
-        return res
+        return False
     elif soma == ponto:
-        res = True
-        return res
+        return True
 
 #funçao para apostar
 def valorAposta(saldo):
@@ -101,4 +97,3 @@ def main():
             outraVez = outroN()
        
 main()
-
