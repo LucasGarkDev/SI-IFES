@@ -27,28 +27,29 @@ def vezJogador():
 def primeiraVezs(saldo,aposta):
     soma = vezJogador()
     guardar = guardarPonto(soma,saldo,aposta)
-    if guardar != (guardar < saldo) and guardar != (guardar > saldo):
-        salva = armazenaPonto(guardar)
-    return guardar
-
-#funçao armazenar o ponto
-def armazenaPonto(ponto) :
-    pontoNecessario = pontoNecessario + ponto
-    return pontoNecessario
+    if guardar == (guardar < saldo):
+        acrescimo = mudouSaldo(saldo,guardar)
+        print("Voce esta com: %.2f"%acrescimo)
+        return acrescimo
+    if guardar == (guardar > saldo):
+        decrescimo = mudouSaldo(saldo,-guardar)
+        print("Voce esta com: %.2f"%decrescimo)
+        return decrescimo
+    else:
+        return guardar
 
 #funçao para guardar os pontos:
 def guardarPonto(ponto,saldo,aposta) :
     if ponto == 11 or ponto == 7 :
         acrescimo = mudouSaldo(saldo,aposta)
-        print("Voce ganhou!!!")
+        print("Voce ganhou!!! agora esta com: %.2f"%acrescimo)
         return acrescimo
     elif ponto == 2 or ponto == 3 or ponto == 12 :
         decrescimo = mudouSaldo(saldo,-aposta)
-        print("Voce perdeu!!!")
+        print("Voce perdeu!!! agora esta com: %.2f"%decrescimo)
         return decrescimo
     else :
-        pontoAtual = 0
-        pontoNecessario = armazenaPonto(pontoAtual,ponto)
+        pontoNecessario = armazenaPonto(ponto)
         print("--------------------------------")
         print("      O SEU PONTO E %d      "%ponto)
         print("--------------------------------")
@@ -59,12 +60,19 @@ def mudouSaldo(saldo,aposta) :
     saldo = saldo + aposta
     return saldo   
 
+#funçao armazenar o ponto
+def armazenaPonto(ponto) :
+    pontoNecessario = 0
+    pontoNecessario = pontoNecessario + ponto
+    return pontoNecessario
+
 #funçao para as proximas vezes
-def proximasVezes(salva,saldo,aposta) :
+def proximasVezes(ponto,saldo,aposta) :
     soma = vezJogador()
-    decisao = ganhouPerdeu(soma,salva,saldo,aposta)
-    if decisao == (decisao < saldo) or decisao == (decisao > saldo):
-        salva = armazenaPonto(decisao)
+    decisao = float(1.0)
+    decisao = ganhouPerdeu(soma,ponto,saldo,aposta)
+    if decisao != saldo :
+        salva = armazenaPonto(ponto)
         return salva
     else:
         outraVez = "nao"
@@ -74,11 +82,11 @@ def proximasVezes(salva,saldo,aposta) :
 def ganhouPerdeu(rolagem,ponto,saldo,aposta) :
     if rolagem == 7:
         decrescimo = mudouSaldo(saldo,-aposta)
-        print("Voce perdeu!!!")
+        print("Voce perdeu!!! agora esta com: %.2f"%decrescimo)
         return decrescimo
     elif rolagem == ponto :
         acrescimo = mudouSaldo(saldo,aposta)
-        print("Voce ganhou!!!")
+        print("Voce ganhou!!! agora esta com: %.2f"%acrescimo)
         return acrescimo
 
 
@@ -104,6 +112,9 @@ def encerra(outraVez) :
     if outraVez == "nao" :
         outraVez = "nao"
         return outraVez
+    
+#funçao primeira etapa
+
 #-----------------------main---------------------------
 def main():
     saldo = 100.00
@@ -113,12 +124,12 @@ def main():
         primeiraVez = primeiraVezs(saldo,aposta)
         outraVez = outroN()
         encerramento = encerra(outraVez)
-        proximaVez = False
+        saldo = primeiraVez
         if primeiraVez != (primeiraVez < saldo) and primeiraVez != (primeiraVez > saldo):
-            while proximaVez == False :
-                proximaVez = proximasVezes(primeiraVez,saldo,aposta)
+            aposta = valorAposta(saldo)
+            while outraVez == "sim" :
+                proximasVezes(primeiraVez,saldo,aposta)
                 outraVez = outroN()
                 encerramento = encerra(outraVez)          
-        encerramento = encerra(outraVez)
 main()
 
