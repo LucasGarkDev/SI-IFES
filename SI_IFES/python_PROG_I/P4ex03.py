@@ -31,6 +31,7 @@ def imprimirNesima(n):
     cont = 1
     while cont <= n:
         imprimirLinha(cont)
+        print(" "*30)
         cont = cont + 1
 #----------------main----------------------------------
 def main() :
