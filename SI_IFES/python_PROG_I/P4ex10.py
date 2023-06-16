@@ -124,10 +124,10 @@ def main():
         primeiraVez = primeiraVezs(saldo,aposta)
         outraVez = outroN()
         encerramento = encerra(outraVez)
+        aposta = valorAposta(saldo)
         if primeiraVez != (primeiraVez < saldo) and primeiraVez != (primeiraVez > saldo):
             while outraVez == "sim" :
                 saldo = primeiraVez
-                aposta = valorAposta(saldo)
                 proximasVezes(primeiraVez,saldo,aposta)
                 outraVez = outroN()
                 encerramento = encerra(outraVez)          
