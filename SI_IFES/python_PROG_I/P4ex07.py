@@ -18,47 +18,47 @@
 # as funções criadas.
 
 #------------------funçoes----------------------------
-#pedir peso
-def pedirPeso() :
-    peso = float(input("Digite o peso: "))
-    while peso < 2.5 :
-        print("Peso Invalido")
-        peso = float(input("Digite o peso, novamente: "))
-    return peso
-
-#pedir a altura
-def pedirAltura() :
-    altura = float(input("Digite a altura: "))
-    while altura < 0.62 :
-        print("Altura Invalida")
-        altura = float(input("Digite a altura, novamente: "))
-    return altura
-
-#calcular o IMC
-def imc(p,a):
-    calculo = p / (a * a)
-    return calculo 
-
-#determinar a categoria do IMC
-def categoria(imc) :
+#dizer o resultado
+def resultado(imc):
     if imc < 18.5 :
         print("Abaixo do peso")
-    elif imc <= 25.0 :
-        print("Peso Normal") 
-    elif imc <= 30.0 :
+    elif imc < 25 :
+        print("Peso Normal")
+    elif imc < 30 :
         print("Sobrepeso")
-    elif imc <= 35.0 :
+    elif imc < 35 :
         print("Obeso Leve")
-    elif imc <= 40.0 :
-        print("Obseo Moderado")
-    else:
+    elif imc < 40 :
+        print("Obeso Moderado")
+    else :
         print("Obeso Morbido")
 
+#pedir peso
+def pedirPeso():
+    peso = float(input("Digite o valor do peso: "))
+    while peso < 1.25 :
+        print("Peso Invalido")
+        peso = float(input("Digite o valor do peso,novamente: "))
+    return peso
+
+#pedir altura
+def pedirAltura():
+    altura = float(input("Digite o valor da altura: "))
+    while altura < 0.65 or altura > 3.00 :
+        print("Altura Invalida")
+        altura = float(input("Digite o valor da altura,novamente: "))
+    return altura
+
+#calcular o imc
+def calIMC(peso,altura):
+    calculo = peso / altura * altura
+    return calculo
+
+
 #------------------main-------------------------------
-def main() :
+def main():
     peso = pedirPeso()
     altura = pedirAltura()
-    resIMC = imc(peso,altura)
-    categoria(resIMC)
-
+    imc = calIMC(peso,altura)
+    resultado(imc)
 main()
