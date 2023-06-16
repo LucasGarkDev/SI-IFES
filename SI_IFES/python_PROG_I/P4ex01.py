@@ -6,39 +6,36 @@
 # No final imprima o nome e a senha.
 
 #---------------funçoes--------------------------------
-#funçao para pedir e validar o nome
-def nomePedir() :
-    nomeUsuario = str(input("Digite o nome do usuario: ")).title()
-    contagemNome = len(nomeUsuario)
-    while contagemNome <= 2 :
-        print("Nome invalido")
-        nomeUsuario = str(input("Digite o nome do usuario: ")).title()
-        contagemNome = len(nomeUsuario)
-    return nomeUsuario
-    
+#funçao para pedir o nome
+def pedirNome():
+    nome = str(input("Digite o nome do usuario: ")).title()
+    contNome = len(nome)
+    while contNome <= 2 :
+        print("Nome Invalido")
+        nome = str(input("Digite o nome do usuario,novamente: ")).title()
+        contNome = len(nome)
+    return nome
 
-#funçao para pedir e validar a senha
-def senhaPedir() :
-    senha = str(input("Digite a senha do usuario: "))
-    contagemSenha = len(senha)
-    while senha == contagemSenha < 6 :
-        print("Senha invalida")
-        senha = str(input("Digite a senha do usuario: "))
-        contagemSenha = len(senha)
+#funçao para pedir senha
+def pedirSenha(nome):
+    senha = input("Digite a senha do usuario: ")
+    contSenha = len(senha)
+    while contSenha < 6 or senha == nome :
+        print("Senha Invalida")
+        senha = input("Digite a senha do usuario,novamente: ")
+        contSenha = len(senha)
     return senha
+
+#funçao para ler o nome e a senha
+def lerNomeSenha():
+    nome = pedirNome()
+    senha = pedirSenha(nome)
+    print("O nome do usuario e: %s"%nome)
+    print("A senha do usuario e: %s"%senha)
 
 
 #----------------main----------------------------------
+def main():
+    lerNomeSenha()
 
-def main() :
-    outroUsuario = "SIM"
-    while outroUsuario == "SIM" :
-        recebeNome = nomePedir()
-        recebeSenha = senhaPedir()
-        while recebeSenha == recebeNome :
-            print("Senha invalida")
-            recebeSenha = str(input("Digite a senha do usuario: "))
-        print("O nome do usuario e: %s"%recebeNome)
-        print("A senha do usuario e: %s"%recebeSenha)
-        outroUsuario = str(input("Voce deseja fazer login de outro usuario? ")).upper()
 main()
