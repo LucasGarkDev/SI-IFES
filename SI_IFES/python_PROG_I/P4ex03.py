@@ -4,38 +4,36 @@
 #  3 3 3
 #  .....
 #  n n n n n n ... n
-# para um n informado pelo usuário. Use uma função para ler e validar o valor n (inteiro e
+# para um n informado pelo usuário. Use uma função para ler e validar o 
+#valor n (inteiro e
 # positivo), uma função para imprimir apenas uma linha e outra função 
-# para imprimir até a nésima linha, ou seja, chamar a função “imprimir linha” n vezes.
+# para imprimir até a nésima linha, ou seja, chamar a função 
+#“imprimir linha” n vezes.
 
 #----------------funçoes-------------------------------
-#funçao de pedir o valor de n
-def pedirN() :
-    n = int(input("Digite um numero: "))
-    while n <= 0 :
-        print("Numero invalido")
-        n = int(input("Digite um numero,novamente: ")) 
+#funçao para pedir n
+def pedirN():
+    n = int(input("Digite o numero do tamanho da sequencia: "))
+    while n < 0 :
+        print("Numero Invalido")
+        n = int(input("Digite novamente: "))
     return n
 
-#funçao de imprimir a sequencia
-def imprimirSequencia(cont) :
-    tent = 0
-    while tent < cont:
-        tent = tent + 1
-        print(cont, end=" ")
-        
-    
-#funçao para imprimir o numero
-def imprimirNum(recebeN) :
-    cont = 1
-    while cont <= recebeN:
-        imprimirSequencia(cont)
+#funçao para imprimir linha
+def imprimirLinha(quantLinha):
+    cont = 0 
+    while cont < quantLinha :
+        print(quantLinha, end=" ")
         cont = cont + 1
-    return cont
 
+#funçao para imprimir a nesima linha
+def imprimirNesima(n):
+    cont = 1
+    while cont <= n:
+        imprimirLinha(cont)
+        cont = cont + 1
 #----------------main----------------------------------
-def main():
-    recebeN = pedirN()
-    imprimirNum(recebeN)
-
+def main() :
+    n = pedirN()
+    imprimirNesima(n)
 main()
