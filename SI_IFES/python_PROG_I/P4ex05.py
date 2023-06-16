@@ -5,47 +5,43 @@
 # calcula a combinação de m, n a n. Crie
 # uma função para calcular o fatorial e chame essa função várias vezes.
 #---------------funçoes-----------------
-#funçao para pedir um numero n
-def pedirN(m) :
-    n = int(input("Digite um numero: "))
-    while n <= 0 or n >= m:
-        print("Numero invalido")
-        n = int(input("Digite um numero,novamente: ")) 
-    return n
-
-#funçao para pedir um numero m
-def pedirM() :
-    m = int(input("Digite um numero: "))
+#funçao pedir m
+def pedirM():
+    m = int(input("Digite um numero para m: "))
     while m <= 0 :
-        print("Numero invalido")
-        m = int(input("Digite um numero,novamente: ")) 
+        print("Numero Invalido")
+        m = int(input("Digite um numero para m: "))
     return m
 
-#funçao para fazer o fatorial
-def fatorial(m) :
+#funçao pedir n
+def pedirN(m):
+    n = int(input("Digite um numero para n: "))
+    while n <= 0 or n > m:
+        print("Numero Invalido")
+        n = int(input("Digite um numero para n,novamente: "))
+    return n
+
+#funçao fatorial
+def fatorial(num):
     fat = 1
-    while m > 1 :
-        fat = fat * m
-        m = m - 1
+    while num > 1:
+       fat = fat * num
+       num = num - 1
     return fat
 
-#funçao para fazer as probabilidades
-def probabilidades(n,m):
-    res = fatorial(m)
-    calculo1 = m - n
-    res2 = fatorial(calculo1)
+#funçao combinaçao
+def combinacao(n,m):
+    res1 = fatorial(m)
+    cal = m - n
+    res2 = fatorial(cal)
     res3 = fatorial(n)
-    final = res / (res2 * res3)
-    return final
-
-
-
+    comb = res1 / (res2 * res3)
+    return comb
 
 #---------------main--------------------
 def main():
-    recebeM = pedirM()
-    recebeN = pedirN(recebeM)
-    final = probabilidades(recebeN,recebeM)
-    print("O resultado das combinaçoes de %d e %d sao: %d"%(recebeM,recebeN,final))
-
+    m = pedirM()
+    n = pedirN(m)
+    r = combinacao(n,m)
+    print("O resultado da combinaçao de %d e %d é: %.2f "%(n,m,r))
 main()
