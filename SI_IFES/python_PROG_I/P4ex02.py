@@ -9,63 +9,64 @@
 # certa. No final imprima todos os dados.
 
 #------------funçoes-----------------------
-#funçao de pedir e validar o nome
+#funçao de pedir o nome
 def pedirNome() :
-    nome = str(input("Digite o seu nome: ")).title()
-    contagemNome = len(nome)
-    while contagemNome < 3 :
-        print("Nome invalido")
-        nome = str(input("Digite o seu nome: ")).title()
-        contagemNome = len(nome)
+    nome = str(input("Digite um nome: ")).title()
+    contNome = len(nome)
+    while contNome <= 3 :
+        print("Nome Invalido")
+        nome = str(input("Digite um nome,novamente: ")).title()
+        contNome = len(nome)
     return nome
 
-#funçao de pedir a idade
+#funçao de pedir idade
 def pedirIdade() :
-    idade = int(input("Digite a sua idade: "))
-    while idade < 0 or idade > 150 :
-        print("Idade invalida")
-        idade = int(input("Digite a sua idade: "))
-    idade = str(idade)
+    idade = int(input("Digite a idade: "))
+    while idade <= 0 or idade > 150 :
+        print("Idade Invalida")
+        idade = int(input("Digite a idade,novamente: "))
     return idade
 
 #funçao de pedir salario
 def pedirSalario() :
-    salario = float(input("Digite seu salario atual: "))
-    while salario <= 0 or salario > 10000 :
-        print("Esse Salario nao consta")
-        salario = float(input("Digite seu salario atual: "))
-    salario = str(salario)
+    salario = float(input("Digite o valor de salario: "))
+    while salario <= 0 :
+        print("Salario não compativel")
+        salario = float(input("Digite o valor de salario,novamente: "))
     return salario
 
-#funçao de pedir o sexo
+#funçao de pedir sexo
 def pedirSexo() :
-    sexo = str(input("Digite a letra indicadora do seu sexo(F/M): ")).upper()
+    sexo = str(input("Digite o sexo(f/m): ")).upper()
     while sexo != "F" and sexo != "M" :
-        print("O sexo que voce digitou nao existe")
-        sexo = str(input("Digite a letra indicadora do seu sexo(F/M): ")).upper()
+        print("Sexo Invalido")
+        sexo = str(input("Digite o sexo(f/m),novamente: ")).upper()
     return sexo
 
-#funçao de pedir o estado civil
+#funçao de pedir estado civil
 def pedirEstCivil() :
-    estadoCivil = str(input("Qual e seu Estado Civil atualmente(S/C/V/D): ")).upper()
+    estadoCivil = str(input("Digite o estado civil(s,c,v,d): ")).upper()
     while estadoCivil != "S" and estadoCivil != "C" and estadoCivil != "V" and estadoCivil != "D":
-        print("Estado Civil Invalido")
-        estadoCivil = str(input("Qual e seu Estado Civil atualmente(S/C/V/D): ")).upper()
+        print("Estado civil nao compativel")
+        estadoCivil = str(input("Digite o estado civil(s,c,v,d): ")).upper()
     return estadoCivil
 
+#funçao imprimir geral
+def imprimir():
+    nome = pedirNome()
+    idade = pedirIdade()
+    salario = pedirSalario()
+    sexo = pedirSexo()
+    estadoCivil = pedirEstCivil()
+    print("O nome e: %s"%nome)
+    print("A idade e: %d anos"%idade),
+    print("O salario e: R$ %.2f"%salario)
+    print("O sexo e: %s"%sexo)
+    print("O estado civil e: %s"%estadoCivil)
 #------------main--------------------------
-def main() :
-    recebeNome = pedirNome()
-    recebeIdade = pedirIdade()
-    recebeSalario = pedirSalario()
-    recebeSexo = pedirSexo()
-    recebeEstCivil = pedirEstCivil()
-    print("O seu nome e: %s"%recebeNome)
-    print("A sua idade e: %s anos"%recebeIdade)
-    print("O salario que voce ganha atualmente e: %s"%recebeSalario)
-    print("O seu sexo e: %s"%recebeSexo)
-    print("O seu estado civil atual e: %s"%recebeEstCivil)
-    
+def main():
+    imprimir()
+
 main()
 
 
