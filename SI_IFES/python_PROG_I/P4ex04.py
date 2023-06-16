@@ -11,33 +11,31 @@
 # linha, ou seja, chamar a função “imprimir linha” n vezes.
 
 #----------------funçoes-------------------------------------
-#funçao de pedir o valor de n
-def pedirN() :
-    n = int(input("Digite um numero: "))
-    while n <= 0 :
-        print("Numero invalido")
-        n = int(input("Digite um numero,novamente: ")) 
+#funçao para pedir n
+def pedirN():
+    n = int(input("Digite o numero do tamanho da sequencia: "))
+    while n < 0 :
+        print("Numero Invalido")
+        n = int(input("Digite novamente: "))
     return n
 
-#funçao imprimir linha
-def imprimirLinha(cont) :
-    tent = 1
-    while tent <= cont :
-        print(tent, end=" ")
-        tent = tent + 1
-
-
-#funçao para imprimir ate a nesima linha
-def imprimirNesima(n) :
+#funçao para imprimir nesima
+def imprimirNesima(n):
     cont = 1
     while cont <= n :
         imprimirLinha(cont)
+        print(" "*30)
         cont = cont + 1
-    
+
+#funçao para imprimir linha
+def imprimirLinha(quantLinha):
+    cont = 1
+    while cont <= quantLinha :
+        print(cont, end= " ")
+        cont = cont + 1
 
 #----------------main----------------------------------------
-def main() :
-    recebeN = pedirN()
-    imprimirNesima(recebeN)
-
+def main():
+    n = pedirN()
+    imprimirNesima(n)
 main()
