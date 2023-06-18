@@ -86,7 +86,7 @@ def main():
             saldo = saldo - aposta
             print("Voce esta com: %.2f"%saldo)
 
-        if saldo == 0:
+        if saldo <= 0:
             outraVez = "N"
         else:
             outraVez = again()

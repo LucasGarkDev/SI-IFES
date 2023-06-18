@@ -18,13 +18,14 @@
 #-----------------funçoes--------------------
 #funçao valor pagamento
 def valorPagamento(valor,dias) :
-    if dias <= 0:
-        calculo = valor + (0.03 * valor)
-        return calculo
+    if dias == 0:
+        return valor
     else:
-        acrescimo = dias * 0.001
-        calculo = valor + (valor * acrescimo)
-        return calculo
+        multa = valor * 0.03
+        juros = dias * 0.001
+        valorJuros = valor * juros
+        valorTotal = valor + multa + valorJuros
+        return valorTotal
 
 #funçao para pedir o valor da prestaçao
 def valorPrestaçao() :
@@ -42,27 +43,31 @@ def numDiasAtraso() :
         numAtraso = int(input("Digite o numero de dias em atraso,novamente: "))
     return numAtraso
 
-#funçao para armazenar o relatorio
-def relatorio(valor,dias) :
-    valorDia = valor
-    diasDoDia = dias
-    print("----------Relatorio---------")
-    print("O valor diario e: %.2f"%valorDia)
-    print("A quantidade de dias atrasados atualmente e: %d"%diasDoDia)
-    print("----------------------------")
+#funçao para repetir tudo
+def desejaContinuar():
+    letra = input("Desejar continuar (S ou N)? ").upper()
+    while letra != "S" and letra != "N" :
+        letra = input("Desejar continuar (S ou N)? ").upper()
+    return letra
+
 #-----------------main-----------------------
 def main() :
-    somaPrestaçao = 0
+    somaPrestacao = 0
     somaDias = 0
-    valorDaPrestaçao = 1
-    while valorDaPrestaçao != 0:
-        valorDaPrestaçao = valorPrestaçao()
+    continuar = "S"
+    while continuar == "S":
+
+        valorDaPrestacao = valorPrestaçao()
         diasAtraso = numDiasAtraso()
-        somaPrestaçao = somaPrestaçao + valorDaPrestaçao
-        somaDias = somaDias + diasAtraso
-        pagamento = valorPagamento(valorDaPrestaçao,diasAtraso)
+        pagamento = valorPagamento(valorDaPrestacao,diasAtraso)
         print("O valor do pagamento foi: %.2f"%pagamento)
-    relatorio(somaPrestaçao,somaDias) 
+        somaPrestacao = somaPrestacao + valorDaPrestacao
+        somaDias = somaDias + diasAtraso
+
+        continuar = desejaContinuar()
+
+    print("Hoje foram pagas %d prestações. " %somaDias)
+    print("O valor total foi de R$ %7.2f. " %somaPrestacao)  
       
 
 main()
