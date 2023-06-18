@@ -20,6 +20,8 @@
 #------------------funçoes----------------------------
 #dizer o resultado
 def resultado(imc):
+    print("Seu IMC é: %.2f"  %imc)
+    
     if imc < 18.5 :
         print("Abaixo do peso")
     elif imc < 25 :
