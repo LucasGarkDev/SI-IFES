@@ -31,11 +31,7 @@ def fatorial(num):
 
 #funçao combinaçao
 def combinacao(n,m):
-    res1 = fatorial(m)
-    cal = m - n
-    res2 = fatorial(cal)
-    res3 = fatorial(n)
-    comb = res1 / (res2 * res3)
+    comb = fatorial(m) / (fatorial(m-n) * fatorial(n))
     return comb
 
 #---------------main--------------------
