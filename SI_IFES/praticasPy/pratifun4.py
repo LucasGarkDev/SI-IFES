@@ -15,29 +15,30 @@ def pedirN():
     return n
 
 #funçao compara se ele e perfeito ou nao
-def perfeito(m,n):
-    if m % n == 0 :
-        print(m)
-    
-        
-
-#funçao compara soma
-def comparaSoma(comparador,referencial):
-    
-
-        
-
-#funçao compara se divide
-def comparaDivisao(comparador,referencial):
-    
+def perfeito(n):
+    c = 1
+    a = 0
+    while c < n :
+        if n % c == 0:
+            a = a + c
+            if a == n :
+                return True
+            elif a > n :
+                return False
+        c = c + 1
+    return False    
 
 #funçao para imprimir os perfeitos ate n
-
-
-
+def perfeitosAteN(n):
+    cont = 1
+    while cont <= n :
+        p = perfeito(cont)
+        if p == True :
+            print(cont)
+        cont = cont + 1
+    
 #------------------------main-------------------------
-n = pedirN()
-cont = 1
-while cont < n :
-    perfeito(cont,n)
-    cont = cont + 1
+def main():
+    n = pedirN()
+    perfeitosAteN(n)
+main()
