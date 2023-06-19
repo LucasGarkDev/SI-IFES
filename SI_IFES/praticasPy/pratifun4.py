@@ -6,39 +6,39 @@
 # perfeitos até n.
 
 #------------------------funçoes----------------------
-#funçao para pedir o n
+#pedir o valor de n
 def pedirN():
     n = int(input("Digite um numero: "))
-    while n < 0 :
-        print("Numero Invalido")
-        n = int(input("Digite um numero,novamente: "))
+    while n <= 0 :
+        print("Esse numero nao e valido")
+        n = int(input("Digite novamente: "))
     return n
 
-#funçao compara se ele e perfeito ou nao
-def perfeito(n):
-    c = 1
-    a = 0
-    while c < n :
-        if n % c == 0:
-            a = a + c
-            if a == n :
+#verificar se e perfeito
+def verificaPerfeito(n):
+    div = 1
+    soma = 0
+    while div < n :
+        if n % div == 0:
+            soma = soma + div
+            if soma == n :
                 return True
-            elif a > n :
+            elif soma > n :
                 return False
-        c = c + 1
-    return False    
+        div = div + 1
+    return False
 
-#funçao para imprimir os perfeitos ate n
-def perfeitosAteN(n):
-    cont = 1
-    while cont <= n :
-        p = perfeito(cont)
-        if p == True :
-            print(cont)
+#imprimir os perfeitos ate n
+def perfeitoN(n):
+    cont = 0
+    while cont < n :  
+        res = verificaPerfeito(cont)
+        if res == True :
+            print(cont, end=" ")  
         cont = cont + 1
-    
+
 #------------------------main-------------------------
 def main():
     n = pedirN()
-    perfeitosAteN(n)
+    perfeitoN(n)
 main()
