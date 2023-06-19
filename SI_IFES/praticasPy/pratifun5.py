@@ -7,3 +7,7 @@
 # –Módulo só para imprimir. 
 # •A execução do algoritmo deverá ser feita 
 # através de chamada de funções dos módulos.
+
+#------------------------funçoes----------------------
+
+#------------------------main-------------------------

@@ -56,6 +56,8 @@ def quatroCasas(n,divisor):
     return final
 
 #------------------------main-------------------------
-num = pedirNum()
-res = inverte(num)
-print("O inverso do numero: %d é: %s "%(num,res))
+def main():
+    num = pedirNum()
+    res = inverte(num)
+    print("O inverso do numero: %d é: %s "%(num,res))
+main()
