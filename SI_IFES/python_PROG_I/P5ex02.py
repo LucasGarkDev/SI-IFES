@@ -14,21 +14,23 @@ import random
 def gerarNumAleatorio(min,max):
     return random.randint(min,max)
 
+
 #repetir a escolha de numeros e guardar no vetor
-def guardarVetor(numeros):
+def guardarVetor(numeros,par,impar):
     min = 1
     max = 100
     cont = 0
     while cont < 50 :
         n = gerarNumAleatorio(min,max)
         numeros.append(n)
+        parOuImpar(n,par,impar)
+        cont = cont + 1
 
 
 #percorrer os numeros
-def percorreNum(num,par,impar):
+def percorreNum(num):
     i = 0 
     while i < 50: 
-       parOuImpar(num,par,impar)
        i = i + 1
 
         
@@ -47,18 +49,24 @@ def contPar(p):
 def contImpar(i):
     return len(i)
 
-#-----------------------main---------------------------
-def main():
-    numeros = [ ]
-    par = [ ]
-    impar = [ ]
-    guardarVetor(numeros)
-    percorreNum(numeros,par,impar)
-    r1 = contPar(par)
-    r2 = contImpar(impar)
+#imprimir os pares e impares
+def imprimir(r1,r2,r0):
     print("---------------------------------------------")
     print("O resultado de numeros pares sao %d"%r1)
     print("O resultado de numeros impares sao %d"%r2)
+    print("A quantidade todal de numeros e %d"%r0)
     print("---------------------------------------------")
+    
+#-----------------------main---------------------------
+def main():
+    numeros = []
+    par = []
+    impar = []
+    guardarVetor(numeros,par,impar)
+    percorreNum(numeros)
+    r0 = len(numeros)
+    r1 = contPar(par)
+    r2 = contImpar(impar)
+    imprimir(r1,r2,r0)
     
 main()
