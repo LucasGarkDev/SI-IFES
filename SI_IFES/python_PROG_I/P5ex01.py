@@ -6,60 +6,58 @@
 
 import random
 #-----------------------funçoes------------------------
-# Gerar um número aleatório entre MIN a MAX
-def gerarNumAleatorio(min,max):
-    return random.randint(min,max)
+# Gerar um número aleatório entre MIN e MAX
+def gerarNumAleatorio(min, max):
+    return random.randint(min, max)
 
-
-#repetir a escolha de numeros e guardar no vetor
-def guardarVetor(numeros,min,max):
+# Repetir a escolha de números e guardar no vetor
+def guardarVetor(numeros, min, max):
     cont = 0
     par = 0
     impar = 0
-    while cont < 50 :
-        n = gerarNumAleatorio(min,max)
+    while cont < 50:
+        n = gerarNumAleatorio(min, max)
         numeros.append(n)
-        par = percorreNum(numeros,n,int(par),int(impar))
-        impar = percorreNum(numeros,n,int(par),int(impar))
+        par, impar = percorreNum(numeros, par, impar)
         cont = cont + 1
-    r1 = contPar(int(par))
-    r2 = contImpar(int(impar))
-    imprimir(r1,r2)
+    r1 = contPar(par)
+    r2 = contImpar(impar)
+    imprimir(r1, r2)
 
-#percorrer os numeros
-def percorreNum(numeros,n,par,impar):
-    for n in numeros :
-        parOuImpar(n,par,impar)
+# Percorrer os números
+def percorreNum(numeros, par, impar):
+    for n in numeros:
+        par, impar = parOuImpar(n, par, impar)
+    return par, impar
 
-        
-#verificar se e par ou impar
-def parOuImpar(n,par,impar):
-    if n % 2 == 0 :
+# Verificar se é par ou ímpar
+def parOuImpar(n, par, impar):
+    if n % 2 == 0:
         par = par + 1
-        return par
-    else :
+    else:
         impar = impar + 1
-        return impar
+    return par, impar
 
-#contar quantos pares 
-def contPar(p): 
-    return len(p)
+# Contar quantos pares
+def contPar(p):
+    return p
 
-#contar quantos impares
+# Contar quantos ímpares
 def contImpar(i):
-    return len(i)
+    return i
 
-#imprimir os pares e impares
-def imprimir(r1,r2):
+# Imprimir os pares e ímpares
+def imprimir(r1, r2):
     print("---------------------------------------------")
-    print("O resultado de numeros pares sao %d"%r1)
-    print("O resultado de numeros impares sao %d"%r2)
+    print("O resultado de números pares são %d" % r1)
+    print("O resultado de números ímpares são %d" % r2)
     print("---------------------------------------------")
-    
+
 #-----------------------main---------------------------
 def main():
     numeros = []
     min = 1
     max = 100
-    guardarVetor(numeros,min,max)
+    guardarVetor(numeros, min, max)
+
 main()
