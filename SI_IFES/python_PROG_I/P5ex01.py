@@ -17,7 +17,7 @@ def guardarVetor(numeros):
     cont = 0
     while cont < 50 :
         n = gerarNumAleatorio(min,max)
-        numeros.append( n )
+        numeros.append(n)
 
 
 #percorrer os numeros
@@ -42,11 +42,12 @@ def contPar(p):
 #contar quantos impares
 def contImpar(i):
     return len(i)
+
 #-----------------------main---------------------------
 def main():
-    numeros = []
-    par = []
-    impar = []
+    numeros = [ ]
+    par = [ ]
+    impar = [ ]
     guardarVetor(numeros)
     percorreNum(numeros,par,impar)
     r1 = contPar(par)
