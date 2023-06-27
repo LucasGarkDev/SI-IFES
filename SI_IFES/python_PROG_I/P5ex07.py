@@ -39,13 +39,59 @@ def pedirJogador(p,voto):
 #adicionar o voto no vetor
 def contabilizarPonto(j,p,voto):
     voto[j] = voto[j] + 1
+    voto[0] = voto[0] + 1
     p = voto
     return p
 
+#imprimir o total de votos
+def imprimirTotal(v):
+    print("Resultado da Votaçao:")
+    print("----------------------------------")
+    print("O total de votos foi: %d"%v[0])
+
+#imprimir os numeros e os votos dos jogadores que foram votados
+def imprimriNumVotos(votos):
+    print("Jogador:")
+    imprimirNum(votos)
+    print("Pontos:")
+    imprimirPontos(votos)
+
+#imprimir os numeros
+def imprimirNum(v):
+    i = 0
+    del(v[0])
+    while i < len(v):
+        if v[i] != 0 :
+            print(v[i])
+            print(" "*30)
+            i = i + 1
+        else:
+            i = i + 1
+
+#imprimir os votos
+def imprimirPontos(v):
+    i = 0
+    del(v[0])
+    while i < len(v):
+        if v[i] != 0 :
+            print(v[i])
+            print(" "*30)
+            i = i + 1
+        else:
+            i = i + 1
+
+#O percentual de votos de cada um destes jogadores
+
+
+#descobrir o jogador mais votado
+
+
 #-----------------------main---------------------------
 votos = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-j = True
+jog = True
 p = 0
-while j != False :
-    j = pedirJogador(p,votos)
-    p = j
+while jog != False :
+    jog = pedirJogador(p,votos)
+    p = jog
+imprimirTotal(votos)
+imprimriNumVotos(votos)
