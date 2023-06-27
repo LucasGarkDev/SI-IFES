@@ -24,7 +24,28 @@
 # calculado. Abaixo segue uma tela de exemplo.
 
 #-----------------------funçoes------------------------
+#pedir o numero do jogador e adicionar no vetor 
+def pedirJogador(p,voto):
+    j = int(input("Digite o numero do jogador que deseja votar(1 a 25): "))
+    while j < 0 or j > 25:
+        print("Numero Invalido")
+        j = int(input("Digite o numero do jogador que deseja votar(1 a 25): "))
+    if j == 0 :
+        return False
+    else :
+        contabilizarPonto(j,p,voto)
 
+        
+#adicionar o voto no vetor
+def contabilizarPonto(j,p,voto):
+    voto[j] = voto[j] + 1
+    p = voto
+    return p
 
 #-----------------------main---------------------------
-
+votos = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+j = True
+p = 0
+while j != False :
+    j = pedirJogador(p,votos)
+    p = j
