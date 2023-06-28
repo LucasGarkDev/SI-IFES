@@ -74,7 +74,7 @@ def imprimirPontos(v):
     del(v[0])
     while i < len(v):
         if v[i] != 0 :
-            print(v[i])
+            print(i)
             print(" "*30)
             i = i + 1
         else:
