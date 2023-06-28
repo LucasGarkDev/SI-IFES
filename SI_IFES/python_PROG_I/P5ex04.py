@@ -24,21 +24,21 @@ def pedirInicio(f):
     return i
 
 #criar o vetor
-def criarVetor(v):
-    c = 0
-    while c < 100 :
+def criarVetor(vet):
+    cont = 0
+    while cont < 100 :
         n = gerarNumAleatorio(0,50)
-        v.append(n)
-        c = c + 1
+        vet.append(n)
+        cont = cont + 1
 
 #pesquisar o inicio e o fim daquele vetor
-def identificarIndices(v,f,i):
-    c = v[i]
+def identificarIndices(vet,f,i):
+    c = vet[i]
     soma = 0
-    while c < v[f]:
-        soma = soma + v[c]
+    while c < vet[f]:
+        soma = soma + vet[c]
         c = c + 1
-    return v[i] + soma + v[f]
+    return vet[i] + soma + vet[f]
     
 
 #gerar um número aleatório entre MIN e MAX
