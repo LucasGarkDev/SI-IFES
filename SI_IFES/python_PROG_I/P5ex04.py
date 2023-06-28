@@ -33,12 +33,12 @@ def criarVetor(vet):
 
 #pesquisar o inicio e o fim daquele vetor
 def identificarIndices(vet,f,i):
-    c = vet[i]
+    c = i
     soma = 0
-    while c < vet[f]:
+    while c <= vet[f]:
         soma = soma + vet[c]
         c = c + 1
-    return vet[i] + soma + vet[f]
+    return soma 
     
 
 #gerar um número aleatório entre MIN e MAX
