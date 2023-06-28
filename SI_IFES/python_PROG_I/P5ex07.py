@@ -50,21 +50,21 @@ def imprimirTotal(v):
     print("O total de votos foi: %d"%v[0])
 
 #imprimir os numeros e os votos dos jogadores que foram votados
-def imprimriNumVotos(votos):
-    print("Jogador:", end="     ")
-    print("Pontos:")
+def imprimriCompleta(votos):
+    print("Jogador:")
     imprimirNum(votos)
+    print("Pontos:")
     imprimirPontos(votos)
+    print("Percentual:")
+    imprimirPercentual(votos)
+    
 
 #imprimir os numeros
 def imprimirNum(v):
     i = 0
-    jog = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-    del(v[0])
     while i < len(v):
-        if v[i] != 0 :
-            print(jog[i], end="     ")
-            print(" "*30)
+        if v[i] != 0 and v[i] != v[0]:
+            print(i," "*20)
             i = i + 1
         else:
             i = i + 1
@@ -72,20 +72,47 @@ def imprimirNum(v):
 #imprimir os votos
 def imprimirPontos(v):
     i = 0
-    del(v[0])
     while i < len(v):
-        if v[i] != 0 :
-            print(v[i])
-            print(" "*30)
+        if v[i] != 0 and v[i] != v[0]:
+            print(v[i]," "*20)
             i = i + 1
         else:
             i = i + 1
 
 #O percentual de votos de cada um destes jogadores
+def percentual(v,i):
+    return v[i] * 100 / v[0]
+    
 
+#imprimir percentual
+def imprimirPercentual(v):
+    i = 0
+    while i < len(v):
+        if v[i] != 0 and v[i] != v[0]:
+            r = percentual(v,i)
+            print(r," "*20)
+            i = i + 1
+        else:
+            i = i + 1
 
 #descobrir o jogador mais votado
-
+def melhorJog(v):
+    i = 0
+    melhor = 0
+    mp = 0
+    mj= 0
+    mpr = 0
+    while i < len(v):
+        if v[i] > melhor:
+            mp = v[i]
+            mj = i
+            r = percentual(v,i)
+            mpr = r
+            i = i + 1
+        else :
+            i = i + 1
+    print("O melhor jogador foi o número %s, com %s votos, correspondendo a %s no total de votos."%(mj,mp,mpr))
+            
 
 #-----------------------main---------------------------
 votos = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -95,4 +122,7 @@ while jog != False :
     jog = pedirJogador(p,votos)
     p = jog
 imprimirTotal(votos)
-imprimriNumVotos(votos)
+imprimriCompleta(votos)
+melhorJog(votos)
+
+
