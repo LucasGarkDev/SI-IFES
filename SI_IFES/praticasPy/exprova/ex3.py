@@ -27,25 +27,27 @@ def preencherVet3(vet1,vet2,vet3):
     i = 0
     while i < 20 :
         vet3.append(vet1[i])
-        vet2.append(vet2[i])
+        vet3.append(vet2[i])
         i = i + 1
 
 #imprimir
 def imprimir(vetor):
     if len(vetor) == 40 :
         print("O vetor 3 é: %s"%vetor)
-    elif vetor[0] % 2 == 0 :
-        print("O vetor 1 é: %s"%vetor)
+    elif vetor[0] > 50 :
+        print("Esse e o vetor 1: %s"%vetor)
     else :
-        print("O vetor 2 é: %s"%vetor)
-
+        print("Esse e o vetor 2: %s"%vetor)
+        
 #-----------------main---------------------
-vet1 = []
-vet2 = []
-preencherVetor(vet1)
-preencherVetor(vet2)
-vet3 = []
-preencherVet3(vet1,vet2,vet3)
-imprimir(vet3)
-imprimir(vet1)
-imprimir(vet2)
+def main():
+    vet1 = []
+    vet2 = []
+    preencherVetor(vet1)
+    preencherVetor(vet2)
+    vet3 = []
+    preencherVet3(vet1,vet2,vet3)
+    imprimir(vet3)
+    imprimir(vet1)
+    imprimir(vet2)
+main()
