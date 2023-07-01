@@ -18,30 +18,80 @@
 
 
 #-----------------funçoes------------------
-#pedir os votos
-def perguntaJogador(p,voto):
-    j = int(input("Digite o numero do jogador que deseja votar(1 a 25): "))
-    while j < 0 or j > 25:
-        print("Numero Invalido")
-        j = int(input("Digite o numero do jogador que deseja votar(1 a 25): "))
-    if j == 0 :
+#pedir o jogador
+def perguntaJogador(vetor,pontos):
+    jogador = int(input("Digite o numero da camisa do jogador que voce achou o melhor(1 a 25): "))
+    while jogador < 0 or jogador > 25 :
+        print("Esse jogador nao existe")
+        jogador = int(input("Digite o numero da camisa do jogador, novamente(1 a 25): "))
+    if jogador == 0 :
         return False
     else :
-        adicionarPonto(j,p,voto)
+        adicionaPonto(jogador,vetor,pontos)
 
-#adicionar ponto
-def adicionarPonto(j,p,voto):
-    voto[j] = voto[j] + 1
-    voto[0] = voto[0] + 1
-    p = voto
+
+#adiciona votos ao vetor
+def adicionaPonto(i,vetor,p):
+    vetor[i] += 1
+    vetor[0] += 1
+    p = vetor[i]
     return p
+
+#imprimir o total de votos
+def imprimirTotalVotos(vetor):
+    print("----------------TOTAL DE VOTOS----------------")
+    print("O total foi de: %s votos"%vetor[0])
+    print("----------------------------------------------")
+
+#imprimir os jogadores, os votos e o percentual
+def imprimirTabela(vetor):
+    print("---------------RELATORIO DE VOTOS---------------")
+    print("Jogador", end="     ")
+    print("Votos", end="          ")
+    print("%")
+    i = 0
+    while i < len(vetor):
+        imprimirLinha(vetor,i)
+        i += 1
+
+
+#imprimir uma linha da tabela
+def imprimirLinha(vetor,i):
+    if vetor[i] != 0 and vetor[i] != vetor[0]:
+        print(i,end="              ")
+        print(vetor[i],end="          ")
+        percentual = calculaPercentual(i,vetor)
+        print(percentual)
+
+#calcular percentual
+def calculaPercentual(i,vetor):
+    return vetor[i] * 100 / vetor[0]
+
+#define quem foi o melhor jogador
+def melhorJog(vetor):
+    melhor = 0
+    i = 0
+    mi = 0
+    mp = 0
+    while i < len(vetor):
+        if vetor[i] > melhor and vetor[i] != vetor[0] :
+            melhor = vetor[i]
+            mi = i
+            mp = calculaPercentual(i,vetor)
+        i += 1
+    print("-----------------MELHOR JOGADOR FOI:-----------------")
+    print("O melhor jogador foi o camisa %d, com %s votos em um \n percentual de %.2f"%(mi,melhor,mp))
+    print("-----------------------------------------------------")
 
 
 #-----------------main---------------------
 votos = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 jog = True
-p = 0
-while p != False :
-    jog = perguntaJogador(p,votos)
-    p = jog
-    print(votos)
+pontos = 0 
+while jog != False :
+    jog = perguntaJogador(votos,pontos)
+    pontos = jog
+imprimirTotalVotos(votos)
+imprimirTabela(votos)
+melhorJog(votos)
+
