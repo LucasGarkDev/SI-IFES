@@ -19,29 +19,29 @@
 
 #-----------------funçoes------------------
 #pedir os votos
-def perguntaJogador(votos,pontos):
-    jogador = int(input("Digite o numero da camisa do jogador que considera o melhor(1 a 25): "))
-    while jogador < 0 or jogador > 25 :
-        print("Esse jogador nao existe")
-        jogador = int(input("Digite o numero da camisa do jogador que considera o melhor(1 a 25): "))
-    if jogador == 0 :
+def perguntaJogador(p,voto):
+    j = int(input("Digite o numero do jogador que deseja votar(1 a 25): "))
+    while j < 0 or j > 25:
+        print("Numero Invalido")
+        j = int(input("Digite o numero do jogador que deseja votar(1 a 25): "))
+    if j == 0 :
         return False
     else :
-        adicionarPonto(jogador,votos,pontos)
+        adicionarPonto(j,p,voto)
 
 #adicionar ponto
-def adicionarPonto(i,vetor,pontos):
-    vetor[i] = vetor[i] + 1 
-    vetor[0] = vetor[0] + 1
-    pontos = vetor
-    return pontos
+def adicionarPonto(j,p,voto):
+    voto[j] = voto[j] + 1
+    voto[0] = voto[0] + 1
+    p = voto
+    return p
 
 
 #-----------------main---------------------
 votos = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 jog = True
-pontos = 0
-while pontos != False :
-    jog = perguntaJogador(votos,pontos)
-    pontos = jog
+p = 0
+while p != False :
+    jog = perguntaJogador(p,votos)
+    p = jog
     print(votos)
