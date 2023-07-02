@@ -26,12 +26,14 @@ def preencherVetor(vetor):
 
 #manipular o vetor
 def manipulaVetor(vetor):
-    i = 0
+    j = 0
+    i = 1
     while i < len(vetor):
-        j = i + 1
-        if vetor[i] == vetor[9]:
-            vetor[i] = vetor[0]
-        vetor[i] = vetor[j]
+        if vetor[i] != 0 :
+            temp = vetor[i]
+            vetor[i] = vetor[j]
+            vetor[j] = temp
+        j += 1
         i += 1
     print(vetor)
 
