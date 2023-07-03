@@ -9,52 +9,58 @@ import random
 # Gerar um número aleatório entre MIN a MAX
 def gerarNumAleatorio(min,max):
     return random.randint(min,max)
-   
+
 #preencher o vetor
-def preencherVetor(min,max,vetor):
-    cont = 0
-    while cont < 100 :
+def preencheVetor(vetor):
+    i = 0
+    min = 1
+    max = 100
+    while i < 100 :
         n = gerarNumAleatorio(min,max)
         vetor.append(n)
-        cont += 1
+        i += 1
 
 #pedir o fim
-def pedirFim():
-    f = int(input("Digite o indice que voce deseja terminar a soma(indice < 100): "))
-    while f > 100 :
-        print("Indice invalido")
-        f = int(input("Digite novamente o indice(indice < 100): "))
+def pedirFim(vetor):
+    f = int(input("Qual sera o indice final da soma: "))
+    while f <= 0 or f > len(vetor):
+        print("Indice Invalido")
+        f = int(input("Qual sera o indice final da soma: "))
     return f
 
 #pedir o inicio
 def pedirInicio(f):
-    i = int(input("Digite o indice de começo da soma(indice >= 0 )"))
+    i = int(input("Qual sera o indice inicial da soma: "))
     while i < 0 or i > f :
         print("Indice Invalido")
-        i = int(input("Digite o indice novamente(indice >= 0 )")) 
+        i = int(input("Qual sera o indice inicial da soma: "))
     return i
 
-#soma entre os valores do inicio ate o fim
-def somaInicioFim(inicio,fim,vetor):  
-    cont = inicio
-    soma = 0 
-    while cont <= fim :
-        soma += vetor[cont]
-        cont += 1
+#somar os numeros entre o inicio e o fim
+def somaInicioFim(inicio,fim,vetor):
+    i = inicio
+    soma = vetor[i]
+    while i < fim:
+        i += 1
+        soma += vetor[i]
     return soma
-
-#imprimir
-def imprimir(elemento,i,f):
-    print("A soma dos valores entre os indices %d e %d é: %d "%(i,f,elemento))
+        
+#imprimir o resultado
+def imprimir(soma,vetor,i,f):
+    v = len(vetor)
+    print("------------IMPRESSÃO FINAL------------")
+    print("O numero total de elementos do vetor: %d"%v)
+    print("O indice de começo da soma: %d"%i)
+    print("O indice do final da soma: %d"%f)
+    print("O valor da soma entre o inicio e o fim: %d"%soma)
+    print("----------------------------------------")
 
 #-----------------main---------------------
 def main():
-    min = 0
-    max = 100
-    vetor = []
-    preencherVetor(min,max,vetor)
-    fim = pedirFim()
+    numeros = []
+    preencheVetor(numeros)
+    fim = pedirFim(numeros)
     inicio = pedirInicio(fim)
-    soma = somaInicioFim(inicio,fim,vetor)
-    imprimir(soma,inicio,fim)
+    soma = somaInicioFim(inicio,fim,numeros)
+    imprimir(soma,numeros,inicio,fim)
 main()
