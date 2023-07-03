@@ -18,80 +18,79 @@
 
 
 #-----------------funçoes------------------
-#pedir o jogador
-def perguntaJogador(vetor,pontos):
-    jogador = int(input("Digite o numero da camisa do jogador que voce achou o melhor(1 a 25): "))
+#pedir o numero do jogador
+def pedirJogador(vetor):
+    jogador = int(input("Digite o numero da camisa do jogador:"))
     while jogador < 0 or jogador > 25 :
-        print("Esse jogador nao existe")
-        jogador = int(input("Digite o numero da camisa do jogador, novamente(1 a 25): "))
+        print("Numero Invalido")
+        jogador = int(input("Digite o numero da camisa do jogador:"))
     if jogador == 0 :
         return False
-    else :
-        adicionaPonto(jogador,vetor,pontos)
+    adicionarPonto(vetor,jogador)
 
-
-#adiciona votos ao vetor
-def adicionaPonto(i,vetor,p):
+#adicionar mais 1 ponto para o jogador desejado
+def adicionarPonto(vetor,i):
     vetor[i] += 1
     vetor[0] += 1
-    p = vetor[i]
-    return p
 
-#imprimir o total de votos
-def imprimirTotalVotos(vetor):
-    print("----------------TOTAL DE VOTOS----------------")
-    print("O total foi de: %s votos"%vetor[0])
-    print("----------------------------------------------")
+#imprimir o total de votos computados
+def imprimirTotal(vetor):
+    print("----------TOTAL DE VOTOS----------")
+    print("O total de votos e: %s"%vetor[0])
+    print("----------------------------------")
 
-#imprimir os jogadores, os votos e o percentual
-def imprimirTabela(vetor):
-    print("---------------RELATORIO DE VOTOS---------------")
-    print("Jogador", end="     ")
-    print("Votos", end="          ")
-    print("%")
-    i = 0
-    while i < len(vetor):
-        imprimirLinha(vetor,i)
-        i += 1
-
-
-#imprimir uma linha da tabela
-def imprimirLinha(vetor,i):
-    if vetor[i] != 0 and vetor[i] != vetor[0]:
-        print(i,end="              ")
-        print(vetor[i],end="          ")
-        percentual = calculaPercentual(i,vetor)
-        print(percentual)
-
-#calcular percentual
-def calculaPercentual(i,vetor):
+#percentual
+def percentual(vetor,i):
     return vetor[i] * 100 / vetor[0]
 
-#define quem foi o melhor jogador
-def melhorJog(vetor):
-    melhor = 0
-    i = 0
-    mi = 0
-    mp = 0
+#imprimir a linha
+def imprimirLinha(vetor):
+    i = 1
     while i < len(vetor):
-        if vetor[i] > melhor and vetor[i] != vetor[0] :
-            melhor = vetor[i]
-            mi = i
-            mp = calculaPercentual(i,vetor)
+        if vetor[i] != 0 and i != 0:
+            print(i,end="               ")
+            print(vetor[i],end="         ")
+            p = percentual(vetor,i)
+            print(p)
         i += 1
-    print("-----------------MELHOR JOGADOR FOI:-----------------")
-    print("O melhor jogador foi o camisa %d, com %s votos em um \n percentual de %.2f"%(mi,melhor,mp))
-    print("-----------------------------------------------------")
+
+#imprimir a tabela com os jogadores, votos e %
+def imprimirRegistro(vetor):
+    print("-------------REGISTRO-------------")
+    print("Jogador", end="              ")
+    print("Votos", end="       ")
+    print("% votos")
+    imprimirLinha(vetor)
+    print("----------------------------------------------")
+
+#escolher o melhor jogador
+def escolheMelhor(vetor):
+    i = 1
+    melhor = 0
+    while i < len(vetor):
+        if vetor[i] > melhor:
+            melhor = i
+        i += 1
+    imprimirMelhorJog(vetor,i)
+
+
+#imprimir o melhor jogador
+def imprimirMelhorJog(vetor,i):
+    print("-----------MELHOR JOGADOR DA RODADA-----------")
+    a = i
+    b = vetor[i]
+    c = percentual(vetor,i)
+    print("O melhor jogador foi o número %d, com %d votos,"%(a,b))
+    print(" correspondendo a %.2f do total de votos."%c)
+    print("----------------------------------------------")
 
 
 #-----------------main---------------------
 votos = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-jog = True
-pontos = 0 
-while jog != False :
-    jog = perguntaJogador(votos,pontos)
+pontos = True
+while pontos != False:
+    jog = pedirJogador(votos)
     pontos = jog
-imprimirTotalVotos(votos)
-imprimirTabela(votos)
-melhorJog(votos)
-
+imprimirTotal(votos)
+imprimirRegistro(votos)
+escolheMelhor(votos)
