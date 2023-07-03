@@ -11,38 +11,39 @@ def gerarNumAleatorio(min,max):
     return random.randint(min,max)
 
 #preencher o vetor
-def preencherVetor(min,max,vetor):
-    cont = 0
-    while cont < 50 :
+def preencheVetor(min,max,vetor):
+    i = 0
+    while i < 50 :
         n = gerarNumAleatorio(min,max)
         vetor.append(n)
-        cont = cont + 1
+        i += 1
 
-#percorrer o vetor
-def percorrerVetor(vetor):
+#percorrer e descobrir os pares e impares
+def percorreVetor(vetor):
     i = 0
-    pares = 0
-    impares = 0
+    par = 0
+    impar = 0
     while i < len(vetor):
-        if vetor[i] % 2 == 0:
-            pares = pares + 1
+        if vetor[i] % 2 == 0 :
+            par += 1
         else :
-            impares = impares + 1
-        i = i + 1
-    ip = "pares"
-    imprimir(pares,ip)
-    ip = "impares"
-    imprimir(impares,ip)
+            impar += 1
+        i += 1
+    imprimirParesImpares(par,impar)
 
-#imprimir 
-def imprimir(qtdeElemento,ip):
-    print("Essa e a quantidade de numeros %s : %d"%(ip,qtdeElemento))
+#imprimir os pares e impares
+def imprimirParesImpares(par,impar):
+    print("-----------NUMEROS PARES E IMPARES-----------")
+    print("A quantidade de numeros pares e: %d"%par)
+    print("A quantidade de numeros impares e: %d"%impar)
+    print("---------------------------------------------")
+
 
 #-----------------main---------------------
 def main():
+    numeros = []
     min = 1
     max = 100
-    numeros = []
-    preencherVetor(min,max,numeros)
-    percorrerVetor(numeros)
+    preencheVetor(min,max,numeros)
+    percorreVetor(numeros)
 main()
