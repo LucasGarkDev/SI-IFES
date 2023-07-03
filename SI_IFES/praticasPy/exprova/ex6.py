@@ -9,57 +9,62 @@
 
 #-----------------funçoes------------------
 #pedir o peso
-def pedirPeso(numeracao,vetor):
-    peso = float(input("Digite o peso do individuo %d: "%numeracao))
-    while peso < 0 :
+def pedirPeso(vetor,c):
+    peso = float(input("Digite o valor do peso do individuo %d: "%c))
+    while peso <= 0 :
         print("Peso Invalido")
-        peso = float(input("Digite o peso do individuo %d, novamente: "%numeracao))
-    if peso == 0 :
-        return False
-    else:
-        return vetor.append(peso)
-    
-#pedir altura
-def pedirAltura(numeracao,vetor):
-    altura = float(input("Digite a altura do individuo %d: "%numeracao))
-    while altura < 0 :
-        print("Altura Invalida")
-        altura = float(input("Digite a altura do individuo %d, novamente: "%numeracao))
-    if altura == 0 :
-        return False
-    else :
-        return vetor.append(altura)
+        peso = float(input("Digite o peso do individuo %d,novamente: "%c))
+    vetor.append(peso)
 
-#calcular IMC
-def calcularIMC(peso,altura,imcs):
+#pedir a altura
+def pedirAltura(vetor,c):
+    altura = float(input("Digite o valor da altura do individuo %d: "%c))
+    while altura <= 0 or altura > 5.0 :
+        print("Peso Invalido")
+        altura = float(input("Digite a altura do individuo %d,novamente: "%c))
+    vetor.append(altura)
+
+#pergunta se deseja continuar
+def desejaContinuar():
+    denovo = str(input("Voce deseja continuar(s/n)? ")).upper()
+    while denovo != "S" and denovo != "N":
+        print("Nao entendi o seu desejo")
+        denovo = str(input("Voce deseja continuar(s/n)? ")).upper()
+    return denovo
+
+#calcular o IMC
+def calculaIMC(pesos,alturas,imcs):
     i = 0
-    while i < len(peso):
-        imc = peso[i] / (altura[i] * altura[i])
-        imcs.append(imc)
+    while i < len(pesos):
+        res = pesos[i]/(alturas[i] * alturas[i])
+        imcs.append(res)
         i += 1
 
-#imprimir
-def imprimirFinal(vetor):
+#imprimir os imcs
+def imprimirImcs(vetor):
     i = 0
-    print("----------TODOS OS IMCS-----------")
+    c = 1
+    print("---------IMC'S ARMAZENADOS---------")
     while i < len(vetor):
-        print("individuo %s: %s"%(i,vetor[i]))
-        print("-------------------------------")
+        print("O imc do individuo %d e: %s"%(c,vetor[i]))
+        c += 1
         i += 1
+    print("-----------------------------------")
 
 
 #-----------------main---------------------
-pesos = []
-alturas = []
-c = 1
-peso = True
-altura = True
-while peso != False and altura != False:
-    peso = pedirPeso(c,pesos)
-    altura = pedirAltura(c,alturas)
-    c += 1
-imcs = []
-calcularIMC(pesos,alturas,imcs)
-imprimirFinal(imcs)
+def main():
+    pesos = []
+    alturas = []
+    contNum = 1 
+    outraVez = "S"
+    while outraVez == "S":
+        pedirPeso(pesos,contNum)
+        pedirAltura(alturas,contNum)
+        contNum += 1
+        outraVez = desejaContinuar()
+    imcs = []
+    calculaIMC(pesos,alturas,imcs)
+    imprimirImcs(imcs)
 
-
+main()
