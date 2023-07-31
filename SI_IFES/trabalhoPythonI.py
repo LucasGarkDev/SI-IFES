@@ -51,7 +51,7 @@ def pedirCodigo(vetor1):
         
 def pedirPreco():
     preco = float(input("Digite o preço desse produto: "))
-    while preco <= 0 or preco.decimal() == False:
+    while preco <= 0 :
         print("Preço impossível de existir no estoque")
         preco = float(input("Digite o preço desse produto, novamente: "))
     return preco
@@ -98,7 +98,7 @@ def aumentarPreco(vetor2, vetor1):
     codigo = obter_codigo_valido(vetor1)
 
     percentual = input("Digite o valor da porcentagem de aumento: ")
-    while codigo.isdigit() == False or float(percentual) <= 0:
+    while float(percentual) <= 0:
         print("Porcentagem inválida.")
         percentual = input("Digite o valor da porcentagem de aumento novamente: ")
 
