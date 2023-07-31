@@ -113,22 +113,22 @@ def aumentarPreco(vetor2, vetor1):
     print("-----------------------------------------")
     
 
-def maiorPreco(vetor2,vetor1):
-    maiorPreco = 0  
-    codigoMaiorPreco = -1
-    i = 1
-    while i < len(vetor2):
-        if vetor2[i] > maiorPreco:
-            maiorPreco = vetor2[i]
-            codigoMaiorPreco = vetor1[i]
-        i += 1
+def maiorPreco(vetor2, vetor1):
+    if len(vetor2) == 0:
+        print("Nenhum produto encontrado")
+    else:
+        maiorPreco = vetor2[0]
+        codigoMaiorPreco = vetor1[0]
+        i = 1
+        while i < len(vetor2):
+            if vetor2[i] > maiorPreco:
+                maiorPreco = vetor2[i]
+                codigoMaiorPreco = vetor1[i]
+            i += 1
 
-    if codigoMaiorPreco != -1:
         print("----------------------------------")
         print("O produto de código %d tem o maior preço: %.2f" % (codigoMaiorPreco, maiorPreco))
         print("----------------------------------")
-    else:
-        print("Nenhum produto encontrado")
 
 
 def excliur(vetor1, vetor2):
