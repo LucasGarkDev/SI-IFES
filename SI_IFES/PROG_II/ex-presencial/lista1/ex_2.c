@@ -51,7 +51,7 @@ int pedirQtdeTermos(){
     int num;
     printf("Digite a quantidade de termos da P.G: ");
     scanf("%d", &num);
-    while (num = 0){
+    while (num <= 0){
         puts("Numero Invalido");
         printf("Digite a quantidade de termos da P.G, novamente: ");
         scanf("%d", &num);
