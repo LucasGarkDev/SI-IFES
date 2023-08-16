@@ -37,17 +37,9 @@ int pedirIdade(){
 }
 
 void decisao(int idade){
-    if (idade > 65){
-        printf("\n%s\n", resultado);
-        puts("Esse individuo e eleitor facultativo");
-    }else if (idade > 18){
-        printf("\n%s\n", resultado);
-        puts("Esse individuo e eleitor obrigatorio");
-    }else if ((idade < 18) &&(idade > 16)){
-        printf("\n%s\n", resultado);
-        puts("Esse individuo e eleitor facultativo");
-    }else{
+    if ((idade > 65)||((idade < 18)&&(idade > 16))){
         printf("\n%s\n", resultado);
         puts("Esse individuo e nao e eleitor");
     }
+    
 }
