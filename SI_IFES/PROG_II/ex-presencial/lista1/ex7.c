@@ -30,10 +30,7 @@ int main() {
     printf("\n%s\n", inicio);
     int vetorCodigo[5];
     float vetorAltura[5], vetorPeso[5];
-    vetorCodigo[5] = {};
-    vetorAltura[5] = {};
-    vetorPeso[5] = {};
-    inserirClientes(vetorCodigo[],vetorAltura[],vetorPeso[]);
+    inserirClientes(vetorCodigo,vetorAltura,vetorPeso);
     
     printf("\n%s\n", resultado);
     
@@ -42,14 +39,23 @@ int main() {
 }
 
 void inserirClientes(int codigos[5],float altura[5], float pesos[5]){
-    int cod, i;
-    float alt, pes;
+    int i;
     for (i = 0; i < 5; i++){
-        cod = pedirCodigo();
-        alt = pedirAltura();
-        pes = pedirPeso();
-        strcat(codigos[i],cod);
-        strcat(altura[i],alt);
-        strcat(pesos[i],pes);
+        codigos[i] = pedirCodigo();
+        altura[i] = pedirAltura();
+        pesos[i] = pedirPeso();
     } 
 }
+
+float descobreAlto(int codigos[5],float altura[5]){
+    int i, maior;
+    maior = 0;
+    for (i = 0; i < 5; i++){
+        if (altura[i] > maior){
+            maior =  altura[i];
+        }
+        
+    }
+    
+}
+
