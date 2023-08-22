@@ -1,52 +1,79 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
-#define tam 5
-
-// int pedirQtde();
-int pedirMatricula(int cont);
-float pedirNota(int cont);
-char pedirSexo(int cont);
-int classificacao();
-char contagemH(char vetor[tam]);
+#define tam 100 // Defina o tamanho máximo da turma
 
 int main() {
-    printf("\n%s\n", inicio);
-    int quanti, matricula, i;
-    float nota;
-    char sexo;
-    // quanti = pedirQtde();
-    int matriculas[tam];
-    float notas[tam];
-    char sexos[tam];
-    for (i = 1; i <= tam; i++){
-        matricula = pedirMatricula(i);
-        matriculas[i] = matricula;
-        nota = pedirNota(i);
-        notas[i] = nota
-        sexo = pedirSexo(i);
-        sexos[i] = sexo;
+    int matricula[tam];
+    float nota[tam];
+    char sexo[tam];
+    int i = 0;
+    int homens = 0, mulheres = 0;
+    int alunosDB = 0, alunosDR = 0, alunosDI = 0;
+    float somaNotas = 0;
+    
+    printf("Digite a matrícula, nota e sexo de cada aluno (matrícula negativa ou zero para encerrar):\n");
+    
+    while (1) {
+        printf("Matrícula do aluno %d: ", i + 1);
+        scanf("%d", &matricula[i]);
+        
+        if (matricula[i] <= 0) {
+            break;
+        }
+        
+        printf("Nota do aluno %d: ", i + 1);
+        scanf("%f", &nota[i]);
+        
+        printf("Sexo do aluno %d (m/f): ", i + 1);
+        scanf(" %c", &sexo[i]);
+        
+        if (sexo[i] == 'm') {
+            homens++;
+        } else {
+            mulheres++;
+        }
+        
+        somaNotas += nota[i];
+        
+        if (nota[i] >= 80) {
+            alunosDB++;
+        } else if (nota[i] >= 60) {
+            alunosDR++;
+        } else {
+            alunosDI++;
+        }
+        
+        i++;
     }
-    printf("\n%s\n", resultado);
     
-    printf("\n%s\n", corte);
+    int totalAlunos = i;
+    float mediaNotas = somaNotas / totalAlunos;
+    float percentualDB = (float) alunosDB / totalAlunos * 100;
+    float percentualDR = (float) alunosDR / totalAlunos * 100;
+    float percentualDI = (float) alunosDI / totalAlunos * 100;
+    float percentualHomensDB = (float) alunosDB / homens * 100;
+    float percentualHomensDR = (float) alunosDR / homens * 100;
+    float percentualHomensDI = (float) alunosDI / homens * 100;
+    float percentualMulheresDB = (float) alunosDB / mulheres * 100;
+    float percentualMulheresDR = (float) alunosDR / mulheres * 100;
+    float percentualMulheresDI = (float) alunosDI / mulheres * 100;
+    
+    printf("Resultados:\n");
+    printf("Quantidade de homens: %d\n", homens);
+    printf("Quantidade de mulheres: %d\n", mulheres);
+    printf("Média das notas: %.2f\n", mediaNotas);
+    printf("Quantidade de alunos DB: %d\n", alunosDB);
+    printf("Quantidade de alunos DR: %d\n", alunosDR);
+    printf("Quantidade de alunos DI: %d\n", alunosDI);
+    printf("Percentual de alunos DB: %.2f%%\n", percentualDB);
+    printf("Percentual de alunos DR: %.2f%%\n", percentualDR);
+    printf("Percentual de alunos DI: %.2f%%\n", percentualDI);
+    printf("Percentual de homens DB: %.2f%%\n", percentualHomensDB);
+    printf("Percentual de homens DR: %.2f%%\n", percentualHomensDR);
+    printf("Percentual de homens DI: %.2f%%\n", percentualHomensDI);
+    printf("Percentual de mulheres DB: %.2f%%\n", percentualMulheresDB);
+    printf("Percentual de mulheres DR: %.2f%%\n", percentualMulheresDR);
+    printf("Percentual de mulheres DI: %.2f%%\n", percentualMulheresDI);
+    
     return 0;
-}
-
-int pedirMatricula(int cont){
-    int num;
-    do{
-        printf("Digite o numero de matricula do aluno %d: ", cont);
-        scanf("%d", &num);
-    } while (num <= 0);
-    return num;
-}
-
-char contagemH(char vetor[tam]){
-    
 }
