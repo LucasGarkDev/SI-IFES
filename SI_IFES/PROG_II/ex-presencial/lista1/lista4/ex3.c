@@ -58,8 +58,7 @@ float calcularCirculo(){
     return res;
 }
 
-
-int menu(){ 
+int lerOpcao() {
     int op;
     do{
         printf("\n\nCALCULAR A ÁREA:\n");
@@ -72,21 +71,25 @@ int menu(){
     return op;
 }
 
-int main(){
-    printf("\n%s\n", inicio);
-    int decisao;
-    float res;
-    decisao = menu();
-    if (decisao == 1){
-        res = calcularRetangulo();
-    }else if (decisao == 2){
-        res = calcularCirculo();
-    }else{
-        printf("Fim do programa....");
-        return 0;
-    }
-    printf("\n%s\n", resultado);
-    printf("O resultado final sera: %.2f", res);
-    printf("\n%s\n", corte);
+int main() {
+    int opcao;
+    do {
+        opcao = lerOpcao();
+        switch (opcao) {
+            case 1:
+            printf("\n\tÁREA DO RETÂNGULO\n");
+            float res = calcularRetangulo();
+            printf("\n%s\n", resultado);
+            printf("O resultado dessa area e: %.2f", res);
+            break;
+        case 2:
+            printf("\n\tÁREA DO CÍRCULO\n");
+            float res = calcularCirculo();
+            printf("\n%s\n", resultado);
+            printf("O resultado dessa area e: %.2f", res);
+            break;
+        }
+    } while ( opcao > 0);
     return 0;
 }
+
