@@ -75,10 +75,11 @@ int multiplicacao(int n1, int n2){
 }
 
 int potencia(int n1, int n2){
-    int res, cont;
+    int res, cont, valor;
     cont = 0;
     while(cont < n2){
-        res *= multiplicacao(n1,n2);
+        valor = multiplicacao(n1, n2);
+        res *= valor;
         cont++;
     }
     return res;
