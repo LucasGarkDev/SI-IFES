@@ -12,15 +12,12 @@ soma.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h> // Para pegar o PI
+#include <time.h> // Para os números aleatórios
 
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h> // Para os números aleatórios
 // ########## JOGO DE CRAPS ###################
 
 // Jogar os dados. O resto da divisão por 6 é
@@ -42,9 +39,49 @@ int jogarDados(){
     return soma;
 }
 
+int segundaRodada(int ponto){
+    int dado;
+    do{
+        dado = jogarDados();
+    } while ((dado != ponto) && (dado != 7));
+    if (dado == ponto){
+        printf("\n%s\n", resultado);
+        printf("Voce Ganhou!!!!");
+        return -1;
+    }else{
+        printf("\n%s\n", resultado);
+        printf("Voce Perdeu!!!");
+        return -1;
+    }
+}
+
+int verificaCraps(int soma){
+    int res;
+    if ((soma == 7)||(soma == 11)){
+        printf("\n%s\n", resultado);
+        printf("Voce Ganhou!!!");
+        return -1;
+    }else if ((soma == 2)||(soma == 3)||(soma == 12)){
+        printf("\n%s\n", resultado);
+        printf("Voce Perdeu!!!");
+        return -1;
+    }else{
+        printf("-----------PONTO-----------\n");
+        printf("Valor do ponto : %d\n", soma);
+        res = segundaRodada(soma);
+        return res;
+    }
+}
+
 int main(){
     // SEMENTE DOS NUMEROS ALEATÓRIOS. Usa a hora local
     srand( (unsigned)time(NULL) );
-    // Continue a partir daqui ...
+    int verifica, turno;
+    verifica = 0;
+    printf("\n%s\n", inicio);
+    do{
+        turno = jogarDados();
+        verifica = verificaCraps(turno);
+    } while (verifica != -1);
     return 0;
 }
