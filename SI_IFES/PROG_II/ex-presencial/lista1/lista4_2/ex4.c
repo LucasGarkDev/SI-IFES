@@ -56,7 +56,7 @@ int main() {
     lerDados(&n1, &n2);
     res = potencia(n1, n2);
     printf("\n%s\n", resultado);
-    printf("O resultado da multiplicacao de %d e %d e: %d", n1, n2, res);
+    printf("O resultado da multiplicacao de %d e %d e: %d", n1, n2, res2);
     printf("\n%s\n", corte);
     return 0;
 }
