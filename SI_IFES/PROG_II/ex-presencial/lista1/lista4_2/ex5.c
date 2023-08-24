@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <math.h>
 
 #define inicio "--------INICIO--------"
@@ -18,17 +17,17 @@
 
 int menu(){
     int op;
-    do{
-        printf("\n%s\n", inicio);
-        printf("\n1-ADIÇÃO\n");
-        printf("\n2-SUBTRAÇÃO\n");
-        printf("\n3-DIVISÃO\n");
-        printf("\n4-MULTIPLICAÇÃO\n");
-        printf("\n5-POTENCIA\n");
-        printf("\n6-SAIR\n");
-        printf("Digite a sua opção:");
-        scanf("%d", &op);
-    } while ((op != 1)&&(op != 2)&&(op != 3)&&(op != 4)&&(op != 5)&&(op != 6));
+
+    printf("\n%s\n", inicio);
+    printf("\n1-ADIÇÃO\n");
+    printf("\n2-SUBTRAÇÃO\n");
+    printf("\n3-DIVISÃO\n");
+    printf("\n4-MULTIPLICAÇÃO\n");
+    printf("\n5-POTENCIA\n");
+    printf("\n6-SAIR\n");
+    printf("Digite a sua opção:");
+    scanf("%d", &op);
+
     return op;
 }
 
@@ -56,11 +55,8 @@ int subtracao(int num1, int num2){
     return res;
 }
 
-float divisao(int num1, int num2){
-    int res;
-    float n1 = (float)num1;
-    float n2 = (float)num2;
-    res = n1 / n2;
+int divisao(int num1, int num2) {
+    int res = num1 / num2;
     return res;
 }
 
@@ -79,63 +75,60 @@ int potencia(int n1, int n2){
     int res, cont, valor;
     cont = 0;
     res = 0;
-    while(cont < n2){
-        valor = multiplicacao(n1, n2);
-        res = valor;
+    valor = n1;
+    while(cont < n2-1){
+        valor = multiplicacao(valor, n1);
         cont++;
     }
-    return res;
-    
+    return valor;
 }
 
 int main() {
-    SetConsoleOutputCP(65001);
-    int n1, n2, final;
-    int escolha = menu();
-    switch (escolha){
-    case 1:
-        lerDados(&n1, &n2);
-        final = adicao(n1, n2);
-        printf("\n%s\n", resultado);
-        printf("O resultado da adição de %d e %d sera: %d", n1, n2, final);
-        printf("\n%s\n", corte);
-        break;
     
-    case 2:
-        lerDados(&n1, &n2);
-        final = subtracao(n1, n2);
-        printf("\n%s\n", resultado);
-        printf("O resultado da subtração de %d e %d sera: %d", n1, n2, final);
-        printf("\n%s\n", corte);
-        break;
-    
-    case 3:
-        lerDados(&n1, &n2);
-        final = divisao(n1, n2);
-        printf("\n%s\n", resultado);
-        printf("O resultado da divisão de %d e %d sera: %.2f", n1, n2, final);
-        printf("\n%s\n", corte);
-        break;
-    
-    case 4:
-        lerDados(&n1, &n2);
-        final = multiplicacao(n1, n2);
-        printf("\n%s\n", resultado);
-        printf("O resultado da multiplicação de %d e %d sera: %d", n1, n2, final);
-        printf("\n%s\n", corte);
-        break;
-    
-    case 5:
-        lerDados(&n1, &n2);
-        final = potencia(n1, n2);
-        printf("\n%s\n", resultado);
-        printf("O resultado da potencia de %d e %d sera: %d", n1, n2, final);
-        printf("\n%s\n", corte);
-        break;
-    
-    case 6:
-        return 0;
-        break;
-    }
+    int n1, n2, final, escolha;
+    do{
+        escolha = menu();
+        switch (escolha){
+        case 1:
+            lerDados(&n1, &n2);
+            final = adicao(n1, n2);
+            printf("\n%s\n", resultado);
+            printf("O resultado da adição de %d e %d sera: %d", n1, n2, final);
+            printf("\n%s\n", corte);
+            break;
+        
+        case 2:
+            lerDados(&n1, &n2);
+            final = subtracao(n1, n2);
+            printf("\n%s\n", resultado);
+            printf("O resultado da subtração de %d e %d sera: %d", n1, n2, final);
+            printf("\n%s\n", corte);
+            break;
+        
+        case 3:
+            lerDados(&n1, &n2);
+            final = divisao(n1, n2);
+            printf("\n%s\n", resultado);
+            printf("O resultado da divisão de %d e %d sera: %d", n1, n2, final);
+            printf("\n%s\n", corte);
+            break;
+        
+        case 4:
+            lerDados(&n1, &n2);
+            final = multiplicacao(n1, n2);
+            printf("\n%s\n", resultado);
+            printf("O resultado da multiplicação de %d e %d sera: %d", n1, n2, final);
+            printf("\n%s\n", corte);
+            break;
+        
+        case 5:
+            lerDados(&n1, &n2);
+            final = potencia(n1, n2);
+            printf("\n%s\n", resultado);
+            printf("O resultado da potencia de %d e %d sera: %d", n1, n2, final);
+            printf("\n%s\n", corte);
+            break;
+        }
+    } while (escolha != 6);
     return 0;
 }
