@@ -26,7 +26,7 @@ int menu(){
         printf("\n4-MULTIPLICAÇÃO\n");
         printf("\n5-POTENCIA\n");
         printf("\n6-SAIR\n");
-        printf("Digite a sua opção:\n");
+        printf("Digite a sua opção:");
         scanf("%d", &op);
     } while ((op != 1)&&(op != 2)&&(op != 3)&&(op != 4)&&(op != 5)&&(op != 6));
     return op;
