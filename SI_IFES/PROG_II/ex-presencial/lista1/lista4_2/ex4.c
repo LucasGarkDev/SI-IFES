@@ -43,13 +43,12 @@ int potencia(int n1, int n2){
     int res, cont, valor;
     cont = 0;
     res = 0;
-    while(cont < n2){
-        valor = multiplicacao(n1, n1);
-        res += valor;
+    valor = n1;
+    while(cont < n2-1){
+        valor = multiplicacao(valor, n1);
         cont++;
     }
-    return res;
-    
+    return valor;
 }
 int main() {
     printf("\n%s\n", inicio);
