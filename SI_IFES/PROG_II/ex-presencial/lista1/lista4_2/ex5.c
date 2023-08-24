@@ -67,6 +67,7 @@ float divisao(int num1, int num2){
 int multiplicacao(int n1, int n2){
     int res, cont;
     cont = 0;
+    res = 0;
     while(cont < n2){
         res += n1;
         cont++;
@@ -77,6 +78,7 @@ int multiplicacao(int n1, int n2){
 int potencia(int n1, int n2){
     int res, cont, valor;
     cont = 0;
+    res = 0;
     while(cont < n2){
         valor = multiplicacao(n1, n2);
         res *= valor;
