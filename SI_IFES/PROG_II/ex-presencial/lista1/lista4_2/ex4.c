@@ -8,7 +8,6 @@ potência de números fracionários.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <math.h>
 
 #define inicio "--------INICIO--------"
@@ -32,6 +31,7 @@ void lerDados(int *num1, int *num2){
 int multiplicacao(int n1, int n2){
     int res, cont;
     cont = 0;
+    res = 0;
     while(cont < n2){
         res += n1;
         cont++;
@@ -42,22 +42,22 @@ int multiplicacao(int n1, int n2){
 int potencia(int n1, int n2){
     int res, cont, valor;
     cont = 0;
+    res = 0;
     while(cont < n2){
-        valor = multiplicacao(n1, n2);
-        res *= valor;
+        valor = multiplicacao(n1, n1);
+        res += valor;
         cont++;
     }
     return res;
     
 }
 int main() {
-    SetConsoleOutputCP(65001);
     printf("\n%s\n", inicio);
     int n1, n2, res;
     lerDados(&n1, &n2);
     res = potencia(n1, n2);
     printf("\n%s\n", resultado);
-    printf("O resultado da multiplicacao de %d e %d e: %d", n1, n2, res2);
+    printf("O resultado da potencia de %d e %d e: %d", n1, n2, res);
     printf("\n%s\n", corte);
     return 0;
 }
