@@ -39,7 +39,14 @@ int multiplicacao(int n1, int n2){
     return res;
 }
 
-int potencia(int multiplicacao){
+int potencia(int n1, int n2){
+    int res, cont;
+    cont = 0;
+    while(cont < n2){
+        res *= multiplicacao(n1,n2);
+        cont++;
+    }
+    return res;
     
 }
 int main() {
