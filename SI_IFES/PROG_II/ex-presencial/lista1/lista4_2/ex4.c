@@ -52,12 +52,11 @@ int potencia(int n1, int n2){
 int main() {
     SetConsoleOutputCP(65001);
     printf("\n%s\n", inicio);
-    int n1, n2, res1, res2;
+    int n1, n2, res;
     lerDados(&n1, &n2);
-    res1 = multiplicacao(n1, n2);
-    res2 = potencia();
+    res = potencia(n1, n2);
     printf("\n%s\n", resultado);
-    printf("O resultado da multiplicacao de %d e %d e: %d", n1, n2, res2);
+    printf("O resultado da multiplicacao de %d e %d e: %d", n1, n2, res);
     printf("\n%s\n", corte);
     return 0;
 }
