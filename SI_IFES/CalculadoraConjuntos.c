@@ -37,22 +37,22 @@ void inserirConjuntos(int *conjunto[], int tamanho){
 
 int uniao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoUniao[]) {
     int i, j, tamanhoUniao;
-    // Copiar o conjunto A para o conjunto de união
+    
     for (i = 0; i < tamanho1; i++) {
         conjuntoUniao[i] = conjuntoA[i];
     }
-    tamanhoUniao = tamanho1; // Inicializar tamanho do conjunto de união
-    // Percorrer o conjunto B e adicionar elementos únicos ao conjunto de união
+    tamanhoUniao = tamanho1; 
+    
     for (i = 0; i < tamanho2; i++) {
-        int elementoExiste = 0; // Variável para verificar se o elemento já existe na união
-        // Verificar se o elemento de B já existe na união
+        int elementoExiste = 0; 
+        
         for (j = 0; j < tamanhoUniao; j++) {
             if (conjuntoB[i] == conjuntoUniao[j]) {
                 elementoExiste = 1;
                 break;
             }
         }
-        // Se o elemento de B não existe na união, adicionar
+        
         if (!elementoExiste) {
             conjuntoUniao[tamanhoUniao] = conjuntoB[i];
             tamanhoUniao++;
@@ -66,7 +66,7 @@ int intersessao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, in
     for (i = 0; i < tamanho1; i++) {
         for (j = 0; j < tamanho2; j++) {
             if (conjuntoA[i] == conjuntoB[j]) {
-                // Verifica se o elemento já existe no conjunto de interseção
+                
                 int elementoExiste = 0;
                 for (int k = 0; k < tamanhoInter; k++) {
                     if (conjuntoA[i] == conjuntoInter[k]) {
@@ -74,7 +74,7 @@ int intersessao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, in
                         break;
                     }
                 }
-                // Se o elemento não existe no conjunto de interseção, adiciona
+                
                 if (!elementoExiste) {
                     conjuntoInter[tamanhoInter] = conjuntoA[i];
                     tamanhoInter++;
@@ -82,61 +82,61 @@ int intersessao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, in
             }
         }
     }
-    return tamanhoInter; // Retorna o tamanho do conjunto de interseção
+    return tamanhoInter; 
 }
 
 int subtracao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoSubtracao[]) {
     int i, j, tamanhoSubtracao = 0;
     for (i = 0; i < tamanho1; i++) {
-        int elementoExiste = 0; // Variável para verificar se o elemento existe em B
+        int elementoExiste = 0; 
         for (j = 0; j < tamanho2; j++) {
             if (conjuntoA[i] == conjuntoB[j]) {
-                elementoExiste = 1; // Elemento existe em B, não será adicionado à subtração
+                elementoExiste = 1; 
                 break;
             }
         }
-        // Se o elemento não existe em B, adiciona ao conjunto de subtração
+        
         if (!elementoExiste) {
             conjuntoSubtracao[tamanhoSubtracao] = conjuntoA[i];
             tamanhoSubtracao++;
         }
     }
-    return tamanhoSubtracao; // Retorna o tamanho do conjunto de subtração
+    return tamanhoSubtracao; 
 }
 
 int diferencaSimetrica(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoDiferencaSimetrica[]) {
     int i, j, tamanhoDiferencaSimetrica = 0;
-    // Verificar elementos presentes apenas em A (não em B)
+    
     for (i = 0; i < tamanho1; i++) {
-        int elementoExisteEmB = 0; // Variável para verificar se o elemento existe em B
+        int elementoExisteEmB = 0; 
         for (j = 0; j < tamanho2; j++) {
             if (conjuntoA[i] == conjuntoB[j]) {
-                elementoExisteEmB = 1; // Elemento existe em B, não será adicionado à diferença simétrica
+                elementoExisteEmB = 1; 
                 break;
             }
         }
-        // Se o elemento não existe em B, adiciona ao conjunto de diferença simétrica
+       
         if (!elementoExisteEmB) {
             conjuntoDiferencaSimetrica[tamanhoDiferencaSimetrica] = conjuntoA[i];
             tamanhoDiferencaSimetrica++;
         }
     }
-    // Verificar elementos presentes apenas em B (não em A)
+    
     for (i = 0; i < tamanho2; i++) {
-        int elementoExisteEmA = 0; // Variável para verificar se o elemento existe em A
+        int elementoExisteEmA = 0; 
         for (j = 0; j < tamanho1; j++) {
             if (conjuntoB[i] == conjuntoA[j]) {
-                elementoExisteEmA = 1; // Elemento existe em A, não será adicionado à diferença simétrica
+                elementoExisteEmA = 1; 
                 break;
             }
         }
-        // Se o elemento não existe em A, adiciona ao conjunto de diferença simétrica
+        
         if (!elementoExisteEmA) {
             conjuntoDiferencaSimetrica[tamanhoDiferencaSimetrica] = conjuntoB[i];
             tamanhoDiferencaSimetrica++;
         }
     }
-    return tamanhoDiferencaSimetrica; // Retorna o tamanho do conjunto de diferença simétrica
+    return tamanhoDiferencaSimetrica; 
 }
 
 void produtoCartesiano(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2) {
@@ -168,15 +168,15 @@ int main() {
 
     int conjtA[10];
     int conjtB[10];
-    int conjtUniao[20]; // tamanho máximo da união
+    int conjtUniao[20]; 
     int tamanhoUniao = 0;
     int conjtIntersecao[10];
     int tamanhoIntersecao = 0;
-    int conjtSubtracaoA_B[10]; // tamanho máximo da subtração
+    int conjtSubtracaoA_B[10]; 
     int tamanhoSubtracaoA_B = 0;
-    int conjtSubtracaoB_A[10]; // tamanho máximo da subtração
+    int conjtSubtracaoB_A[10]; 
     int tamanhoSubtracaoB_A = 0;
-    int conjtDiferencaSimetrica[20]; // tamanho máximo da diferença simétrica
+    int conjtDiferencaSimetrica[20]; 
     int tamanhoDiferencaSimetrica = 0;
 
     do {
