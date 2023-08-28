@@ -7,31 +7,19 @@
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
 
-int pesquisar(int vetor[], int pesq, int tamanho){
-    int i, num;
-    for (i = 0; i < tamanho; i++){
-        if (vetor[i] == pesq){
-            num = vetor[i];
-            return num;
-        }
-    }
-    return -1;
-}
-
-int pedirTamanho(char conjunto){
+int pedirTamanho(char conjunto) {
     int num;
-    do{
-        printf("Digite o tamanho do conjunto %c", conjunto);
+    do {
+        printf("Digite o tamanho do conjunto %c: ", conjunto);
         scanf("%d", &num);
     } while (num <= 0);
     return num;
 }
 
-void inserirConjuntos(int *conjunto[], int tamanho){
-    int i;
-    for (i = 0; i < tamanho; i++){
-        printf("Digite o %d numero: ", i+1);
-        scanf("%d", conjunto[i]);
+void inserirConjunto(int conjunto[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        printf("Digite o %dº número: ", i + 1);
+        scanf("%d", &conjunto[i]);
     }
 }
 
@@ -184,79 +172,77 @@ int main() {
         printf("\nDigite a opção: ");
         scanf("%d", &opcao);
         switch (opcao) {
-        case 1:
-            tamanho1 = pedirTamanho('A');
-            tamanho2 = pedirTamanho('B');
-            inserirConjuntos(&conjtA, tamanho1);
-            inserirConjuntos(&conjtB, tamanho2);
-            printf("\n%s\n", corte);
-            break;
+            case 1:
+                tamanho1 = pedirTamanho('A');
+                tamanho2 = pedirTamanho('B');
+                inserirConjuntos(&conjtA, tamanho1);
+                inserirConjuntos(&conjtB, tamanho2);
+                printf("\n%s\n", corte);
+                break;
 
-        case 2:
-            tamanhoUniao = uniao(conjtA, conjtB, tamanho1, tamanho2, conjtUniao);
-            printf("\n%s\n", resultado);
-            printf("Conjunto de União: ");
-            for (int i = 0; i < tamanhoUniao; i++) {
-                printf("%d ", conjtUniao[i]);
+            case 2:
+                tamanhoUniao = uniao(conjtA, conjtB, tamanho1, tamanho2, conjtUniao);
+                printf("\n%s\n", resultado);
+                printf("Conjunto de União: ");
+                for (int i = 0; i < tamanhoUniao; i++) {
+                    printf("%d ", conjtUniao[i]);
+                }
+                printf("\n%s\n", corte);
+                break;
+
+            case 3:
+                tamanhoIntersecao = intersessao(conjtA, conjtB, tamanho1, tamanho2, conjtIntersecao);
+                printf("\n%s\n", resultado);
+                printf("Conjunto de Interseção: ");
+                for (int i = 0; i < tamanhoIntersecao; i++) {
+                    printf("%d ", conjtIntersecao[i]);
+                }
+                printf("\n%s\n", corte);
+                break;
+
+            case 4:
+                tamanhoSubtracaoA_B = subtracao(conjtA, conjtB, tamanho1, tamanho2, conjtSubtracaoA_B);
+                printf("\n%s\n", resultado);
+                printf("Resultado da subtração (A - B): ");
+                for (int i = 0; i < tamanhoSubtracaoA_B; i++) {
+                    printf("%d ", conjtSubtracaoA_B[i]);
+                }
+                printf("\n%s\n", corte);
+                break;
+
+            case 5:
+                tamanhoSubtracaoB_A = subtracao(conjtB, conjtA, tamanho2, tamanho1, conjtSubtracaoB_A);
+                printf("\n%s\n", resultado);
+                printf("Resultado da subtração (B - A): ");
+                for (int i = 0; i < tamanhoSubtracaoB_A; i++) {
+                    printf("%d ", conjtSubtracaoB_A[i]);
+                }
+                printf("\n%s\n", corte);
+                break;
+
+            case 6:
+                tamanhoDiferencaSimetrica = diferencaSimetrica(conjtA, conjtB, tamanho1, tamanho2, conjtDiferencaSimetrica);
+                printf("\n%s\n", resultado);
+                printf("Resultado da diferença simétrica (A ∆ B): ");
+                for (int i = 0; i < tamanhoDiferencaSimetrica; i++) {
+                    printf("%d ", conjtDiferencaSimetrica[i]);
+                }
+                printf("\n%s\n", corte);
+                break;
+
+            case 7:
+                printf("\n%s\n", resultado);
+                produtoCartesiano(conjtA, conjtB, tamanho1, tamanho2);
+                printf("\n%s\n", corte);
+                break;
+
+            case 8:
+                // Não é necessário fazer nada, o loop será encerrado
+                break;
+
+            default:
+                printf("\nOpção inválida! Digite um número entre 1 e 8.\n");
             }
-            printf("\n%s\n", corte);
-            break;
-
-        case 3:
-            tamanhoIntersecao = intersessao(conjtA, conjtB, tamanho1, tamanho2, conjtIntersecao);
-            printf("\n%s\n", resultado);
-            printf("Conjunto de Interseção: ");
-            for (int i = 0; i < tamanhoIntersecao; i++) {
-                printf("%d ", conjtIntersecao[i]);
-            }
-            printf("\n%s\n", corte);
-            break;
-
-        case 4:
-            tamanhoSubtracaoA_B = subtracao(conjtA, conjtB, tamanho1, tamanho2, conjtSubtracaoA_B);
-            printf("\n%s\n", resultado);
-            printf("Resultado da subtração (A - B): ");
-            for (int i = 0; i < tamanhoSubtracaoA_B; i++) {
-                printf("%d ", conjtSubtracaoA_B[i]);
-            }
-            printf("\n%s\n", corte);
-            break;
-
-        case 5:
-            tamanhoSubtracaoB_A = subtracao(conjtB, conjtA, tamanho2, tamanho1, conjtSubtracaoB_A);
-            printf("\n%s\n", resultado);
-            printf("Resultado da subtração (B - A): ");
-            for (int i = 0; i < tamanhoSubtracaoB_A; i++) {
-                printf("%d ", conjtSubtracaoB_A[i]);
-            }
-            printf("\n%s\n", corte);
-            break;
-
-        case 6:
-            tamanhoDiferencaSimetrica = diferencaSimetrica(conjtA, conjtB, tamanho1, tamanho2, conjtDiferencaSimetrica);
-            printf("\n%s\n", resultado);
-            printf("Resultado da diferença simétrica (A ∆ B): ");
-            for (int i = 0; i < tamanhoDiferencaSimetrica; i++) {
-                printf("%d ", conjtDiferencaSimetrica[i]);
-            }
-            printf("\n%s\n", corte);
-            break;
-
-        case 7:
-            printf("\n%s\n", resultado);
-            produtoCartesiano(conjtA, conjtB, tamanho1, tamanho2);
-            printf("\n%s\n", corte);
-            break;
-
-        case 8:
-            // Não é necessário fazer nada, o loop será encerrado
-            break;
-
-        default:
-            printf("\nOpção inválida! Digite um número entre 1 e 8.\n");
-        }
-
     } while (opcao != 8);
-
     return 0;
 }
