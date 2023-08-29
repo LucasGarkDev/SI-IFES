@@ -16,8 +16,9 @@ int pedirTamanho(char conjunto) {
     return num;
 }
 
-void inserirConjunto(int conjunto[], int tamanho) {
-    for (int i = 0; i < tamanho; i++) {
+void inserirConjunto(int conjunto[], int tamanho){
+    int i;
+    for (i = 0; i < tamanho; i++) {
         printf("Digite o %dº número: ", i + 1);
         scanf("%d", &conjunto[i]);
     }
@@ -35,7 +36,7 @@ int uniao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conj
         int elementoExiste = 0; 
         
         for (j = 0; j < tamanhoUniao; j++) {
-            if (conjuntoB[i] == conjuntoUniao[j]) {
+            if (conjuntoUniao[j] == conjuntoB[i]) {
                 elementoExiste = 1;
                 break;
             }
@@ -50,13 +51,13 @@ int uniao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conj
 }
 
 int intersessao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoInter[]) {
-    int i, j, tamanhoInter = 0;
+    int i, j, k, tamanhoInter = 0;
     for (i = 0; i < tamanho1; i++) {
         for (j = 0; j < tamanho2; j++) {
             if (conjuntoA[i] == conjuntoB[j]) {
                 
                 int elementoExiste = 0;
-                for (int k = 0; k < tamanhoInter; k++) {
+                for (k = 0; k < tamanhoInter; k++) {
                     if (conjuntoA[i] == conjuntoInter[k]) {
                         elementoExiste = 1;
                         break;
@@ -153,20 +154,13 @@ int main() {
     printf("\n%s\n", inicio);
     int opcao = 0;
     int tamanho1, tamanho2;
-
-    int conjtA[10];
-    int conjtB[10];
-    int conjtUniao[20]; 
+    int conjtA[10], conjtB[10], conjtUniao[20], conjtIntersecao[10], conjtSubtracaoA_B[10]; 
     int tamanhoUniao = 0;
-    int conjtIntersecao[10];
     int tamanhoIntersecao = 0;
-    int conjtSubtracaoA_B[10]; 
     int tamanhoSubtracaoA_B = 0;
-    int conjtSubtracaoB_A[10]; 
+    int conjtSubtracaoB_A[10], conjtDiferencaSimetrica[20]; 
     int tamanhoSubtracaoB_A = 0;
-    int conjtDiferencaSimetrica[20]; 
     int tamanhoDiferencaSimetrica = 0;
-
     do {
         menu();
         printf("\nDigite a opção: ");
@@ -175,8 +169,8 @@ int main() {
             case 1:
                 tamanho1 = pedirTamanho('A');
                 tamanho2 = pedirTamanho('B');
-                inserirConjuntos(&conjtA, tamanho1);
-                inserirConjuntos(&conjtB, tamanho2);
+                inserirConjunto(conjtA, tamanho1);
+                inserirConjunto(conjtB, tamanho2);
                 printf("\n%s\n", corte);
                 break;
 
@@ -237,7 +231,6 @@ int main() {
                 break;
 
             case 8:
-                // Não é necessário fazer nada, o loop será encerrado
                 break;
 
             default:
