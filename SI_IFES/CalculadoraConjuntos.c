@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-#include <math.h>
 
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
@@ -130,8 +129,9 @@ int diferencaSimetrica(int conjuntoA[], int conjuntoB[], int tamanho1, int taman
 
 void produtoCartesiano(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2) {
     printf("\nProduto Cartesiano (A x B):\n");
-    for (int i = 0; i < tamanho1; i++) {
-        for (int j = 0; j < tamanho2; j++) {
+    int i, j;
+    for(i = 0; i < tamanho1; i++) {
+        for(j = 0; j < tamanho2; j++) {
             printf("(%d, %d)\n", conjuntoA[i], conjuntoB[j]);
         }
     }
@@ -161,6 +161,7 @@ int main() {
     int conjtSubtracaoB_A[10], conjtDiferencaSimetrica[20]; 
     int tamanhoSubtracaoB_A = 0;
     int tamanhoDiferencaSimetrica = 0;
+    int i;
     do {
         menu();
         printf("\nDigite a opção: ");
@@ -178,7 +179,7 @@ int main() {
                 tamanhoUniao = uniao(conjtA, conjtB, tamanho1, tamanho2, conjtUniao);
                 printf("\n%s\n", resultado);
                 printf("Conjunto de União: ");
-                for (int i = 0; i < tamanhoUniao; i++) {
+                for (i = 0; i < tamanhoUniao; i++) {
                     printf("%d ", conjtUniao[i]);
                 }
                 printf("\n%s\n", corte);
@@ -188,7 +189,7 @@ int main() {
                 tamanhoIntersecao = intersessao(conjtA, conjtB, tamanho1, tamanho2, conjtIntersecao);
                 printf("\n%s\n", resultado);
                 printf("Conjunto de Interseção: ");
-                for (int i = 0; i < tamanhoIntersecao; i++) {
+                for (i = 0; i < tamanhoIntersecao; i++) {
                     printf("%d ", conjtIntersecao[i]);
                 }
                 printf("\n%s\n", corte);
@@ -198,7 +199,7 @@ int main() {
                 tamanhoSubtracaoA_B = subtracao(conjtA, conjtB, tamanho1, tamanho2, conjtSubtracaoA_B);
                 printf("\n%s\n", resultado);
                 printf("Resultado da subtração (A - B): ");
-                for (int i = 0; i < tamanhoSubtracaoA_B; i++) {
+                for (i = 0; i < tamanhoSubtracaoA_B; i++) {
                     printf("%d ", conjtSubtracaoA_B[i]);
                 }
                 printf("\n%s\n", corte);
@@ -208,7 +209,7 @@ int main() {
                 tamanhoSubtracaoB_A = subtracao(conjtB, conjtA, tamanho2, tamanho1, conjtSubtracaoB_A);
                 printf("\n%s\n", resultado);
                 printf("Resultado da subtração (B - A): ");
-                for (int i = 0; i < tamanhoSubtracaoB_A; i++) {
+                for (i = 0; i < tamanhoSubtracaoB_A; i++) {
                     printf("%d ", conjtSubtracaoB_A[i]);
                 }
                 printf("\n%s\n", corte);
@@ -218,7 +219,7 @@ int main() {
                 tamanhoDiferencaSimetrica = diferencaSimetrica(conjtA, conjtB, tamanho1, tamanho2, conjtDiferencaSimetrica);
                 printf("\n%s\n", resultado);
                 printf("Resultado da diferença simétrica (A ∆ B): ");
-                for (int i = 0; i < tamanhoDiferencaSimetrica; i++) {
+                for (i = 0; i < tamanhoDiferencaSimetrica; i++) {
                     printf("%d ", conjtDiferencaSimetrica[i]);
                 }
                 printf("\n%s\n", corte);
