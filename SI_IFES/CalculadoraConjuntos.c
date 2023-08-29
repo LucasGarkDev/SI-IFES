@@ -6,6 +6,7 @@
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
 
+
 int pedirTamanho(char conjunto) {
     int num;
     do {
