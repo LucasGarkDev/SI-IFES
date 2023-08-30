@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-#include <math.h>
 
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
@@ -148,7 +147,6 @@ void menu(){
     printf("\n8 - SAIR\n");
 }
 
-
 int main() {
     SetConsoleOutputCP(65001);
     printf("\n%s\n", inicio);
@@ -233,8 +231,6 @@ int main() {
             case 8:
                 break;
 
-            default:
-                printf("\nOpção inválida! Digite um número entre 1 e 8.\n");
             }
     } while (opcao != 8);
     return 0;
