@@ -15,7 +15,7 @@ corretamente.
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
-#define PI 3.14
+#define _USE_MATH_DEFINES
 
 float pedirValor(int deci1, int deci2){
     float num, res;
@@ -54,7 +54,7 @@ float calcularRetangulo(){
 float calcularCirculo(){
     float pi, raio, res;
     raio = pedirValor(2,3);
-    res = PI * (raio * raio);
+    res = M_PI * (raio * raio);
     return res;
 }
 
