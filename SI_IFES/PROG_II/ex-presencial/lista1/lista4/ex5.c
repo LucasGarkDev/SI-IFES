@@ -67,16 +67,13 @@ int segundaRodada(int ponto, float saldo, float aposta) {
 char desejaContinuar() {
     char letra;
     do {
-        printf("Voce deseja continuar jogando (S-sim/N-nao): ");
+        printf("Voce deseja continuar jogando (S-sim/N-nao): \n");
         scanf(" %c", &letra);
     } while ((letra != 'S') && (letra != 's') && (letra != 'N') && (letra != 'n'));
     return letra;
 }
 
-int verificaCraps(int soma, float saldo) {
-    float aposta;
-    aposta = pedirAposta(saldo);
-    
+int verificaCraps(int soma, float saldo, float aposta) {
     if ((soma == 7) || (soma == 11)) {
         printf("\n%s\n", resultado);
         saldo += aposta * 2;
@@ -101,12 +98,14 @@ int main() {
     srand((unsigned)time(NULL));
     int turno;
     float saldo = 100.00;
+    float aposta;
     char continuar;
     printf("\n%s\n", inicio);
-    
+    printf("Você esta com um saldo incial de : %.2f\n", saldo);
     do {
+        aposta = pedirAposta(saldo);
         turno = jogarDados();
-        saldo = verificaCraps(turno, saldo);
+        saldo = verificaCraps(turno, saldo, aposta);
         if (saldo <= 0) {
             printf("Você não tem saldo suficiente para continuar.\n");
             break;
