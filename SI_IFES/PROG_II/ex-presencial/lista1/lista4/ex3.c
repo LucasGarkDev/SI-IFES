@@ -15,7 +15,7 @@ corretamente.
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
-#define _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES 
 
 float pedirValor(int deci1, int deci2){
     float num, res;
@@ -52,7 +52,7 @@ float calcularRetangulo(){
 }
 
 float calcularCirculo(){
-    float pi, raio, res;
+    float raio, res;
     raio = pedirValor(2,3);
     res = M_PI * (raio * raio);
     return res;
@@ -73,18 +73,19 @@ int lerOpcao() {
 
 int main() {
     int opcao;
+    float res2, res1;
     do {
         opcao = lerOpcao();
         switch (opcao) {
             case 1:
             printf("\n\tÁREA DO RETÂNGULO\n");
-            float res2 = calcularRetangulo();
+            res2 = calcularRetangulo();
             printf("\n%s\n", resultado);
             printf("O resultado dessa area e: %.2f", res2);
             break;
         case 2:
             printf("\n\tÁREA DO CÍRCULO\n");
-            float res1 = calcularCirculo();
+            res1 = calcularCirculo();
             printf("\n%s\n", resultado);
             printf("O resultado dessa area e: %.2f", res1);
             break;
