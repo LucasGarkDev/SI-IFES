@@ -10,12 +10,13 @@ corretamente.
 
 #include <stdio.h>
 #include <stdlib.h>
+#define _USE_MATH_DEFINES 
 #include <math.h> // Para pegar o PI
+#include <windows.h>
 
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
-#define _USE_MATH_DEFINES 
 
 float pedirValor(int deci1, int deci2){
     float num, res;
@@ -72,6 +73,7 @@ int lerOpcao() {
 }
 
 int main() {
+    SetConsoleOutputCP(65001);
     int opcao;
     float res2, res1;
     do {
