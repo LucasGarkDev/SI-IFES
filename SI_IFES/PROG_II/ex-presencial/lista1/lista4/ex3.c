@@ -79,7 +79,7 @@ int main() {
     do {
         opcao = lerOpcao();
         switch (opcao) {
-            case 1:
+        case 1:
             printf("\n\tÁREA DO RETÂNGULO\n");
             res2 = calcularRetangulo();
             printf("\n%s\n", resultado);
