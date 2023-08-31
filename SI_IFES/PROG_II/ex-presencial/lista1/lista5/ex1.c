@@ -3,28 +3,35 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
-#include <ctype.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 #define MAX 1000
 
-void imprimir(int vetor[], int *quanti){
+void acrescenta(int vetor[],int quanti){
     int i;
-    int num = 1;
+    int num = 100;
+    for (i = 0; i < quanti; i++){
+        vetor[i] = num;
+        num--;
+    }
+    
+}
+
+void imprimir(int vetor[], int quanti){
+    int i;
+    printf("\n%s\n", RESULTADO);
     for (i = 0; i < 100; i++){
-        printf(" %d\n", &vetor[i]);
-        num++;
+        printf(" %d\n", vetor[i]);
     }
 }
 
 int main(){
-    SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
     int vetor[MAX];
-    int quanti = 0;
-    imprimir(vetor,&quanti);
+    int quanti = 100;
+    acrescenta(vetor,quanti);
+    imprimir(vetor,quanti);
     return 0;
 }
