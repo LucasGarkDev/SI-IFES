@@ -57,7 +57,7 @@ int main(){
     int quanti1 = 20;
     int quanti2;
     acrescenta(vetorPadrao,quanti1);
-    quanti2 = distribui(vetorPadrao,vetorPar,vetorImpar,quanti2);
+    quanti2 = distribui(vetorPadrao,vetorPar,vetorImpar,quanti1);
     imprimir(vetorPar,quanti2);
     imprimir(vetorImpar,20-quanti2);
     return 0;
