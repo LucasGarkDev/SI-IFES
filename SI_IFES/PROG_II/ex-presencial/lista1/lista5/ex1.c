@@ -11,7 +11,7 @@
 #define CORTE "-------------------------------------"
 #define MAX 1000
 
-int imprimir(int vetor[], int *quanti){
+void imprimir(int vetor[], int *quanti){
     int i;
     int num = 1;
     for (i = 0; i < 100; i++){
@@ -19,7 +19,6 @@ int imprimir(int vetor[], int *quanti){
         num++;
     }
 }
-
 
 int main(){
     SetConsoleOutputCP(65001);
