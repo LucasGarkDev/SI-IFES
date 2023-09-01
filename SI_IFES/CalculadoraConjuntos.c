@@ -16,6 +16,16 @@ int pedirTamanho(char conjunto) {
     return num;
 }
 
+int pesquisar(int vetor[],int quanti,int pesq){
+    int i;
+    for(i = 0; i < quanti; i++){ 
+        if(vetor[i] == pesq){
+            return i;
+        }
+    }
+    return -1;
+}
+
 void inserirConjunto(int conjunto[], int tamanho){
     int i;
     for (i = 0; i < tamanho; i++) {
@@ -25,115 +35,81 @@ void inserirConjunto(int conjunto[], int tamanho){
 }
 
 int uniao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoUniao[]) {
-    int i, j, tamanhoUniao;
+    int i, tamanhoUniao = 0;
     
     for (i = 0; i < tamanho1; i++) {
-        conjuntoUniao[i] = conjuntoA[i];
+        conjuntoUniao[tamanhoUniao] = conjuntoA[i];
+        tamanhoUniao++;
     }
-    tamanhoUniao = tamanho1; 
     
     for (i = 0; i < tamanho2; i++) {
-        int elementoExiste = 0; 
-        
-        for (j = 0; j < tamanhoUniao; j++) {
-            if (conjuntoUniao[j] == conjuntoB[i]) {
-                elementoExiste = 1;
-                break;
-            }
-        }
-        
-        if (!elementoExiste) {
+        if (pesquisar(conjuntoUniao, tamanhoUniao, conjuntoB[i]) == -1) {
             conjuntoUniao[tamanhoUniao] = conjuntoB[i];
             tamanhoUniao++;
         }
     }
+    
     return tamanhoUniao; 
 }
 
 int intersessao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoInter[]) {
-    int i, j, k, tamanhoInter = 0;
+    int i, j, tamanhoInter = 0;
+    
     for (i = 0; i < tamanho1; i++) {
         for (j = 0; j < tamanho2; j++) {
             if (conjuntoA[i] == conjuntoB[j]) {
-                
-                int elementoExiste = 0;
-                for (k = 0; k < tamanhoInter; k++) {
-                    if (conjuntoA[i] == conjuntoInter[k]) {
-                        elementoExiste = 1;
-                        break;
-                    }
-                }
-                
-                if (!elementoExiste) {
+                if (pesquisar(conjuntoInter, tamanhoInter, conjuntoA[i]) == -1) {
                     conjuntoInter[tamanhoInter] = conjuntoA[i];
                     tamanhoInter++;
                 }
             }
         }
     }
+    
     return tamanhoInter; 
 }
 
 int subtracao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoSubtracao[]) {
-    int i, j, tamanhoSubtracao = 0;
+    int i, tamanhoSubtracao = 0;
+    
     for (i = 0; i < tamanho1; i++) {
-        int elementoExiste = 0; 
-        for (j = 0; j < tamanho2; j++) {
-            if (conjuntoA[i] == conjuntoB[j]) {
-                elementoExiste = 1; 
-                break;
-            }
-        }
-        
-        if (!elementoExiste) {
+        if (pesquisar(conjuntoB, tamanho2, conjuntoA[i]) == -1) {
             conjuntoSubtracao[tamanhoSubtracao] = conjuntoA[i];
             tamanhoSubtracao++;
         }
     }
+    
     return tamanhoSubtracao; 
 }
 
 int diferencaSimetrica(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoDiferencaSimetrica[]) {
-    int i, j, tamanhoDiferencaSimetrica = 0;
-    
+    int i, tamanhoDiferencaSimetrica = 0;
+
     for (i = 0; i < tamanho1; i++) {
-        int elementoExisteEmB = 0; 
-        for (j = 0; j < tamanho2; j++) {
-            if (conjuntoA[i] == conjuntoB[j]) {
-                elementoExisteEmB = 1; 
-                break;
-            }
-        }
-       
-        if (!elementoExisteEmB) {
+        if (pesquisar(conjuntoB, tamanho2, conjuntoA[i]) == -1) {
             conjuntoDiferencaSimetrica[tamanhoDiferencaSimetrica] = conjuntoA[i];
             tamanhoDiferencaSimetrica++;
         }
     }
-    
+
     for (i = 0; i < tamanho2; i++) {
-        int elementoExisteEmA = 0; 
-        for (j = 0; j < tamanho1; j++) {
-            if (conjuntoB[i] == conjuntoA[j]) {
-                elementoExisteEmA = 1; 
-                break;
-            }
-        }
-        
-        if (!elementoExisteEmA) {
+        if (pesquisar(conjuntoA, tamanho1, conjuntoB[i]) == -1) {
             conjuntoDiferencaSimetrica[tamanhoDiferencaSimetrica] = conjuntoB[i];
             tamanhoDiferencaSimetrica++;
         }
     }
-    return tamanhoDiferencaSimetrica; 
+
+    return tamanhoDiferencaSimetrica;
 }
 
 void produtoCartesiano(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2) {
     printf("\nProduto Cartesiano (A x B):\n");
     int i, j;
-    for(i = 0; i < tamanho1; i++) {
-        for(j = 0; j < tamanho2; j++) {
-            printf("(%d, %d)\n", conjuntoA[i], conjuntoB[j]);
+    for (i = 0; i < tamanho1; i++) {
+        for (j = 0; j < tamanho2; j++) {
+            if (pesquisar(conjuntoA, tamanho1, conjuntoA[i]) != -1 && pesquisar(conjuntoB, tamanho2, conjuntoB[j]) != -1) {
+                printf("(%d, %d)\n", conjuntoA[i], conjuntoB[j]);
+            }
         }
     }
 }
