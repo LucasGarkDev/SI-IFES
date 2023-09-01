@@ -10,12 +10,13 @@ corretamente.
 
 #include <stdio.h>
 #include <stdlib.h>
+#define _USE_MATH_DEFINES 
 #include <math.h> // Para pegar o PI
+#include <windows.h>
 
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
-#define PI 3.14
 
 float pedirValor(int deci1, int deci2){
     float num, res;
@@ -52,9 +53,9 @@ float calcularRetangulo(){
 }
 
 float calcularCirculo(){
-    float pi, raio, res;
+    float raio, res;
     raio = pedirValor(2,3);
-    res = PI * (raio * raio);
+    res = M_PI * (raio * raio);
     return res;
 }
 
@@ -72,19 +73,21 @@ int lerOpcao() {
 }
 
 int main() {
+    SetConsoleOutputCP(65001);
     int opcao;
+    float res2, res1;
     do {
         opcao = lerOpcao();
         switch (opcao) {
-            case 1:
+        case 1:
             printf("\n\tÁREA DO RETÂNGULO\n");
-            float res2 = calcularRetangulo();
+            res2 = calcularRetangulo();
             printf("\n%s\n", resultado);
             printf("O resultado dessa area e: %.2f", res2);
             break;
         case 2:
             printf("\n\tÁREA DO CÍRCULO\n");
-            float res1 = calcularCirculo();
+            res1 = calcularCirculo();
             printf("\n%s\n", resultado);
             printf("O resultado dessa area e: %.2f", res1);
             break;
