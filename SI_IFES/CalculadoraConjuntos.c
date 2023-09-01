@@ -34,7 +34,7 @@ void inserirConjunto(int conjunto[], int tamanho){
     }
 }
 
-int uniao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoUniao[]) {
+int uniao(int conjuntoA[], int conjuntoB[], int tamanho1, int tamanho2, int conjuntoUniao[]){
     int i, tamanhoUniao = 0;
     
     for (i = 0; i < tamanho1; i++) {
@@ -130,11 +130,11 @@ int main() {
     printf("\n%s\n", inicio);
     int opcao = 0;
     int tamanho1, tamanho2;
-    int conjtA[10], conjtB[10], conjtUniao[20], conjtIntersecao[10], conjtSubtracaoA_B[10]; 
+    int conjtA[100], conjtB[100], conjtUniao[200], conjtIntersecao[100], conjtSubtracaoA_B[100]; 
     int tamanhoUniao = 0;
     int tamanhoIntersecao = 0;
     int tamanhoSubtracaoA_B = 0;
-    int conjtSubtracaoB_A[10], conjtDiferencaSimetrica[20]; 
+    int conjtSubtracaoB_A[100], conjtDiferencaSimetrica[200]; 
     int tamanhoSubtracaoB_A = 0;
     int tamanhoDiferencaSimetrica = 0;
     int i;
