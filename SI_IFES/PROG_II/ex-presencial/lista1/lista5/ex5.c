@@ -28,12 +28,15 @@ int pesquisar(int vetor[],int quanti,int pesq){
 }
 
 void acrescentar(int vetor[],int quanti){
-    int i, num;
-    for (i = 0; i < quanti; i++){
+    int i, num, verifica;
+    num = aleatorio(1000);
+    vetor[0] = num;
+    for (i = 1; i < quanti; i++){
         do{
             num = aleatorio(1000);
+            verifica = pesquisar(vetor,quanti,num);
             vetor[i] = num;
-        } while (vetor[i] == vetor[i-1]);
+        } while (verifica != -1);
     } 
 }
 
@@ -49,6 +52,7 @@ int main(){
     printf("\n%s\n", RESULTADO);
     int vetor[MAX];
     int quanti = 100;
-    
+    acrescentar(vetor,quanti);
+    imprimir(vetor,quanti);
     return 0;
 }
