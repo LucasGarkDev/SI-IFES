@@ -8,6 +8,22 @@
 #define CORTE "-------------------------------------"
 #define MAX 1000
 
+int lerIdade(){
+    int num;
+    do{
+        printf("Digite a idade do individuo: ");
+        scanf("%d", &num);
+    } while (num <= 0);
+    return num;
+}
+
+void alocarMEM(int **vetor){
+    int num;
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &num);
+    *vetor = (int *) malloc(num * sizeof(int));
+}
+
 int lerDados(int *vetor, int *quanti){
     char continuar;
     do{
@@ -40,9 +56,9 @@ void imprimir(int *vetor, int tamanho){
 int main(){
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
-    int vet1[MAX];
+    int *vet1;
     int quanti = 0;
-
+    alocarMEM(&vet1);
     lerDados(vet1,&quanti);
     imprimir(vet1,quanti);
 
