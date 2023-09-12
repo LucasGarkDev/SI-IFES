@@ -17,14 +17,14 @@ acima da média.
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define MAX 1000
+#define MAX 5
 
 float pedirAltura(int cont){
     float num;
     do{
         printf("Digite a altura do atleta %d(digite 0 para parar): ", cont+1);
         scanf("%f", &num);
-    } while ((num < 0)||(num > 7.0));
+    } while ((num < 0)||(num > 100.0));
     return num;
 }
 
@@ -59,12 +59,16 @@ float retornarMaiorMenor(int vetor[], int quanti, int deci){
     return -1;
 }
 
-int acrescentar(int vetor[]){
-    int altura, i = 0;
+int acrescentar(int *vetor){
+    int altura, qtde, i = 0;
     do{
         altura = pedirAltura(i);
         vetor[i] = altura;
         i++;
+        if (i == MAX){
+            qtde = i * 2; 
+            *vetor = (int *)realloc(vetor, qtde * sizeof(int));
+        }
     } while (altura != 0);
     return i-1;
 }
