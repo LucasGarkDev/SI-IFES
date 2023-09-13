@@ -9,6 +9,15 @@
 #define CORTE "-------------------------------------"
 // #define TAM 20;
 
+int pedirQtde(){
+    int num;
+    do{
+        printf("Digite a quantidade de espaços no vetor: ");
+        scanf("%d", &num);
+    } while (num <= 0);
+    return num;
+}
+
 void limparBuffer(){
     int ch;
     do{
@@ -19,6 +28,12 @@ void limparBuffer(){
 void alocarMEM(char **vetor, int tamanho){
     int num;
     *vetor = (char *) malloc(tamanho * sizeof(char));
+}
+
+void inserirString(char *vetor, int quanti){
+    printf("Digite o texto no vetor: ");
+    fgets(vetor,quanti,stdin);
+    limparBuffer();
 }
 
 void imprimir(char *vetor, int tamanho){
@@ -34,6 +49,16 @@ void imprimir(char *vetor, int tamanho){
 int main(){
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
+    char *nome;
+    char *ponteiro;
+    int quanti = pedirQtde(), i;
+    alocarMEM(nome,quanti);
+    inserirString(nome,quanti);
+    int numPalavra = (strlen(nome)/2);
+    for (i = 0; i < quanti; i++){
+        *ponteiro = strchr(nome,'')
+    }
     
+
     return 0;
 }
