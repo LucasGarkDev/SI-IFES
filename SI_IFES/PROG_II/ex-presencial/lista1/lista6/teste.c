@@ -25,7 +25,7 @@ int pedirNumNPC(){
     return num;
 }
 
-void inserirNome(char *vetor1,char *vetor2, int tamanho){
+char inserirNome(char *vetor1,char *vetor2, int tamanho){
     int i;
     for (i = 0; i < tamanho; i++){
         printf("Digite o %d nome: ", i+1);
@@ -35,17 +35,17 @@ void inserirNome(char *vetor1,char *vetor2, int tamanho){
             vetor1 = strcat(vetor1,'1');
         }
     }
-    
+    return vetor1;
 }
 
 void inserirDados(char *barra, char *nome, int quanti){
     int i;
     char armazena;
     for ( i = 0; i < quanti; i++){
-        /* code */
+        armazena = inserirNome(nome,barra,quanti);
+        strcpy(armazena,nome);
+        barra[i] = armazena;
     }
-    strcpy(armazena,nome);
-    barra[i] = armazena;
 }
 
 void alocarMEM(char **vetor, int tamanho){
