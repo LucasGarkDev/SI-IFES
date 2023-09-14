@@ -41,7 +41,6 @@ void alocarMEM(char **vetor, int tamanho){
 
 int contagem(char *string, int quanti){
     int i, cont = 0;
-    char vetor[quanti+1];
     for (i = 0; i < quanti; i++){
         string[i] = toupper(string[i]);
         if (string[i] != '\n' && string[i] != EOF){
