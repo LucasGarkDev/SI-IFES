@@ -2,74 +2,30 @@
 determina quantas vezes o caractere aparece na string. */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <windows.h>
-#include <ctype.h>
-
-#define INICIO "--------INICIO--------"
-#define RESULTADO "-----------RESULTADO-----------"
-#define CORTE "-------------------------------------"
-
-int pedirQtde(){
-    int num;
-    do{
-        printf("Digite a quantidade de espaços no vetor: ");
-        scanf("%d", &num);
-    } while (num <= 0);
-    return num;
-}
-
-void limparBuffer(){
-    int ch;
-    do{
-        ch = fgetc(stdin);
-    } while (ch != EOF && ch != '\n');
-}
-
-void inserirString(char *vetor, int quanti){
-    printf("Digite o texto no vetor: ");
-    fgets(vetor,quanti,stdin);
-    limparBuffer();
-}
-
-void alocarMEM(char **vetor, int tamanho){
-    *vetor = (char *) calloc(tamanho , sizeof(char));
-}
+#include <string.h>
+#define TAM 50
 
 char pedirCaracter(){
     char letra;
-    do{
-        printf("Digite o caracter que deseja pesquisar: ");
-        scanf(" %c", &letra);
-    } while (!isalnum(letra));
+    printf("Digite o caracter que deseja pesquisar: ");
+    scanf("%c", &letra);
     return letra;
 }
 
-int contagem(char *string, char pesq) {
+int main() {
+    char str[50] = "Exemplo de string para teste";
+    char * pch;	// Ponteiro para char
     int cont = 0;
-    char *ponteiro1 = strchr(string, pesq);
-    while (ponteiro1 != NULL) {
-        printf("Encontrei na posição: %d\n", ponteiro1 - string);
-        ponteiro1 = strchr(ponteiro1 + 1, pesq);
+    char pesq = pedirCaracter;
+    printf ("Procurando o caractere '%c' na string %s\n",pesq, str);
+    pch = strchr(str,pesq);
+    while ( pch != NULL)
+    {
+        printf ("encontrado na posição %d\n", pch - str);  
+        pch = strchr(pch+1, pesq);
         cont++;
+              
     }
-    return cont;
-}
+    printf("O numero de letras %c sao: %d",pesq, cont);
 
-
-int main(){
-    SetConsoleOutputCP(65001);
-    printf("\n%s\n", INICIO);
-    char *nome;
-    char avalia;
-    int quanti = pedirQtde();
-    int res;
-    alocarMEM(&nome,quanti);
-    inserirString(nome,quanti);
-    avalia = pedirCaracter();
-    res = contagem(nome,quanti);
-    printf("\n%s\n", RESULTADO);
-    printf("A quantidade de '%c' apareçem: %d vezes nessa frase", avalia, res);
-    printf("\n%s\n", CORTE);
-    return 0;
 }
