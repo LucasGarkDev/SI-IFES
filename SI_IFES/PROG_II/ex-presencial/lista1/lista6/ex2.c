@@ -56,7 +56,7 @@ int main(){
     inserirString(nome,quanti);
     int numPalavra = (strlen(nome)/2);
     for (i = 0; i < quanti; i++){
-        *ponteiro = strchr(nome,'')
+        *ponteiro = strchr(nome,'1');
     }
     
 
