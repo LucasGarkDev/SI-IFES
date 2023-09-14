@@ -13,22 +13,46 @@ da biblioteca <string.h>*/
 #define CORTE "-------------------------------------"
 // #define TAM 21
 
+int pedirQtde(){
+    int num;
+    do{
+        printf("Digite a quantidade de espaços no vetor: ");
+        scanf("%d", &num);
+    } while (num <= 0);
+    return num;
+}
+
+void limparBuffer(){
+    int ch;
+    do{
+        ch = fgetc(stdin);
+    } while (ch != EOF && ch != '\n');
+}
+
+void alocarMEM(char **vetor, int tamanho){
+    *vetor = (char *) malloc(tamanho * sizeof(char));
+}
+
 int main() {
-    char str[1000], ch;
+    char *str, achado;
     int count = 0;
-
+    int quanti = pedirQtde();
+    // alocarMEM(&str,quanti);
+    str = (char *) malloc(quanti * sizeof(char));
     printf("Informe os caracteres: ");
-    fgets(str, sizeof(str), stdin);
-
+    fgets(str, 50, stdin);
+    limparBuffer();
+    printf("%s", str);
     printf("Informe o caractere que deseja buscar: ");
-    scanf("%c", &ch);
+    scanf("%c", &achado);
     int i;
-    for(i = 0; str[i] != '\0'; ++i) {
-        if (ch == str[i])
-            ++count;
+    for(i = 0; str[i] != '\0'; i++) {
+        if (achado == str[i]){
+            count++;
+        }
     }
 
-    printf("Quantidade de %c = %d", ch, count);
+    printf("Quantidade de %c = %d", achado, count);
     return 0;
 }
 // int contagem(char *string) {
