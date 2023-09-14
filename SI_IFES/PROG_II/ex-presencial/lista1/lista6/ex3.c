@@ -3,50 +3,58 @@ formato americano “aaaa-mmdd”. */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <ctype.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-// #define TAM 11
+// #define TAM 21
 
-void limparBuffer() {
+int pedirQtde(){
+    int num;
+    do{
+        printf("Digite a quantidade de espaços no vetor: ");
+        scanf("%d", &num);
+    } while (num <= 0);
+    return num;
+}
+
+void limparBuffer(){
     int ch;
-    do {
-        ch = getchar();
+    do{
+        ch = fgetc(stdin);
     } while (ch != EOF && ch != '\n');
 }
 
-void inserirString(char *vetor, int tamanho) {
-    printf("Digite a data no formato (dd/mm/aaaa): ");
-    fgets(vetor, tamanho, stdin);
-    limparBuffer();
+int contagem(char *string, int quanti){
+    char vetor[quanti];
+    int i, cont = 0;
+    for (i = 0; i < quanti; i++){
+        vetor[i] = toupper(string[i]);
+        if (vetor[i] != '\n' && vetor[i] != '\0' && vetor[i] != ' '){
+            cont++;
+        }
+    }
+    return cont;
 }
 
 int main() {
-    char data[12];
-    int tamanho = 11, i;
-    printf("\n%s\n", INICIO);
-    printf("Digite a data no formato (dd/mm/aaaa): ");
-    fgets(data, tamanho, stdin);
+    char *str;
+    char achado;
+    int res;
+    
+    int quanti = pedirQtde();
+    str = (char *) malloc(quanti * sizeof(char)); 
     limparBuffer();
-    char dia[2];
-    char mes[2];
-    char ano[4];
-    printf("%s", data);
-    for (i = 0; i < 2; i++){
-        dia[i] = data[i];
-    }
-    for (i = 2; i < 2; i++){
-        mes[i] = data[i];
-    }
-    for (i = 4; i < 4; i++){
-        ano[i] = data[i];
-    }
-    strcat(mes,dia);
-    strcat(ano,"-");
-    strcat(ano,mes);
-    printf("%s", ano);
+    
+    printf("Informe a data(dd/mm/aaaa): ");
+    fgets(str, quanti, stdin);
+    limparBuffer();
+    
+    char dia[2], mes[2], ano[4];
+    
+    
+    free(str);
+    
     return 0;
 }
