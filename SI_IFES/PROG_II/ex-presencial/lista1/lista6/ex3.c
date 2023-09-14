@@ -9,6 +9,7 @@ formato americano “aaaa-mmdd”. */
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
+// #define TAM 11
 
 void limparBuffer() {
     int ch;
@@ -17,33 +18,36 @@ void limparBuffer() {
     } while (ch != EOF && ch != '\n');
 }
 
-void inserirString(char *vetor) {
+void inserirString(char *vetor, int tamanho) {
     printf("Digite a data no formato (dd/mm/aaaa): ");
-    fgets(vetor, sizeof(vetor) - 1, stdin);
+    fgets(vetor, tamanho, stdin);
     limparBuffer();
 }
 
 int main() {
-    char data[11];
+    char data[12];
+    int tamanho = 11, i;
     printf("\n%s\n", INICIO);
-    inserirString(data);
-    int dia, mes, ano;
-    if (sscanf(data, "%d/%d/%d", &dia, &mes, &ano) == 3) {
-        if (dia >= 1 && dia <= 31 && mes >= 1 && mes <= 12 && ano >= 1000) {
-            char dataAmericana[11];
-            snprintf(dataAmericana, sizeof(dataAmericana), "%04d-%02d%02d", ano, mes, dia);
-            printf("\n%s\n", RESULTADO);
-            printf("Data no formato americano: %s\n", dataAmericana);
-            printf("\n%s\n", CORTE);
-        } else {
-            printf("\n%s\n", RESULTADO);
-            printf("Data inválida.\n");
-            printf("\n%s\n", CORTE);
-        }
-    } else {
-        printf("\n%s\n", RESULTADO);
-        printf("Formato de data inválido. Use dd/mm/aaaa.\n");
-        printf("\n%s\n", CORTE);
+    printf("Digite a data no formato (dd/mm/aaaa): ");
+    fgets(data, tamanho, stdin);
+    limparBuffer();
+    char dia[2];
+    char mes[2];
+    char ano[4];
+    printf("%s", data);
+    for (i = 0; i < 2; i++){
+        dia[i] = data[i];
     }
+    for (i = 2; i < 2; i++){
+        mes[i] = data[i];
+    }
+    for (i = 4; i < 4; i++){
+        ano[i] = data[i];
+    }
+    strcat(mes,dia);
+    strcat(ano,"-");
+    strcat(ano,mes);
+    printf("%s", ano);
     return 0;
+}turn 0;
 }
