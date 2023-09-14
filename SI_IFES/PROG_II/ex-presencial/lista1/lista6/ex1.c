@@ -5,7 +5,6 @@ da biblioteca <string.h>*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <ctype.h>
 
 #define INICIO "--------INICIO--------"
@@ -29,30 +28,35 @@ void limparBuffer(){
     } while (ch != EOF && ch != '\n');
 }
 
-void alocarMEM(char **vetor, int tamanho){
-    *vetor = (char *) malloc(tamanho * sizeof(char));
+int contagem(char *string, int quanti){
+    char vetor[quanti];
+    int i, cont = 0;
+    for (i = 0; i < quanti; i++){
+        vetor[i] = toupper(string[i]);
+        if (vetor[i] != '\n' && vetor[i] != '\0'){
+            cont++;
+        }
+    }
+    return cont;
 }
 
 int main() {
-    char *str, achado;
-    int count = 0;
+    char *str;
+    char achado;
+    int res;
+    
     int quanti = pedirQtde();
-    // alocarMEM(&str,quanti);
-    str = (char *) malloc(quanti * sizeof(char));
-    printf("Informe os caracteres: ");
-    fgets(str, 50, stdin);
+    str = (char *) malloc(quanti * sizeof(char)); 
     limparBuffer();
-    printf("%s", str);
-    printf("Informe o caractere que deseja buscar: ");
-    scanf("%c", &achado);
-    int i;
-    for(i = 0; str[i] != '\0'; i++) {
-        if (achado == str[i]){
-            count++;
-        }
-    }
-
-    printf("Quantidade de %c = %d", achado, count);
+    
+    printf("Informe os caracteres: ");
+    fgets(str, quanti, stdin);
+    limparBuffer();
+    
+    res = contagem(str,quanti);
+    printf("Quantidade de letras e: %d", res);
+    free(str);
+    
     return 0;
 }
 // int contagem(char *string) {
