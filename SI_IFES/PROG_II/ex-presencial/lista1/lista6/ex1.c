@@ -13,54 +13,22 @@ da biblioteca <string.h>*/
 #define CORTE "-------------------------------------"
 // #define TAM 21
 
-int pedirQtde(){
-    int num;
-    do{
-        printf("Digite a quantidade de espaços no vetor: ");
-        scanf("%d", &num);
-    } while (num <= 0);
-    return num;
-}
+int main() {
+    char str[1000], ch;
+    int count = 0;
 
-void limparBuffer(){
-    int ch;
-    do{
-        ch = fgetc(stdin);
-    } while (ch != EOF && ch != '\n');
-}
+    printf("Informe os caracteres: ");
+    fgets(str, sizeof(str), stdin);
 
-void inserirString(char *vetor, int quanti){
-    printf("Digite o texto no vetor: ");
-    fgets(vetor,quanti,stdin);
-    limparBuffer();
-}
-
-void alocarMEM(char **vetor, int tamanho){
-    *vetor = (char *) calloc(tamanho , sizeof(char));
-}
-
-int contagem(char *string, int quanti){
-    int i, cont = 0;
-    for (i = 0; i < quanti; i++){
-        string[i] = toupper(string[i]);
-        if (string[i] != '\n' && string[i] != EOF){
-            cont++;
-        }
+    printf("Informe o caractere que deseja buscar: ");
+    scanf("%c", &ch);
+    int i;
+    for(i = 0; str[i] != '\0'; ++i) {
+        if (ch == str[i])
+            ++count;
     }
-    return cont;
-}
 
-int main(){
-    SetConsoleOutputCP(65001);
-    printf("\n%s\n", INICIO);
-    char *nome;
-    int quanti = pedirQtde();
-    alocarMEM(&nome,quanti);
-    inserirString(nome,quanti);
-    int res = contagem(nome,quanti);
-    printf("\n%s\n", RESULTADO);
-    printf("A quantidade de letras presente nesse texto e: %d", res);
-    printf("\n%s\n", CORTE);
+    printf("Quantidade de %c = %d", ch, count);
     return 0;
 }
 // int contagem(char *string) {
