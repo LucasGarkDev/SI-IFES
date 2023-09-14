@@ -41,7 +41,7 @@ int contagem(char *string, int quanti){
 int main() {
     char *str;
     char achado;
-    int res;
+    int i, j = 0, x = 0, z = 0;
     
     int quanti = pedirQtde();
     str = (char *) malloc(quanti * sizeof(char)); 
@@ -52,6 +52,13 @@ int main() {
     limparBuffer();
     
     char dia[2], mes[2], ano[4];
+    
+    for (i = 0; i < quanti; i++){
+        if (str[i] == 1 || str[i] == 0){
+            dia[j] =
+        }
+        
+    }
     
     
     free(str);
