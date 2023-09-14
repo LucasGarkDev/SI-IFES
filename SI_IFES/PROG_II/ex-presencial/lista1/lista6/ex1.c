@@ -11,6 +11,7 @@ da biblioteca <string.h>*/
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
+// #define TAM 21
 
 int pedirQtde(){
     int num;
@@ -39,11 +40,11 @@ void alocarMEM(char **vetor, int tamanho){
 }
 
 int contagem(char *string, int quanti){
-    char vetor[quanti];
     int i, cont = 0;
+    char vetor[quanti+1];
     for (i = 0; i < quanti; i++){
-        vetor[i] = toupper(string[i]);
-        if (vetor[i] != '\n' && vetor[i] != EOF){
+        string[i] = toupper(string[i]);
+        if (string[i] != '\n' && string[i] != EOF){
             cont++;
         }
     }
