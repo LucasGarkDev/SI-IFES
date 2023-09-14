@@ -49,5 +49,4 @@ int main() {
     strcat(ano,mes);
     printf("%s", ano);
     return 0;
-}turn 0;
 }
