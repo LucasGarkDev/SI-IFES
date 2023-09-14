@@ -33,7 +33,7 @@ int contagem(char *string, int quanti){
     int i, cont = 0;
     for (i = 0; i < quanti; i++){
         vetor[i] = toupper(string[i]);
-        if (vetor[i] != '\n' && vetor[i] != '\0'){
+        if (vetor[i] != '\n' && vetor[i] != '\0' && vetor[i] != ' '){
             cont++;
         }
     }
@@ -59,32 +59,3 @@ int main() {
     
     return 0;
 }
-// int contagem(char *string) {
-//     int length = strcspn(string, "\n"); // Encontra o índice da primeira ocorrência de '\n' (ou seja, o final da linha)
-    
-//     int cont = 0;
-    
-//     for (int i = 0; i < length; i++) {
-//         if (isalpha((unsigned char)string[i])) {
-//             cont++;
-//         }
-//     }
-    
-//     return cont;
-// }
-
-// int main() {
-//     char *nome = NULL;
-//     size_t tamanho = 0;
-    
-//     printf("Digite o texto: ");
-//     getline(&nome, &tamanho, stdin);
-    
-//     int res = contagem(nome);
-    
-//     printf("A quantidade de letras presente nesse texto é: %d\n", res);
-    
-//     free(nome);
-    
-//     return 0;
-// }
