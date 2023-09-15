@@ -3,58 +3,61 @@ formato americano “aaaa-mmdd”. */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <string.h>
+#include <windows.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-// #define TAM 21
 
-int pedirQtde(){
+int pedirQtde() {
     int num;
-    do{
+    do {
         printf("Digite a quantidade de espaços no vetor: ");
         scanf("%d", &num);
     } while (num <= 0);
     return num;
 }
 
-void limparBuffer(){
+void limparBuffer() {
     int ch;
-    do{
-        ch = fgetc(stdin);
+    do {
+        ch = getchar();
     } while (ch != EOF && ch != '\n');
 }
 
-int contagem(char *string, int quanti){
-    char vetor[quanti];
-    int i, cont = 0;
-    for (i = 0; i < quanti; i++){
-        vetor[i] = toupper(string[i]);
-        if (vetor[i] != '\n' && vetor[i] != '\0' && vetor[i] != ' '){
-            cont++;
-        }
+void remover(char *vetor, int *qtde, int pos) {
+    int i;
+    for (i = pos; i < *qtde - 1; i++) {
+        vetor[i] = vetor[i + 1];
     }
-    return cont;
+    (*qtde)--;
 }
 
 int main() {
+    SetConsoleOutputCP(65001);
     char *str;
-    char achado;
-    int res;
-    
+
     int quanti = pedirQtde();
-    str = (char *) malloc(quanti * sizeof(char)); 
+    str = (char *)malloc(quanti * sizeof(char));
     limparBuffer();
-    
-    printf("Informe a data(dd/mm/aaaa): ");
+
+    printf("Informe a data (dd/mm/aaaa): ");
     fgets(str, quanti, stdin);
     limparBuffer();
+
+    char dia[3], mes[3], ano[5], vetorRes[9] = {0};
+    sscanf(str, "%2s/%2s/%4s", dia, mes, ano);
+    strcat(vetorRes, ano);
+    strcat(vetorRes, "-");
+    strcat(vetorRes, mes);
+    strcat(vetorRes, dia);
     
-    char dia[2], mes[2], ano[4];
-    
-    
+    printf("\n%s\n", RESULTADO);
+    printf("O valor da data é: %s", vetorRes);
+    printf("\n%s\n", CORTE);
+
     free(str);
-    
+
     return 0;
 }
