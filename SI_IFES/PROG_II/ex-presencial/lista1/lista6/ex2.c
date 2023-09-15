@@ -1,10 +1,14 @@
-/*Ler uma data no formato: “dd/mm/aaaa” e imprimir a data no 
-formato americano “aaaa-mmdd”. */
+/*Ler uma string e imprimir se a mesma é ou não palíndrome. 
+Uma palavra é palíndrome se lendo de frente para trás ou de trás para 
+frente temos exatamente a mesma string.     
+Exemplos: “mutum” é palíndrome.        
+“socorram me subi no onibus em marrocos” é palíndrome.     
+Nesse caso deve-se ignorar os espaços em branco. */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
+#include <ctype.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
@@ -26,38 +30,49 @@ void limparBuffer() {
     } while (ch != EOF && ch != '\n');
 }
 
-void remover(char *vetor, int *qtde, int pos) {
-    int i;
-    for (i = pos; i < *qtde - 1; i++) {
-        vetor[i] = vetor[i + 1];
+int ehPalindromo(const char *str) {
+    int tamanho = strlen(str);
+    for (int i = 0, j = tamanho - 1; i < j; i++, j--) {
+        // Ignorar espaços em branco
+        while (i < j && isspace((unsigned char)str[i])) {
+            i++;
+        }
+        while (i < j && isspace((unsigned char)str[j])) {
+            j--;
+        }
+
+        // Comparar os caracteres, ignorando maiúsculas e minúsculas
+        if (tolower((unsigned char)str[i]) != tolower((unsigned char)str[j])) {
+            return 0; // Não é um palíndromo
+        }
     }
-    (*qtde)--;
+    return 1; // É um palíndromo
 }
 
 int main() {
-    SetConsoleOutputCP(65001);
-    char *str;
+    printf("\n%s\n", INICIO);
 
     int quanti = pedirQtde();
-    str = (char *)malloc(quanti * sizeof(char));
     limparBuffer();
 
-    printf("Informe a data (dd/mm/aaaa): ");
+    char *str = (char *)malloc(quanti * sizeof(char));
+
+    printf("Informe a palavra: ");
     fgets(str, quanti, stdin);
     limparBuffer();
 
-    char dia[3], mes[3], ano[5], vetorRes[9] = {0};
-    sscanf(str, "%2s/%2s/%4s", dia, mes, ano);
-    strcat(vetorRes, ano);
-    strcat(vetorRes, "-");
-    strcat(vetorRes, mes);
-    strcat(vetorRes, dia);
-    
-    printf("\n%s\n", RESULTADO);
-    printf("O valor da data é: %s", vetorRes);
-    printf("\n%s\n", CORTE);
+    if (ehPalindromo(str)) {
+        printf("\n%s\n", RESULTADO);
+        printf("A palavra: %s é um palíndromo", str);
+        printf("\n%s\n", CORTE);
+    } else {
+        printf("\n%s\n", RESULTADO);
+        printf("A palavra: %s não é um palíndromo", str);
+        printf("\n%s\n", CORTE);
+    }
 
     free(str);
 
     return 0;
 }
+
