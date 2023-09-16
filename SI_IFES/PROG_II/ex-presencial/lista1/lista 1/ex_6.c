@@ -14,7 +14,7 @@ Onde F é a temperatura em Fahrenheit e C é a temperatura em centígrados*/
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int pedirTemp(){
+float pedirTemp(){
     float num;
     do{
         printf("Digite a temperatura em C: ");

@@ -16,7 +16,7 @@ valor do desconto. */
 #define CORTE "-------------------------------------"
 
 
-int pedirNum(){
+float pedirNum(){
     float num;
     printf("Digite o preço do produto: ");
     scanf("%f", &num);

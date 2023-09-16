@@ -5,44 +5,35 @@ A. Apresente os valores trocados.*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <locale.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirValor(char let);
-void imprimir(int a, int b);
-
-int main() {
-    setlocale(LC_ALL, "Portuguese");
-    printf("\n%s\n", inicio);
-    int valorA, valorB, valorC;
-    valorA = pedirValor('A');
-    valorB = pedirValor('B');
-    valorC = valorA;
-    valorA = valorB;
-    valorB = valorC;
-    imprimir(valorA, valorB);
-    return 0;
-}
-
-int pedirValor(char let) {
-    int num;
-    printf("Digite um valor para %c: ", let);
-    scanf("%d", &num);
-    while (num <= 0) {
-        puts("Numero Invalido");
-        printf("Digite um valor para %c, novamente: ", let);
-        scanf("%d", &num);
-    }
+int pedirTemp(){
+    float num;
+    do{
+        printf("Digite a temperatura em C: ");
+        scanf("%f", &num);
+    } while ((num <= 0) || (num > 100));
     return num;
 }
 
-void imprimir(int a, int b) {
-    printf("\n%s\n", resultado);
-    printf("O valor de A é: %d\n", a);
-    printf("O valor de B é: %d\n", b);
-    printf("\n%s\n", corte);
+float conversao(float C){
+    return (9 * C + 160) / 5;
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    float tempC, tempF;
+    tempC = pedirTemp();
+    tempF = conversao(tempC);
+    printf("\n%s\n", RESULTADO);
+    printf("O valor em Fahrenheit de %.2f em Celsius e: %.2f",tempC,tempF);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
