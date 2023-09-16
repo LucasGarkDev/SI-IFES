@@ -13,27 +13,31 @@ A. Apresente os valores trocados.*/
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int pedirTemp(){
+float pedirNum(char letra){
     float num;
     do{
-        printf("Digite a temperatura em C: ");
+        printf("Digite um valor para %c: ", letra);
         scanf("%f", &num);
     } while ((num <= 0) || (num > 100));
     return num;
 }
 
-float conversao(float C){
-    return (9 * C + 160) / 5;
+void troca(float *a, float *b){
+    float arm;
+    arm = *a;
+    *a = *b;
+    *b = arm;
 }
 
 int main(){
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
-    float tempC, tempF;
-    tempC = pedirTemp();
-    tempF = conversao(tempC);
+    float a, b;
+    a = pedirNum('A');
+    b = pedirNum('B');
+    troca(&a,&b);
     printf("\n%s\n", RESULTADO);
-    printf("O valor em Fahrenheit de %.2f em Celsius e: %.2f",tempC,tempF);
+    printf("A partir de agora os valores de A e B sao, respectivamente: %.2f e %.2f ", a, b);
     printf("\n%s\n", CORTE);
     return 0;
 }
