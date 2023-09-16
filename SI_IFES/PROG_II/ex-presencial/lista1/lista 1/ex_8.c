@@ -5,54 +5,39 @@ essa pessoa ganha*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-float pedirSalario();
-float valorSalarioMin();
-float qtdeSalarios(float salario, float salariosMinimos);
+float pedirNum(char letra){
+    float num;
+    do{
+        printf("Digite um valor para %c: ", letra);
+        scanf("%f", &num);
+    } while ((num <= 0) || (num > 100));
+    return num;
+}
 
-int main() {
-    printf("\n%s\n", inicio);
-    float salario, valor, res;
-    salario = pedirSalario();
-    valor = valorSalarioMin();
-    res = qtdeSalarios(salario, valor);
-    printf("\n%s\n", resultado);
-    printf("O salario dessa pessoa equivale a %.2f salarios minimos", res);
-    printf("\n%s\n", corte);
+void troca(float *a, float *b){
+    float arm;
+    arm = *a;
+    *a = *b;
+    *b = arm;
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    float a, b;
+    a = pedirNum('A');
+    b = pedirNum('B');
+    troca(&a,&b);
+    printf("\n%s\n", RESULTADO);
+    printf("A partir de agora os valores de A e B sao, respectivamente: %.2f e %.2f ", a, b);
+    printf("\n%s\n", CORTE);
     return 0;
-}
-
-float pedirSalario(){
-    float num;
-    printf("Digite o valor so seu salario: ");
-    scanf("%f", &num);
-    while (num <= 0) {
-        puts("Salario Invalido");
-        printf("Digite o valor so seu salario, novamente: ");
-        scanf("%f", &num);
-    }
-    return num;
-}
-
-float valorSalarioMin(){
-    float num;
-    printf("Digite o valor do salario minimo atualmente: ");
-    scanf("%f", &num);
-    while (num <= 0) {
-        puts("Salario Invalido");
-        printf("Digite o valor do salario minimo, novamente: ");
-        scanf("%f", &num);
-    }
-    return num;
-}
-
-float qtdeSalarios(float salario, float salariosMinimos){
-    float resu;
-    resu = salario / salariosMinimos;
-    return resu;
 }
