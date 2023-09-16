@@ -16,8 +16,10 @@ Onde F é a temperatura em Fahrenheit e C é a temperatura em centígrados*/
 
 int pedirTemp(){
     float num;
-    printf("Digite a temperatura em C: ");
-    scanf("%f", &num);
+    do{
+        printf("Digite a temperatura em C: ");
+        scanf("%f", &num);
+    } while ((num <= 0) || (num > 100));
     return num;
 }
 
