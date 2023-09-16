@@ -13,31 +13,39 @@ essa pessoa ganha*/
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-float pedirNum(char letra){
+float pedirValor(int desci){
     float num;
-    do{
-        printf("Digite um valor para %c: ", letra);
-        scanf("%f", &num);
-    } while ((num <= 0) || (num > 100));
-    return num;
+    if (desci == 1){
+        do{
+            printf("Digite um valor do salario minimo: ");
+            scanf("%f", &num);
+        } while ((num <= 0) || (num > 5000));
+        return num;
+    }else{
+        do{
+            printf("Digite um valor do salario do funcionario: ");
+            scanf("%f", &num);
+        } while ((num <= 0) || (num > 100000));
+        return num;
+    }
 }
 
-void troca(float *a, float *b){
-    float arm;
-    arm = *a;
-    *a = *b;
-    *b = arm;
+int contagemSalarios(float valor, float salarioMin){
+    int res;
+    res = valor / salarioMin;
+    return res;
 }
 
 int main(){
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
-    float a, b;
-    a = pedirNum('A');
-    b = pedirNum('B');
-    troca(&a,&b);
+    float salarioMin, valor;
+    int res;
+    salarioMin = pedirValor(1);
+    valor = pedirValor(0);
+    res = contagemSalarios(valor,salarioMin);
     printf("\n%s\n", RESULTADO);
-    printf("A partir de agora os valores de A e B sao, respectivamente: %.2f e %.2f ", a, b);
+    printf("A quantidade de salarios mininos que esse funcionario ganha e: %d", res);
     printf("\n%s\n", CORTE);
     return 0;
 }
