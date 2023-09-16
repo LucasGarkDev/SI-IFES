@@ -6,42 +6,33 @@ Onde F é a temperatura em Fahrenheit e C é a temperatura em centígrados*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <locale.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirTemperatura();
-int calculoConversao(int c);
-
-int main(){
-    setlocale(LC_ALL, "Portuguese");
-    printf("\n%s\n", inicio);
-    int temperatura, res;
-    temperatura = pedirTemperatura();
-    res = calculoConversao(temperatura);
-    printf("\n%s\n", resultado);
-    printf("A temperatura %d em graus celcius equivale a %d em fahrenheit", temperatura, res);
-    printf("\n%s\n", corte);
-    return 0;
-}
-
-int pedirTemperatura(){
-    int num;
-    printf("Digite o grau da temperatura em Celcius: ");
-    scanf("%d", &num);
-    while (num <= 0){
-        puts("Temperatura Invalida");
-        printf("Digite o grau da temperatura em Celcius, novamente: ");
-        scanf("%d", &num);
-    }
+int pedirTemp(){
+    float num;
+    printf("Digite a temperatura em C: ");
+    scanf("%f", &num);
     return num;
 }
 
-int calculoConversao(int c){
-    int f;
-    f = (9 * c + 160) / 5;
-    return f;
+float conversao(float C){
+    return (9 * C + 160) / 5;
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    float tempC, tempF;
+    tempC = pedirTemp();
+    tempF = conversao(tempC);
+    printf("\n%s\n", RESULTADO);
+    printf("O valor em Fahrenheit de %.2f em Celsius e: %.2f",tempC,tempF);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
