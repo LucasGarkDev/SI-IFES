@@ -4,46 +4,21 @@ valor somado seja menor ou igual a 20, este deverá ser apresentado subtraindo-s
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirNumero();
-int decisao(int num1, int num2);
 
-int main() {
-    printf("\n%s\n", inicio);
-    int n1, n2, res;
-    n1 = pedirNumero();
-    n2 = pedirNumero();
-    res = decisao(n1,n2);
-    printf("\n%s\n", inicio);
-    printf("O valor sera: %d", res);
-    printf("\n%s\n", corte);
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    
+    printf("\n%s\n", RESULTADO);
+    printf("");
+    printf("\n%s\n", CORTE);
     return 0;
-}
-
-int pedirNumero(){
-    int num;
-    printf("Digite um numero inteiro positivo: ");
-    scanf("%d", &num);
-    while (num <= 0){
-        puts("Numero Invalido");
-        printf("Digite um numero inteiro positivo: ");
-        scanf("%d", &num);
-    }
-    return num;
-}
-
-int decisao(int num1, int num2){
-    int resp;
-    resp = num1 + num2; 
-    if(resp > 20){
-        resp += 8;
-    }else{
-        resp -= 5;
-    }
-    return resp;
 }
