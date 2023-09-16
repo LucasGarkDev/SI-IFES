@@ -6,62 +6,45 @@ an = a1 x q(n - 1) */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <locale.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int perdir1Termo();
-int pedirRazao();
-int pedirQtdeTermos();
-int calculo(int a1, int n, int q);
+
+int pedirNum(int desc){
+    int res;
+    if (desc == 1){
+        printf("Digite o primeiro numero dessa P.G: ");
+        scanf("%d", &res);
+    }else if(desc == 2){
+        printf("Digite a razão dessa P.G: ");
+        scanf("%d", &res);
+    }else{
+        printf("Digite o numero do termo que deseja saber dessa P.G: ");
+        scanf("%d", &res);
+    }
+    return res;
+}
+
+int calPg(int a1, int q, int n){
+    return a1 * pow(q,(n-1));
+}
 
 int main(){
-    setlocale(LC_ALL, "Portuguese");
-    printf("\n%s\n", inicio);
-    int a1, n, q, res;
-    a1 = perdir1Termo();
-    n = pedirQtdeTermos();
-    q = pedirRazao();
-    res = calculo(a1,n,q);
-    printf("\n%s\n", resultado);
-    printf("O resultado do termo de numero %d...\n", n);
-    printf("E igual a : %d\n", res);
-    printf("\n%s\n", corte);
-}
-
-int perdir1Termo(){
-    int num;
-    printf("Digite o primeiro termo da P.G: ");
-    scanf("%d", &num);
-    return num;
-}
-
-int pedirRazao(){
-    int num;
-    printf("Digite a razao da P.G: ");
-    scanf("%d", &num);
-    return num;
-}
-
-int pedirQtdeTermos(){
-    int num;
-    printf("Digite a quantidade de termos da P.G: ");
-    scanf("%d", &num);
-    while (num <= 0){
-        puts("Numero Invalido");
-        printf("Digite a quantidade de termos da P.G, novamente: ");
-        scanf("%d", &num);
-    }
-    return num;
-}
-
-int calculo(int a1, int n, int q){
-    int an;
-    an = a1 * pow(q,(n - 1));
-    return an;
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int n, a1, razao, res;
+    n = pedirNum(0);
+    a1 = pedirNum(1);
+    razao = pedirNum(2);
+    res = calPg(a1,razao,n);
+    printf("\n%s\n", RESULTADO);
+    printf("A quantidade de termos dessa P.G sera: %d", res);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
 
