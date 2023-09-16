@@ -6,60 +6,43 @@ termos.  an = a1 + (n-1) x r */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <locale.h>
+#include <windows.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int perdir1Termo();
-int pedirRazao();
-int pedirQtdeTermos();
-int calculo(int a1, int n, int r);
+
+int pedirNum(int desc){
+    int res;
+    if (desc == 1){
+        printf("Digite o primeiro numero dessa P.A: ");
+        scanf("%d", &res);
+    }else if(desc == 2){
+        printf("Digite a razão dessa P.A: ");
+        scanf("%d", &res);
+    }else{
+        printf("Digite a quantidade de termos dessa P.A: ");
+        scanf("%d", &res);
+    }
+    return res;
+}
+
+int calRazao(int a1, int r, int n){
+    return a1 + (n-1) * r;
+}
 
 int main(){
-    setlocale(LC_ALL, "Portuguese");
-    printf("\n%s\n", inicio);
-    int a1, n, r, res;
-    a1 = perdir1Termo();
-    n = pedirQtdeTermos();
-    r = pedirRazao();
-    res = calculo(a1,n,r);
-    printf("\n%s\n", resultado);
-    printf("O resultado do termo de numero %d...\n", n);
-    printf("E igual a : %d\n", res);
-    printf("\n%s\n", corte);
-}
-
-int perdir1Termo(){
-    int num;
-    printf("Digite o primeiro termo da P.A: ");
-    scanf("%d", &num);
-    return num;
-}
-
-int pedirRazao(){
-    int num;
-    printf("Digite a razao da P.A: ");
-    scanf("%d", &num);
-    return num;
-}
-
-int pedirQtdeTermos(){
-    int num;
-    printf("Digite a quantidade de termos da P.A: ");
-    scanf("%d", &num);
-    while (num <= 0){
-        puts("Numero Invalido");
-        printf("Digite a quantidade de termos da P.A, novamente: ");
-        scanf("%d", &num);
-    }
-    return num;
-}
-
-int calculo(int a1, int n, int r){
-    int an;
-    an = a1 + (n-1) * r;
-    return an;
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int n, a1, razao, res;
+    n = pedirNum(0);
+    a1 = pedirNum(1);
+    razao = pedirNum(2);
+    res = calRazao(a1,razao,n);
+    printf("\n%s\n", RESULTADO);
+    printf("A quantidade de termos dessa P.A sera: %d", res);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
