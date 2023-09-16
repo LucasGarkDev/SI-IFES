@@ -7,42 +7,31 @@ valor do desconto. */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <locale.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-float pedirValor();
-float calcularDesconto(float valor, float desconto);
 
-int main(){
-    setlocale(LC_ALL, "Portuguese");
-    printf("\n%s\n", inicio);
-    float valor, desconto, res;
-    valor = pedirValor();
-    desconto = (9/100);
-    res = calcularDesconto(valor,desconto);
-    printf("\n%s\n", resultado);
-    printf("O resultado do desconto de %.2f e: %.2f\n", desconto, res);
-    printf("\n%s\n", corte);
-}
-
-float pedirValor(){
+int pedirNum(){
     float num;
-    printf("Digite o valor do produto: ");
+    printf("Digite o preço do produto: ");
     scanf("%f", &num);
-    while (num <= 0.0){
-        puts("Numero Invalido");
-        printf("Digite o valor do produto, novamente: ");
-        scanf("%f", &num);
-    }
     return num;
 }
 
-float calcularDesconto(float valor, float desconto){
-    float calculo;
-    calculo = valor - (valor * desconto);
-    return calculo;
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    float produto, desconto, res;
+    produto = pedirNum();
+    desconto = produto * 0.09;
+    res = produto - desconto;
+    printf("\n%s\n", RESULTADO);
+    printf("O valor do produto com um desconto de 9%% sera de : %.2f", res);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
