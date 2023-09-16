@@ -5,58 +5,47 @@ R$ 60,00 por dia e R$ 0,15 por km rodado.*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-float pedirKilometragem();
-int pedirDiasAlugados();
-float calculoFinal(float km, int dias);
-
-int main() {
-    printf("\n%s\n", inicio);
-    int dias;
-    float kilometros, res;
-    kilometros = pedirKilometragem();
-    dias = pedirDiasAlugados();
-    res = calculoFinal(kilometros,dias);
-    printf("\n%s\n", resultado);
-    printf("O preco final a pagar e %.2f", res);
-    printf("\n%s\n", corte);
-    return 0;
-}
-
-float pedirKilometragem(){
+float pedirKm(){
     float num;
-    printf("Digite a quantidade de Km percorridos: ");
-    scanf("%f", &num);
-    while (num < 0) {
-        puts("Quilometragem Invalida");
-        printf("Digite a quantidade de Km percorridos, novamente: ");
+    do{
+        printf("Digite a quantidade de km percorridos: ");
         scanf("%f", &num);
-    }
+    } while ((num <= 0) || (num > 5000));
     return num;
 }
 
-int pedirDiasAlugados(){
+int pedirDia(){
     int num;
-    printf("Digite a quantidade de dias para qual o carro foi alugado: ");
-    scanf("%d", &num);
-    while (num < 0){
-        puts("Quantidade invalida Invalida");
-        printf("Digite a quantidade de dias para qual o carro foi alugado, novamente: ");
+    do{
+        printf("Digite a quantidade de dias em que ficou com o carro: ");
         scanf("%d", &num);
-    }
+    } while ((num <= 0) || (num > 365));
     return num;
 }
 
-float calculoFinal(float km, int dias){
-    int part1;
-    float part2, partFinal;
-    part1 = dias * 60;
-    part2 = 0.15 * km;
-    partFinal = part2 + (float)part1;
-    return partFinal;
+float calculo(float km, int dia){
+    return (0.15 * km) + (60 * dia);
+}
+
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    float km, res;
+    int dias;
+    km = pedirKm();
+    dias = pedirDia();
+    res = calculo(km,dias);
+    printf("\n%s\n", RESULTADO);
+    printf("O valor a ser pago pelo aluguel desse carro e: %.2f", res);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
