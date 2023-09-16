@@ -43,7 +43,7 @@ int main(){
     razao = pedirNum(2);
     res = calPg(a1,razao,n);
     printf("\n%s\n", RESULTADO);
-    printf("A quantidade de termos dessa P.G sera: %d", res);
+    printf("O termo dessa P.G, que corresponde a posiçao %d sera: %d",n ,res);
     printf("\n%s\n", CORTE);
     return 0;
 }
