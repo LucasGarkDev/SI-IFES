@@ -6,69 +6,73 @@ dia da semana com esse número. */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirNumero();
-void mostrarDia(int num);
-
-int main(){
-    printf("\n%s\n", inicio);
-    int numero = pedirNumero();
-    printf("\n%s\n", resultado);
-    mostrarDia(numero);
-    printf("\n%s\n", corte);
-    return 0;
-}
-
-int pedirNumero(){
+int pedirNum(){
     int num;
-    printf("Digite um numero inteiro positivo: ");
+    printf("Digite o numero do dia da semana (1 a 7):");
     scanf("%d", &num);
-    while (num < 0){
-        puts("Numero Invalido");
-        printf("Digite um numero inteiro positivo: ");
-        scanf("%d", &num);
-    }
     return num;
 }
-
-void mostrarDia(int num){
-    switch (num){
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int numDiaSemana;
+    numDiaSemana = pedirNum();
+    switch (numDiaSemana){
     case 1:
-        puts("Hoje o dia e: domingo");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Domingo");
+        printf("\n%s\n", CORTE);
         break;
     
     case 2:
-        puts("Hoje o dia e: segunda");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Segunda");
+        printf("\n%s\n", CORTE);
         break;
     
     case 3:
-        puts("Hoje o dia e: terça");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Terça");
+        printf("\n%s\n", CORTE);
         break;
     
     case 4:
-        puts("Hoje o dia e: quarta");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Quarta");
+        printf("\n%s\n", CORTE);
         break;
     
     case 5:
-        puts("Hoje o dia e: quinta");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Quinta");
+        printf("\n%s\n", CORTE);
         break;
     
     case 6:
-        puts("Hoje o dia e: sexta");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Sexta");
+        printf("\n%s\n", CORTE);
         break;
     
     case 7:
-        puts("Hoje o dia e: sabado");
+        printf("\n%s\n", RESULTADO);
+        printf("Hoje o dia e: Sabado");
+        printf("\n%s\n", CORTE);
         break;
     
     default:
-        puts("nao existe esse dia da semana");
+        printf("\n%s\n", RESULTADO);
+        printf("Não existe esse dia da semana");
+        printf("\n%s\n", CORTE);
         break;
     }
+    return 0;
 }
