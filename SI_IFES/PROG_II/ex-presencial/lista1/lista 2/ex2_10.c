@@ -20,6 +20,7 @@ int pedirNum(){
     scanf("%d", &num);
     return num;
 }
+
 int main(){
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
