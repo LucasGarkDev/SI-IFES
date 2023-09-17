@@ -17,45 +17,67 @@ sobre o valor total;
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int pedirNum(char coeficiente){
+int pedirNum(int desci){
     int num;
-    do {
-        printf("Digite o valor do coeficiente %c: ", coeficiente);
-        scanf("%d", &num);
-    } while (num == 0 || num > 10000 || num < -10000);
-    return num;
+    if (desci == 1){
+        do {
+            printf("Digite o codigo do produto(1 a 40): ");
+            scanf("%d", &num);
+        } while (num < 0 || num > 40);
+        return num;
+    }else{
+        do {
+            printf("Digite a quantidade que voce deseja desse produto: ");
+            scanf("%d", &num);
+        } while (num <= 0 || num > 100);
+        return num;
+    }
 }
 
-float operacaoSegGrau(int a, int b, int c, int desci){
-    // a*pow(x,2) + b*x + c
-    int delta, x;
-    delta = (b * b) - 4 * a * c;
-    if (delta < 0) {
-        printf("Delta é negativo. Não há raízes reais.\n");
-        return 0; 
+float definePreco(int codigo) {
+    float precoUni;
+    if (codigo <= 10 ) {
+        precoUni = 10.00;
+    } else if (codigo <= 20) {
+        precoUni = 15.00;
+    } else if (codigo <= 30) {
+        precoUni = 20.00;
+    } else {
+        precoUni = 30.00;
     }
-    if (desci == 1){
-        x = (- b - sqrt(delta))/(2.0 * a);
-        return x;
+    return precoUni;
+}
+
+float desconto(int soma){
+    if (soma <= 250.00){
+        return soma * 0.05;
+    }else if (soma <= 500.00){
+        return soma * 0.10;
     }else{
-        x = (- b + sqrt(delta))/(2.0 * a);
-        return x;
+        return soma * 0.15;
     }
+}
+
+float calculaNota(int soma, float desconto){
+    return soma - desconto;
 }
 
 int main(){
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
-    int a, b, c;
-    float x1, x2;
-    a = pedirNum('A');
-    b = pedirNum('B');
-    c = pedirNum('C');
-    x1 = operacaoSegGrau(a,b,c,1);
-    x2 = operacaoSegGrau(a,b,c,0);
+    int codigo, quanti;
+    float descontoQuanti, nota, precoUni, soma;
+    codigo = pedirNum(1);
+    quanti = pedirNum(0);
+    precoUni = definePreco(codigo);
+    soma = precoUni * quanti;
+    descontoQuanti = desconto(soma);
+    nota = calculaNota(soma, descontoQuanti);
     printf("\n%s\n", RESULTADO);
-    printf("Dentro da equaçao: %dx^2 + %dx + %d \n", a, b, c);
-    printf("O resultado das raizes foram: %.2f e %.2f", x1, x2);
+    printf("O preço do produto unitario: %.2f\n", precoUni);
+    printf("O valor total da nota: %.2f\n", soma);
+    printf("O valor do descont: %.2f\n", descontoQuanti);
+    printf("O valor da nota com o desconto: %.2f", nota);
     printf("\n%s\n", CORTE);
     return 0;
 }
