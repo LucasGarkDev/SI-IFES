@@ -5,40 +5,42 @@ maiores que zero (coloque validação para isso).
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirNumero();
-int calcularFatorial(int num);
-
-int main() {
-    printf("\n%s\n", inicio);
-    int numero, res;
-    numero = pedirNumero();
-    res = calcularFatorial(numero);
-    printf("\n%s\n", resultado);
-    printf("O fatorial de %d e: %d", numero, res);
-    printf("\n%s\n", corte);
-    return 0;
-}
-
-int pedirNumero(){
+int pedirNum(){
     int num;
     do{
-        printf("Digite um numero que deseja: ");
+        printf("Digite um numero inteiro: ");
         scanf("%d", &num);
     } while (num <= 0);
     return num;
 }
 
-int calcularFatorial(int num){
+int imprimirFat(int numero){
     int i;
-    int fat = 1;
-    for(i = num; i > 1; i--){
-        fat = fat * i;
+    int soma = numero;
+    printf("\n%s\n", RESULTADO);
+    printf("%d", numero);
+    for (i = numero - 1; i >= 1; i--){
+        printf("x%d", i);
+        soma *= i; 
     }
-    return fat;
+    return soma;
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int numero, res;
+    numero = pedirNum();
+    res = imprimirFat(numero);
+    printf(" = %d",res);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
