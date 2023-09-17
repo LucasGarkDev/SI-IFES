@@ -73,7 +73,7 @@ int main(){
     printf("\n%s\n", INICIO);
     float notas[5];
     float maior, menor, res;
-    inserirNotas(&notas, 5);
+    inserirNotas(notas, 5);
     maior = encontrarMaiorMenor(notas,5,1);
     menor = encontrarMaiorMenor(notas,5,2);
     res = calMedia(notas,maior,menor,5);
