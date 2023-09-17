@@ -6,40 +6,42 @@ termo. Este N-ésimo termo é digitado pelo usuário.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirTermo();
-void imprimir(int ter);
-
-int main() {
-    printf("\n%s\n", inicio);
-    int termo;
-    termo = pedirTermo();
-    printf("\n%s\n", resultado);
-    imprimir(termo);
-    printf("\n%s\n", corte);
-    return 0;
-}
-
-int pedirTermo(){
+int pedirStop(){
     int num;
+    printf("1, 4, 9, 16, 25, 36, ...\n");
     do{
-        printf("Digite o numero final: ");
+        printf("Considerando essa sequencia de numeros, onde deseja que pare: ");
         scanf("%d", &num);
-    } while (num <= 1);
+    } while (num <= 0);
     return num;
 }
 
-void imprimir(int ter){
-    int i, res;
-    res = 0;
-    for(i = 0; i < ter; i++){
-        res = pow(i,2);
-        printf("%d\n", res);
+void imprimir(int stop){
+    int i;
+    int valor = 1;
+    int razao = 3;
+    for (i = 0; i < stop; i++){
+        printf("%d,", valor);
+        valor += razao;
+        razao += 2;
     }
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int stop;
+    stop = pedirStop();
+    printf("\n%s\n", RESULTADO);
+    imprimir(stop);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
