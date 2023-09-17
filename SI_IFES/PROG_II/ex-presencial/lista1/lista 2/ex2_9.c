@@ -5,50 +5,53 @@ teclado. */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirCoeficientes(int numCoe);
-int calculoEquacao(int a, int b, int c, int esco);
-
-int main(){
-    printf("\n%s\n", inicio);
-    int a, b, c, res1, res2;
-    a = pedirCoeficientes(1);
-    b = pedirCoeficientes(2);
-    c = pedirCoeficientes(3);
-    res1 = calculoEquacao(a,b,c,0);
-    res2 = calculoEquacao(a,b,c,1);
-    printf("\n%s\n", resultado);
-    printf("As razes dessa equacao e: %d e %d", res1, res2);
-    printf("\n%s\n", corte);
-    return 0;
-}
-
-int pedirCoeficientes(int numCoe){
+int pedirNum(char coeficiente){
     int num;
-    printf("Digite do %d coeficiente: ", numCoe);
-    scanf("%d", &num);
-    while (num < 0 || num > 10){
-        puts("Nota invalida");
-        printf("Digite do %d coeficiente, novamente: ", numCoe);
+    do {
+        printf("Digite o valor do coeficiente %c: ", coeficiente);
         scanf("%d", &num);
-    }
+    } while (num == 0 || num > 10000 || num < -10000);
     return num;
 }
 
-int calculoEquacao(int a, int b, int c, int esco){
-    int res1, res2, part1;
-    part1 = sqrt((pow(b, 2) - 4 * a * c));
-    res1 = (-b + part1) / (2 * a); // Correção aqui
-    res2 = (-b - part1) / (2 * a); // Correção aqui
-    if (esco == 0){
-        return res1;
-    } else {
-        return res2;
+float operacaoSegGrau(int a, int b, int c, int desci){
+    // a*pow(x,2) + b*x + c
+    int delta, x;
+    delta = (b * b) - 4 * a * c;
+    if (delta < 0) {
+        printf("Delta é negativo. Não há raízes reais.\n");
+        return 0; 
     }
+    if (desci == 1){
+        x = (- b - sqrt(delta))/(2.0 * a);
+        return x;
+    }else{
+        x = (- b + sqrt(delta))/(2.0 * a);
+        return x;
+    }
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int a, b, c;
+    float x1, x2;
+    a = pedirNum('A');
+    b = pedirNum('B');
+    c = pedirNum('C');
+    x1 = operacaoSegGrau(a,b,c,1);
+    x2 = operacaoSegGrau(a,b,c,0);
+    printf("\n%s\n", RESULTADO);
+    printf("Dentro da equaçao: %dx^2 + %dx + %d \n", a, b, c);
+    printf("O resultado das raizes foram: %.2f e %.2f", x1, x2);
+    printf("\n%s\n", CORTE);
+    return 0;
 }
