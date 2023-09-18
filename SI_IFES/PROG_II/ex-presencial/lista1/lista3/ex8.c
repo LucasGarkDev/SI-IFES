@@ -1,79 +1,111 @@
-#include <stdio.h>
+/*Faça um algoritmo que dado as notas de cada um dos alunos do 2º 
+Período do curso de Bacharel de Sistemas de Informação, gere uma 
+serie de estatísticas. Para tanto, serão fornecidos a matrícula, 
+a nota e o sexo de cada aluno. Quando for informado uma matrícula
+negativa (ou zero), encerrar a leitura das informações. Deseja-se
+as seguintes informações estatísticas: 
+ Quantos homens existem na turma ? 
+ Quantas mulheres existem na turma ? 
+ Qual é a média das notas ? 
+ Quantos alunos DR existem na turma ? 
+ Quantos alunos DI existem na turma ? 
+ Qual a % de alunos DB, DR e DI na turma ? 
+ Qual a % de homens DB, DR e DI na turma ? 
+ Qual a % de mulheres DB, DR e DI na turma ? */
 
-#define tam 100 // Defina o tamanho máximo da turma
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <math.h>
+#include <ctype.h>
+
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
+#define MAX 100
+
+int pedirDados(int cont, int desci) {
+    int num;
+    float nota;
+    char sexo;
+    if (desci == 1) {
+        printf("Digite a matricula do estudante %d: ", cont);
+        scanf("%d", &num);
+        return num;
+    } else if (desci == 2) {
+        do {
+            printf("Digite a nota do estudante %d: ", cont);
+            scanf("%f", &nota);
+        } while ((nota < 0) || (nota > 10));
+        return nota;
+    } else {
+        do {
+            printf("Digite o sexo do estudante %d (M-masculino/F-feminino): ", cont);
+            scanf(" %c", &sexo);
+        } while (sexo != 'M' && sexo != 'F');
+        return sexo;
+    }
+}
 
 int main() {
-    int matricula[tam];
-    float nota[tam];
-    char sexo[tam];
-    int i = 0;
-    int homens = 0, mulheres = 0;
+    printf("\n%s\n", INICIO);
+    int matriculas[MAX];
+    float notas[MAX];
+    char sexo[MAX];
+    int numMatricula, i = 0;
+    float numNotas;
+    int numHomens = 0, numMulheres = 0;
+    float media = 0;
     int alunosDB = 0, alunosDR = 0, alunosDI = 0;
-    float somaNotas = 0;
-    
-    printf("Digite a matrícula, nota e sexo de cada aluno (matrícula negativa ou zero para encerrar):\n");
-    
-    while (1) {
-        printf("Matrícula do aluno %d: ", i + 1);
-        scanf("%d", &matricula[i]);
-        
-        if (matricula[i] <= 0) {
-            break;
+
+    do {
+        numMatricula = pedirDados(i + 1, 1);
+        if (numMatricula > 0) {
+            matriculas[i] = numMatricula;
+            numNotas = pedirDados(i + 1, 2);
+            notas[i] = numNotas;
+            char letraSexo = pedirDados(i + 1, 0);
+            sexo[i] = letraSexo;
+            i++;
+
+            // Contagem de homens e mulheres
+            if (letraSexo == 'M') {
+                numHomens++;
+            } else {
+                numMulheres++;
+            }
+
+            // Cálculo da média
+            media += numNotas;
+
+            // Contagem de alunos por desempenho
+            if (numNotas < 60) {
+                alunosDI++;
+            } else if (numNotas < 80) {
+                alunosDR++;
+            } else {
+                alunosDB++;
+            }
         }
-        
-        printf("Nota do aluno %d: ", i + 1);
-        scanf("%f", &nota[i]);
-        
-        printf("Sexo do aluno %d (m/f): ", i + 1);
-        scanf(" %c", &sexo[i]);
-        
-        if (sexo[i] == 'm') {
-            homens++;
-        } else {
-            mulheres++;
-        }
-        
-        somaNotas += nota[i];
-        
-        if (nota[i] >= 80) {
-            alunosDB++;
-        } else if (nota[i] >= 60) {
-            alunosDR++;
-        } else {
-            alunosDI++;
-        }
-        
-        i++;
+    } while (numMatricula > 0);
+
+    // Cálculo da média
+    if (i > 0) {
+        media /= i;
     }
-    
-    int totalAlunos = i;
-    float mediaNotas = somaNotas / totalAlunos;
-    float percentualDB = (float) alunosDB / totalAlunos * 100;
-    float percentualDR = (float) alunosDR / totalAlunos * 100;
-    float percentualDI = (float) alunosDI / totalAlunos * 100;
-    float percentualHomensDB = (float) alunosDB / homens * 100;
-    float percentualHomensDR = (float) alunosDR / homens * 100;
-    float percentualHomensDI = (float) alunosDI / homens * 100;
-    float percentualMulheresDB = (float) alunosDB / mulheres * 100;
-    float percentualMulheresDR = (float) alunosDR / mulheres * 100;
-    float percentualMulheresDI = (float) alunosDI / mulheres * 100;
-    
-    printf("Resultados:\n");
-    printf("Quantidade de homens: %d\n", homens);
-    printf("Quantidade de mulheres: %d\n", mulheres);
-    printf("Média das notas: %.2f\n", mediaNotas);
-    printf("Quantidade de alunos DB: %d\n", alunosDB);
-    printf("Quantidade de alunos DR: %d\n", alunosDR);
-    printf("Quantidade de alunos DI: %d\n", alunosDI);
-    printf("Percentual de alunos DB: %.2f%%\n", percentualDB);
-    printf("Percentual de alunos DR: %.2f%%\n", percentualDR);
-    printf("Percentual de alunos DI: %.2f%%\n", percentualDI);
-    printf("Percentual de homens DB: %.2f%%\n", percentualHomensDB);
-    printf("Percentual de homens DR: %.2f%%\n", percentualHomensDR);
-    printf("Percentual de homens DI: %.2f%%\n", percentualHomensDI);
-    printf("Percentual de mulheres DB: %.2f%%\n", percentualMulheresDB);
-    printf("Percentual de mulheres DR: %.2f%%\n", percentualMulheresDR);
-    printf("Percentual de mulheres DI: %.2f%%\n", percentualMulheresDI);
-    
+
+    // Cálculo das porcentagens
+    float porcenDB = (alunosDB * 100.0) / i;
+    float porcenDR = (alunosDR * 100.0) / i;
+    float porcenDI = (alunosDI * 100.0) / i;
+
+    printf("\n%s\n", RESULTADO);
+    printf("Quantidade de homens: %d\n", numHomens);
+    printf("Quantidade de mulheres: %d\n", numMulheres);
+    printf("Media das notas: %.2f\n", media);
+    printf("Quantidade de alunos DB, DR, DI: %d, %d, %d\n", alunosDB, alunosDR, alunosDI);
+    printf("Porcentagem de alunos DB, DR, DI: %.2f%%, %.2f%%, %.2f%%\n", porcenDB, porcenDR, porcenDI);
+    printf("\n%s\n", CORTE);
+
     return 0;
 }
