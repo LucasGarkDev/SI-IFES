@@ -10,97 +10,104 @@ além da média das alturas e dos pesos dos clientes.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
+#define MAX 100
 
-int pedirCodigo(int cont);
-float pedirAltura(int cont);
-float pedirPeso(int cont);
-void inserirClientes(int codigos[5],float altura[5],float pesos[5]);
-float descobreMagroBaixo(int codigos[5],float vetor[5]);
-float descobreAltoGordo(int codigos[5],float vetor[5]);
+int pesquisar(int*vetor, int qtde, int pesq){ 
+    int i; 
+    for (i = 0; i < qtde; i++){ 
+        if(vetor[i] == pesq){
+            return i;
+        } 
+    } 
+    return-1; 
+}
 
-int main() {
-    printf("\n%s\n", inicio);
-    int vetorCodigo[5];
-    float vetorAltura[5], vetorPeso[5];
-    inserirClientes(vetorCodigo,vetorAltura,vetorPeso);
-    float alto, magro, gordo, baixo;
-    alto = descobreAltoGordo(vetorCodigo,vetorAltura);
-    gordo = descobreAltoGordo(vetorCodigo,vetorPeso);
-    baixo = descobreMagroBaixo(vetorCodigo,vetorAltura);
-    magro = descobreMagroBaixo(vetorCodigo,vetorPeso);
-    printf("\n%s\n", resultado);
-    printf("O mais alto tem: %.2f\n", alto);
-    printf("O mais baixo tem: %.2f\n", baixo);
-    printf("O mais magro tem: %.2f\n", magro);
-    printf("O mais gordo tem: %.2f\n", gordo);
-    printf("\n%s\n", corte);
+float pedirCodigo(int cont, float vetor[], int desci){
+    int verifica;
+    float num;
+    if (desci == 1){
+        do{
+            printf("Digite o codigo do aluno %d: ", cont);
+            scanf("%f", &num);
+            verifica = pesquisar(vetor,MAX,num);
+        } while (verifica != -1);
+        return num;
+    }else if (desci == 2){
+        do{
+            printf("Digite a altura do aluno %d: ", cont);
+            scanf("%f", &num);
+            verifica = pesquisar(vetor,MAX,num);
+        } while (verifica != -1);
+        return num;
+    }else{
+        do{
+            printf("Digite o peso do aluno %d: ", cont);
+            scanf("%f", &num);
+            verifica = pesquisar(vetor,MAX,num);
+        } while (verifica != -1);
+        return num;
+    }
+}
+
+void inserirAlunos(float *codigos, float *alturas, float *pesos){
+    int cont = 0;
+    float aluno, altura, peso;
+    do{
+        aluno = pedirCodigo(cont+1,codigos,1);
+        codigos[cont] = aluno;
+        altura = pedirCodigo(cont+1,alturas,2);
+        alturas[cont] = altura;
+        peso = pedirCodigo(cont+1,pesos,0);
+        pesos[cont] = peso;
+        cont++;
+    } while (aluno != 0);
+
+}
+
+float identifica(float *vetor, int desci){
+    int i;
+    float comp1 = 0.0 , comp2 = 99.0;
+    if (desci == 1){
+        for (i = 0; i < MAX; i++){
+            if (vetor[i] > comp1){
+                comp1 = vetor[i];
+            }
+        }
+        return comp1;
+    }else{
+        for (i = 0; i < MAX; i++){
+            if (vetor[i] < comp2){
+                comp2 = vetor[i];
+            }
+        }
+        return comp2;
+    }
+}
+
+int main(){
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    float codigos[MAX];
+    float alturas[MAX];
+    float pesos[MAX];
+    inserirAlunos(codigos,alturas,pesos);
+    float maior, menor, gordo, magro;
+    maior = identifica(alturas,1);
+    menor = identifica(alturas,2);
+    gordo = identifica(pesos,1);
+    magro = identifica(pesos,2);
+    printf("\n%s\n", RESULTADO);
+    printf("O cliente mais alto: %.2f", maior);
+    printf("O cliente mais baixo: %.2f", menor);
+    printf("O cliente mais gordo: %.2f", gordo);
+    printf("O cliente mais magro: %.2f", magro);
+    printf("\n%s\n", CORTE);
     return 0;
 }
-
-void inserirClientes(int codigos[5],float altura[5], float pesos[5]){
-    int i;
-    for (i = 0; i < 5; i++){
-        codigos[i] = pedirCodigo(i);
-        altura[i] = pedirAltura(i);
-        pesos[i] = pedirPeso(i);
-    } 
-}
-
-
-float descobreMagroBaixo(int codigos[5],float vetor[5]){
-    int i;
-    float variavel;
-    variavel = 0;
-    for (i = 0; i < 5; i++){
-        if (vetor[i] < variavel){
-            variavel =  vetor[i];
-        }
-    }
-    return variavel;
-}
-
-float descobreAltoGordo(int codigos[5],float vetor[5]){
-    int i;
-    float variavel;
-    variavel = 0;
-    for (i = 0; i < 5; i++){
-        if (vetor[i] > variavel){
-            variavel =  vetor[i];
-        }
-    }
-    return variavel;
-}
-
-int pedirCodigo(int cont){
-    int num;
-    do{
-        printf("Digite o codigo do aluno %d: ", cont);
-        scanf("%d", &num);
-    } while (num <= 0);
-    return num;
-}
-
-float pedirAltura(int cont){
-    float num;
-    do{
-        printf("Digite a altura do aluno %d: ", cont);
-        scanf("%f", &num);
-    } while (num <= 0);
-    return num;
-}
-
-float pedirPeso(int cont){
-    float num;
-    do{
-        printf("Digite o peso do aluno %d: ", cont);
-        scanf("%f", &num);
-    } while (num <= 0);
-    return num;
-}
-
