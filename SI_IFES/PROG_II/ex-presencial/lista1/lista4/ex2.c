@@ -9,37 +9,30 @@ total da compra.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
 float pedirPreco(){
     float num;
     do{
-        printf("Digite o preco do produto: ");
+        printf("Digite o preço do produto: ");
         scanf("%f", &num);
-    } while (num < 0);
+    } while(num <= 0);
     return num;
 }
 
-char pedirFormPagamento(){
-    char forma;
+char pedirFormaPagamento(){
+    char letra, inserir;
     do{
-        printf("Digite a forma de pagamento desejada(V- a vista/P- a prazo): ");
-        scanf(" %c", &forma);
-    } while ((forma != 'V') && (forma != 'P'));
-    return forma;
-}
-
-float calDescontoAcrescimo(float num, int deci){
-    float res;
-    if (deci == 1){
-        res = num - ((num * 10)/100);
-    }else{
-        res = num + ((num * 10)/100);
-    }
-    return res;
+        printf("Digite o preço do produto: ");
+        scanf("%c", &letra);
+        inserir = toupper(letra);
+    } while((inserir != 'V')&&(inserir != 'P'));
+    return letra;
 }
 
 int pedirQtde(){
@@ -51,30 +44,28 @@ int pedirQtde(){
     return num;
 }
 
-float calcularPreco(float preco, char formaPagamento){
-    float precoUnitario, precoFinal, valor;
-    int qtde;
-    if (formaPagamento == 'V'){
-        valor = calDescontoAcrescimo(preco,1);
-        precoUnitario = preco - valor;
+float calculo(float preco, char formaPagamento){
+    float total;
+    int quanti;
+    if(formaPagamento == 'V'){
+        total = preco - (preco * 0.10);
     }else{
-        valor = calDescontoAcrescimo(preco,0);
-        precoUnitario = preco + valor;
+        total = preco + (preco * 0.10);
     }
-    qtde = pedirQtde();
-    precoFinal = precoUnitario * qtde;
-    return precoFinal;
+    quanti = pedirQtde();
+    total = total * quanti;
+    return total;
 }
 
-int main(){
-    printf("\n%s\n", inicio);
-    float preco, calculo;
-    char formaDePagamento;
+int main() {
+    printf("\n%s\n", INICIO);
+    float preco, res;
+    char forma;
     preco = pedirPreco();
-    formaDePagamento = pedirFormPagamento();
-    calculo = calcularPreco(preco,formaDePagamento);
-    printf("\n%s\n", resultado);
-    printf("O valor a ser pago sera: %.2f", calculo);
-    printf("\n%s\n", corte);
+    forma = pedirFormaPagamento();
+    res = calculo(preco,forma);
+    printf("\n%s\n", RESULTADO);
+    printf("O valor a ser pago pelo produto e: %.2f", res);
+    printf("\n%s\n", CORTE);
     return 0;
 }
