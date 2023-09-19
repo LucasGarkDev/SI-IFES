@@ -8,56 +8,70 @@ média e imprimir a mensagem.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirMatricula(){
-    int num;
-    do{
-        printf("Digite o numero da Matricula do aluno: ");
-        scanf("%d", &num);
-    } while (num < 0);
-    return num;
+float pesquisar(int vetor[], int quanti, int pesq) {
+    int i;
+    for (i = 0; i < quanti; i++) {
+        if (vetor[i] == pesq) {
+            return i;
+        }
+    }
+    return -1;
 }
 
-float pedirNota(int cont){
+int pedirMatricula(int vetor[], int cont) {
+    int matricula, verifica;
+    do {
+        printf("Digite a matricula do aluno %d: ", cont + 1);
+        scanf("%d", &matricula);
+        verifica = pesquisar(vetor, cont, matricula);
+    } while (matricula < 0 || verifica != -1);
+    return matricula;
+}
+
+float pedirNota(int cont) {
     float num;
-    do{
-        printf("Digite a nota %d do aluno: ", cont + 1);
+    do {
+        printf("Digite o valor da nota do aluno %d: ", cont + 1);
         scanf("%f", &num);
-    } while ((num < 0) || (num > 10));
+    } while (num < 0 || num > 10);
     return num;
 }
 
-float calcularMedia(float soma){
-    float media = soma / 3;
-    return media;
-}
-
-void imprimir(float media){
-    if (media >= 7){
-        printf("O aluno esta: Aprovado");
-    }else if (media >= 6){
-        printf("O aluno esta: de Prova Final");
-    }else{
-        printf("O aluno esta: Reprovado");
+void imprimirSofisticado(float vetor[], int tamanho){
+    int i;
+    for(i = 0; i < tamanho; i++){
+        if(vetor[i] >= 7){
+            printf("O aluno %d esta: APROVADO\n", i + 1);
+        }else if(vetor[i] >= 6){
+            printf("O aluno %d esta: PROVA FINAL\n", i + 1);
+        }else{
+            printf("O aluno %d esta: REPROVADO\n", i + 1); 
+        }
     }
 }
 
-int main(){
-    printf("\n%s\n", inicio);
-    int matricula, i;
-    float nota, somaNotas, mediaReal;
-    matricula = pedirMatricula();
-    for (i = 0; i < 3; i++){
-        nota = pedirNota(i);
-        somaNotas += nota;
-    }
-    mediaReal = calcularMedia(somaNotas);
-    printf("\n%s\n", resultado);
-    imprimir(mediaReal);
-    printf("\n%s\n", corte);
+int main() {
+    printf("\n%s\n", INICIO);
+    int matriculas[10], i = 0, numAlunos = 0;
+    float notas[10], media;
+    int inserir;
+    do {
+        inserir = pedirMatricula(matriculas, numAlunos);
+        if (inserir > 0) {
+            matriculas[numAlunos] = inserir;
+            notas[numAlunos] = pedirNota(numAlunos);
+            numAlunos++;
+        }
+    } while (inserir != 0);
+    printf("\n%s\n", RESULTADO);
+    imprimirSofisticado(notas,numAlunos);
+    printf("\n%s\n", CORTE);
     return 0;
 }
