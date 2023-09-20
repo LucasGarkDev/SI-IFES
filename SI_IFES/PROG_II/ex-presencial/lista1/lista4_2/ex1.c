@@ -17,33 +17,31 @@ biblioteca <math.h> da linguagem C.*/
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int distancia(int *x1, int *x2, int *y1, int *y2){
-    int res1, res2, res3, res4, res5, res6;
-    res1 = *x2 - *x1;
-    res2 = *y2 - *y1;
-    res3 = pow(res1,2);
-    res4 = pow(res2,2);
-    res5 = res3 + res4;
-    res6 = sqrt(res5);
-    return res6;
+void pedirPonto(int *x, int *y, int num){
+    do{
+        printf("Digite o valor do X%d:",num);
+        scanf("%d", x);
+    } while (*x <= 0);
+    do{
+        printf("Digite o valor do Y%d:",num);
+        scanf("%d", y);
+    } while (*y <= 0);
 }
 
-void lerPonto(int *x, int *y, int cont){
-    printf("Digite o valor de X%d : ", cont);
-    scanf("%d", x);
-    printf("Digite o valor de Y%d : ", cont);
-    scanf("%d", y);
+int calculoDistancia(int x1, int x2, int y1, int y2){
+    return ((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))/2;
 }
 
 int main() {
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
     int x1, x2, y1, y2, res;
-    lerPonto(&x1,&y1,1);
-    lerPonto(&x2,&y2,2);
-    res = distancia(&x1, &x2, &y1, &y2);
+    pedirPonto(&x1,&y1,1);
+    pedirPonto(&x2,&y2,2);
+    res = calculoDistancia(x1,x2,y1,y2);
     printf("\n%s\n", RESULTADO);
-    printf("O valor da distancia entre os pontos (%d,%d) e (%d,%d)...", x1, y1, x2, y2);
-    printf("....sera %d", res);
+    printf("O resultado entre a distancia do ponto(%d,%d) para (%d,%d)...\n",x1,y1,x2,y2);
+    printf("... e: %d", res);
+    printf("\n%s\n", CORTE);
     return 0;
 }
