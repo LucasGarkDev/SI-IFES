@@ -10,42 +10,45 @@ Observação 1: Use a função distância e a função da leitura dos pontos da 
 #include <stdlib.h>
 #include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int distancia(int *x1, int *x2, int *y1, int *y2){
-    int res1, res2, res3, res4, res5, res6;
-    res1 = *x2 - *x1;
-    res2 = *y2 - *y1;
-    res3 = pow(res1,2);
-    res4 = pow(res2,2);
-    res5 = res3 + res4;
-    res6 = sqrt(res5);
-    return res6;
+void pedirPonto(int *x, int *y, int num){
+    do{
+        printf("Digite o valor do X%d:",num);
+        scanf("%d", x);
+    } while (*x <= 0);
+    do{
+        printf("Digite o valor do Y%d:",num);
+        scanf("%d", y);
+    } while (*y <= 0);
 }
 
-void lerPonto(int *x, int *y, int cont){
-    printf("Digite o valor de X%d : ", cont);
-    scanf("%d", x);
-    printf("Digite o valor de Y%d : ", cont);
-    scanf("%d", y);
+int calculoDistancia(int x1, int x2, int y1, int y2){
+    return ((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))/2;
+}
+
+int calcularPerimetro(int x1, int x2, int y1, int y2, int x3, int y3){
+    int lado1, lado2, lado3;
+    lado1 = calculoDistancia(x1,y1,x2,y2);
+    lado2 = calculoDistancia(x2,y2,x3,y3);
+    lado3 = calculoDistancia(x1,y1,x3,y3);
+    return lado1 + lado2 + lado3;
 }
 
 int main() {
     SetConsoleOutputCP(65001);
-    printf("\n%s\n", inicio);
-    int x1, x2, y1, y2, x3, y3, ab, bc, ca, res;
-    lerPonto(&x1,&y1,1);
-    lerPonto(&x2,&y2,2);
-    lerPonto(&x3,&y3,3);
-    ab = distancia(&x1, &y1, &x2, &y2);
-    bc = distancia(&x2, &y2, &x3, &y3);
-    ca = distancia(&x3, &y3, &x1, &y1);
-    res = ab + bc + ca;
-    printf("\n%s\n", resultado);
-    printf("O perimetro desse triangulo e: %d", res);
-    printf("\n%s\n", corte);
+    printf("\n%s\n", INICIO);
+    int x1, x2, y1, y2, x3, y3, res;
+    pedirPonto(&x1,&y1,1);
+    pedirPonto(&x2,&y2,2);
+    pedirPonto(&x3,&y3,3);
+    res = calcularPerimetro(x1,x2,y1,y2,x3,y3);
+    printf("\n%s\n", RESULTADO);
+    printf("O perimetro desse triangulo (%d,%d),(%d,%d),(%d,%d) e: %d",x1,x2,y1,y2,x3,y3,res);
+    printf("\n%s\n", CORTE);
     return 0;
 }
