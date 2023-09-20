@@ -11,87 +11,68 @@ corretamente.
 #include <stdio.h>
 #include <stdlib.h>
 #define _USE_MATH_DEFINES 
-#include <math.h> // Para pegar o PI
+#include <math.h> 
 #include <windows.h>
 
 #define inicio "--------INICIO--------"
 #define resultado "-----------RESULTADO-----------"
 #define corte "-------------------------------------"
 
-float pedirValor(int deci1, int deci2){
-    float num, res;
-    if (deci1 == 1){
-        if (deci2 == 1){
-            do{
-                printf("Digite o valor da Base: ");
-                scanf("%f", &num);
-            } while (num < 0);
-            return num;
-        }else{
-            do{
-                printf("Digite o valor da Altura: ");
-                scanf("%f", &num);
-            } while (num < 0);
-            return num;
-        }
+float pedirDados(int desci1, char *texto){
+    float res;
+    if (desci1 == 1){
+        do{
+            printf("Digite o valor da %s do retangulo: ", texto);
+            scanf("%f", &res);
+        } while (res <= 0);
+        return res;
     }else{
         do{
-            printf("Digite o valor da Raio: ");
-            scanf("%f", &num);
-        } while (num < 0);
-        res = num * num;
+            printf("Digite o valor do raio do circulo: ");
+            scanf("%f", &res);
+        } while (res <= 0);
         return res;
     } 
 }
 
-float calcularRetangulo(){
-    float base, altura, res;
-    base = pedirValor(1,1);
-    altura = pedirValor(1,2);
-    res = base * altura;
-    return res;
-}
-
-float calcularCirculo(){
-    float raio, res;
-    raio = pedirValor(2,3);
-    res = M_PI * (raio * raio);
-    return res;
-}
-
-int lerOpcao() {
-    int op;
+int pedirArea(){
+    int num;
     do{
-        printf("\n\nCALCULAR A ÁREA:\n");
-        printf("1-Retângulo\n");
-        printf("2-Círculo\n");
-        printf("0-Sair\n");
-        printf("Informe sua opção: ");
-        scanf("%d", &op);
-    } while ((op != 1)&&(op != 2)&&(op != 0));
-    return op;
+        printf("Escolha entre alguma dessas opçoes:\n");
+        printf("1 - AREA DO RETANGULO:\n");
+        printf("2- AREA DO CIRCULO:\n");
+        printf("Insira a opçao: ");
+        scanf("%d", &num);
+    } while ((num != 1)&&(num != 2));
+    return num;
 }
+
+
+// void imprimir(float num){
+//     printf("\n%s\n", resultado);
+//     printf("%f,", num);
+//     printf("\n%s\n", corte);
+// }
+
 
 int main() {
     SetConsoleOutputCP(65001);
-    int opcao;
-    float res2, res1;
-    do {
-        opcao = lerOpcao();
-        switch (opcao) {
-        case 1:
-            printf("\n\tÁREA DO RETÂNGULO\n");
-            res2 = calcularRetangulo();
-            printf("\n%s\n", resultado);
-            printf("O resultado dessa area e: %.2f", res2);
-            break;
-        case 2:
-            printf("\n\tÁREA DO CÍRCULO\n");
-            res1 = calcularCirculo();
-            printf("\n%s\n", resultado);
-            printf("O resultado dessa area e: %.2f", res1);
-            break;
-        }
-    } while ( opcao > 0);
+    float base, altura, raio, res;
+    int deci;
+    deci = pedirArea();
+    if (deci == 1){
+        base = pedirDados(1,"base");
+        altura = pedirDados(1,"altura");
+        res = base * altura;
+        printf("\n%s\n", resultado);
+        printf("O valor da area do Retangulo e: %.2f", res);
+        printf("\n%s\n", corte);
+    }else{
+        raio = pedirDados(0,"  ");
+        res = M_PI * (raio * raio);
+        printf("\n%s\n", resultado);
+        printf("O valor da area do Circulo e: %.2f", res);
+        printf("\n%s\n", corte);
+    }
     return 0;
 }
