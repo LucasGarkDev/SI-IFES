@@ -12,16 +12,14 @@ soma.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> // Para os números aleatórios
+#include <math.h>
+#include <time.h> 
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-// ########## JOGO DE CRAPS ###################
-
-// Jogar os dados. O resto da divisão por 6 é
-// um número de entre 0 e 5, por isso soma-se 1
 int lancarDado(){
  return ( rand() % 6) + 1;
 }
@@ -39,49 +37,48 @@ int jogarDados(){
     return soma;
 }
 
-int segundaRodada(int ponto){
-    int dado;
+int continua(int rolagem, int ponto){
+    int res;
     do{
-        dado = jogarDados();
-    } while ((dado != ponto) && (dado != 7));
-    if (dado == ponto){
-        printf("\n%s\n", resultado);
-        printf("Voce Ganhou!!!!");
-        return -1;
-    }else{
-        printf("\n%s\n", resultado);
-        printf("Voce Perdeu!!!");
-        return -1;
-    }
+        rolagem = jogarDados();
+        if (rolagem == 7){
+            res = 0;
+        }else if (rolagem == ponto){
+            res = 1;
+        }
+    } while ((res != 1)&&(res != 0)); 
+    return res;
 }
 
-int verificaCraps(int soma){
-    int res;
-    if ((soma == 7)||(soma == 11)){
-        printf("\n%s\n", resultado);
-        printf("Voce Ganhou!!!");
-        return -1;
-    }else if ((soma == 2)||(soma == 3)||(soma == 12)){
-        printf("\n%s\n", resultado);
-        printf("Voce Perdeu!!!");
-        return -1;
+int analisaCraps(){
+    int rolagem, rolagem2, res;
+    rolagem = jogarDados();
+    if ((rolagem == 7)||(rolagem == 11)){
+        return 1;
+    }else if ((rolagem == 2)||(rolagem == 3)||(rolagem == 12)){
+        return 0;
     }else{
-        printf("-----------PONTO-----------\n");
-        printf("Valor do ponto : %d\n", soma);
-        res = segundaRodada(soma);
+        printf("-----------------------\n");
+        printf("       PONTO: %d       \n", rolagem);
+        printf("-----------------------\n");
+        rolagem2 = jogarDados();
+        res = continua(rolagem2, rolagem);
         return res;
     }
 }
 
-int main(){
-    // SEMENTE DOS NUMEROS ALEATÓRIOS. Usa a hora local
+int main() {
+    SetConsoleOutputCP(65001);
     srand( (unsigned)time(NULL) );
-    int verifica, turno;
-    verifica = 0;
-    printf("\n%s\n", inicio);
-    do{
-        turno = jogarDados();
-        verifica = verificaCraps(turno);
-    } while (verifica != -1);
+    printf("\n%s\n", INICIO);
+    int res;
+    res = analisaCraps();
+    printf("\n%s\n", RESULTADO);
+    if (res == 1){
+        printf("Voce ganhou!!! Parabens....");
+    }else{
+        printf("Voce Perdeu!!! Deu ruim....");
+    }
+    printf("\n%s\n", CORTE);
     return 0;
 }
