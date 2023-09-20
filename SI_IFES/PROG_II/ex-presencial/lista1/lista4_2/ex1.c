@@ -11,10 +11,11 @@ biblioteca <math.h> da linguagem C.*/
 #include <stdlib.h>
 #include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
 int distancia(int *x1, int *x2, int *y1, int *y2){
     int res1, res2, res3, res4, res5, res6;
@@ -36,12 +37,12 @@ void lerPonto(int *x, int *y, int cont){
 
 int main() {
     SetConsoleOutputCP(65001);
-    printf("\n%s\n", inicio);
+    printf("\n%s\n", INICIO);
     int x1, x2, y1, y2, res;
     lerPonto(&x1,&y1,1);
     lerPonto(&x2,&y2,2);
     res = distancia(&x1, &x2, &y1, &y2);
-    printf("\n%s\n", resultado);
+    printf("\n%s\n", RESULTADO);
     printf("O valor da distancia entre os pontos (%d,%d) e (%d,%d)...", x1, y1, x2, y2);
     printf("....sera %d", res);
     return 0;
