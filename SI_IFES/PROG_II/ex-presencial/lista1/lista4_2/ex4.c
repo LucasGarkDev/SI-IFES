@@ -8,55 +8,48 @@ potência de números fracionários.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
-#define inicio "--------INICIO--------"
-#define resultado "-----------RESULTADO-----------"
-#define corte "-------------------------------------"
+#define INICIO "--------INICIO--------"
+#define RESULTADO "-----------RESULTADO-----------"
+#define CORTE "-------------------------------------"
 
-int pedirNum(){
-    int num;
+void pedirValor(int *num,char letra){
     do{
-        printf("Digite um numero inteiro: ");
-        scanf("%d", &num);
-    } while (num < 0);
-    return num;
+        printf("Digite um valor para %c: ",letra);
+        scanf("%d", num);
+    } while (*num < 0);
 }
 
-void lerDados(int *num1, int *num2){
-    *num1 = pedirNum();
-    *num2 = pedirNum();
-}
-
-int multiplicacao(int n1, int n2){
-    int res, cont;
-    cont = 0;
-    res = 0;
-    while(cont < n2){
-        res += n1;
-        cont++;
+int produto(int x, int y){
+    int i;
+    int res = 0;
+    for (i = 0; i < y; i++){
+        res += x;
     }
     return res;
 }
 
-int potencia(int n1, int n2){
-    int res, cont, valor;
-    cont = 0;
-    res = 0;
-    valor = n1;
-    while(cont < n2-1){
-        valor = multiplicacao(valor, n1);
-        cont++;
+int potencia(int x, int y){
+    int i;
+    int res = produto(x,x);
+    for (i = 1; i < y - 1; i++){
+        res = produto(res,x);
     }
-    return valor;
+    return res;
 }
+
 int main() {
-    printf("\n%s\n", inicio);
-    int n1, n2, res;
-    lerDados(&n1, &n2);
-    res = potencia(n1, n2);
-    printf("\n%s\n", resultado);
-    printf("O resultado da potencia de %d e %d e: %d", n1, n2, res);
-    printf("\n%s\n", corte);
+    SetConsoleOutputCP(65001);
+    printf("\n%s\n", INICIO);
+    int x, y, res;
+    pedirValor(&x,'X');
+    pedirValor(&y,'Y');
+    res = potencia(x,y);
+    printf("\n%s\n", RESULTADO);
+    printf("A potencia de %d e %d sera: %d",x,y,res);
+    printf("\n%s\n", CORTE);
     return 0;
 }
