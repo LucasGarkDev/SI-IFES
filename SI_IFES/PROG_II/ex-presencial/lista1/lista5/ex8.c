@@ -29,64 +29,52 @@ de vendas. Senão tiver vagas, imprimir uma mensagem de erro.
 #define CORTE "-------------------------------------"
 #define MAX 1000
 
-void adicionarVenda(int vetor1[], int vetor2[], int pesq, int qtde) {
-    vetor1[pesq] += qtde; 
-    vetor2[pesq] -= qtde; 
-}
-
-void showsDisponiveis(int vendas[],int maxShow[],int tamanho){
-    int i, res;
+void showsDisponiveis(int *maxShow, int *vendas, int tamanho){
+    int i;
     printf("\n%s\n", RESULTADO);
     for (i = 0; i < tamanho; i++){
         if (vendas[i] < maxShow[i]){
-            res = maxShow[i] - vendas[i];
-            printf("Para o show %d a quantidade de ingressos e: %d\n", i+1, res);
+            printf("O show %d, atualmente, tem dispiveis: %d igressos\n",i+1,maxShow[i]);
         }
+        
     }
-    printf("\n%s\n", CORTE);
 }
 
-char desejaComprar(){
-    char letra;
-    do{
-        printf("Voce deseja ir a alguns desses show's(S/N)? ");
-        scanf(" %c", &letra);
-    } while ((toupper(letra) != 'S')&&(toupper(letra) != 'N'));
-    return toupper(letra);
+int pedirDados(int desci, int *maxShow, int numShow){
+    int num;
+    if (desci == 1){
+        do{
+            printf("Digite o numero do show que voce deseja ir: ");
+            scanf("%d", &num);
+        } while ((num <= 0)||(num > 10));
+        return num;
+    }else{
+        do{
+            printf("Digite a quantidade de ingressos para o show %d: ", numShow);
+            scanf("%d", &num);
+        } while ((num <= 0)||(num > maxShow[numShow]));
+        return num;
+    }
 }
 
-void realizarVenda(int vendas[], int maxShow[], int tamanho) {
-    int numShow, qtde;
-    char letra;
-    letra = desejaComprar();
-    if (letra == 'S') {
-        printf("Qual é o número do show que você deseja ir: ");
-        scanf("%d", &numShow);
-        printf("Digite a quantidade de ingressos que você deseja: ");
-        scanf("%d", &qtde);
-        if (numShow >= 1 && numShow <= tamanho) { // Verifica se o número do show é válido
-            if (qtde > 0 && qtde <= maxShow[numShow - 1] - vendas[numShow - 1]) {
-                adicionarVenda(vendas, maxShow, numShow - 1, qtde);
-                printf("\n%s\n", RESULTADO);
-                printf("Você está marcado para ir no show %d\n", numShow);
-                printf("\n%s\n", CORTE);
-            } else {
-                printf("Não há ingressos disponíveis ou quantidade inválida.\n");
-                printf("\n%s\n", CORTE);
-            }
-        } else {
-            printf("Número do show inválido.\n");
-            printf("\n%s\n", CORTE);
+void realizarVenda(int **maxShow, int **vendas, int tamanho){
+    int numeroShow, quanti, i;
+    numeroShow = pedirDados(1,*maxShow,0);
+    quanti = pedirDados(1,*maxShow,numeroShow);
+    for (i = 0; i < tamanho; i++){
+        if (i == numeroShow){
+            *maxShow[i] -= quanti;
+            *vendas[i] += quanti;
         }
     }
 }
 
-void imprimir(int vendas[],int tamanho){
+void imprimir(int *vendas, int tamanho){
     int i;
     printf("\n%s\n", RESULTADO);
     for (i = 0; i < tamanho; i++){
         if (vendas[i] > 0){
-            printf("O show %d teve %d vendas\n", i+1,vendas[i]);
+            printf("A quantidade das vendas do show %d e: %d\n",i+1,vendas[i]);
         }
     }
     printf("\n%s\n", CORTE);
@@ -109,12 +97,13 @@ int main() {
             break;
         
         case 1:
-            showsDisponiveis(vendas, maxShow, tamanho);                   
-            realizarVenda(vendas, maxShow, tamanho);
+            showsDisponiveis(maxShow,vendas,tamanho);
+            realizarVenda(&maxShow,&vendas,tamanho);
+            printf("\n%s\n", CORTE);
             break;
         
         case 2:
-            imprimir(vendas, tamanho);
+            imprimir(vendas,tamanho);
             break;
         
         default:
