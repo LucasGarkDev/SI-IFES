@@ -12,79 +12,87 @@ acima da média.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define MAX 5
+#define MAX 1000
+
+// int pedirQuanti(int *vetor){
+//     int num;
+//     int tamanho = sizeof(vetor)/sizeof(vetor[0]);
+//     do{
+//         printf("Digite a quantidade de atletas: ");
+//         scanf("%d", &num);
+//     } while ((num <= 0)||(num > tamanho));
+//     return num;
+// }
 
 float pedirAltura(int cont){
     float num;
     do{
-        printf("Digite a altura do atleta %d(digite 0 para parar): ", cont+1);
+        printf("Digite o valor da altura do atleta %d(digite 0 para parar): ", cont);
         scanf("%f", &num);
-    } while ((num < 0)||(num > 100.0));
+    } while (num < 0);
     return num;
 }
 
-float calculaMedia(int vetor[], int quanti){
-    int i, soma, res;
-    for (i = 0; i < quanti; i++){
-        soma += vetor[i];
-    }
-    res = soma/quanti;
-    return res;
-}
-
-float retornarMaiorMenor(int vetor[], int quanti, int deci){
-    int i;
-    float maior = 0.0;
-    float menor = 99.0;
-    if (deci == 1){
+float maiorMenorAltura(float *vetor, int quanti, int desci){
+    int i, maior = 0.0, menor = 99.9;
+    if (desci == 1){
         for (i = 0; i < quanti; i++){
             if (vetor[i] > maior){
                 maior = vetor[i];
-            } 
+            }
         }
-        return maior;   
+        return maior;
     }else{
         for (i = 0; i < quanti; i++){
             if (vetor[i] < menor){
                 menor = vetor[i];
-            } 
+            }
         }
         return menor;
-    } 
-    return -1;
+    }
 }
 
-int acrescentar(int *vetor){
-    int altura, qtde, i = 0;
+float calculaMedia(float *vetor, int quanti){
+    float soma = 0;
+    int i;
+    for (i = 0; i < quanti; i++){
+        soma += vetor[i];
+    }
+    return soma/quanti;
+}
+
+int main() {
+    SetConsoleOutputCP(65001);
+    float alturas[MAX];
+    int quanti = 1, i;
+    float inserir, maior, menor, media;
     do{
-        altura = pedirAltura(i);
-        vetor[i] = altura;
-        i++;
-        if (i == MAX){
-            qtde = i * 2; 
-            *vetor = (int *)realloc(vetor, qtde * sizeof(int));
+        inserir = pedirAltura(quanti);
+        if (inserir != 0){
+            alturas[quanti-1] = inserir;
+            quanti++;
         }
-    } while (altura != 0);
-    return i-1;
-}
-
-int main(){
-    printf("\n%s\n", INICIO);
-    int vetorAltura[MAX];
-    int quanti = 0;
-    float maior, menor, media;
-    quanti = acrescentar(vetorAltura);
-    maior = retornarMaiorMenor(vetorAltura,quanti,1);
-    menor = retornarMaiorMenor(vetorAltura,quanti,0);
-    media = calculaMedia(vetorAltura,quanti);
+    } while (inserir != 0);
+    maior = maiorMenorAltura(alturas,quanti-1,1);
+    menor = maiorMenorAltura(alturas,quanti-1,0);
+    media = calculaMedia(alturas,quanti-1);
     printf("\n%s\n", RESULTADO);
-    printf("\nA maior altura foi: %.2f\n", maior);
-    printf("\nA menor altura foi: %.2f\n", menor);
-    printf("\nA media das altura foi: %.2f\n", media);
+    printf("A maior altura é: %.2f\n", maior);
+    printf("A menor altura é: %.2f\n", menor);
+    printf("A media das alturas é: %.2f\n", media);
+    printf("As alturas acima da media:\n");
+    for (i = 0; i < quanti-1; i++){
+        if (alturas[i] >= media){
+            printf("%.2f, ", alturas[i]);
+        }
+    }
+    printf("\n%s\n", CORTE);
     return 0;
 }
