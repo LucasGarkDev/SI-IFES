@@ -5,42 +5,50 @@ do vetor for ímpar, colocar o número ao cubo. Ao final, imprimir esse vetor.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define MAX 1000
+#define MAX 21
 
-void acrescenta(int vetor[],int quanti){
+// int pedirQuanti(int *vetor){
+//     int num;
+//     int tamanho = sizeof(vetor)/sizeof(vetor[0]);
+//     do{
+//         printf("Digite o tamanho do vetor: ");
+//         scanf("%d", &num);
+//     } while ((num <= 0)||(num > tamanho));
+//     return num;
+// }
+
+void preencherVetor(int *vetor, int quanti){
     int i;
-    int num = 1;
-    for (i = 0; i < quanti; i++){
-        if (num % 2 == 0){
-            vetor[i] = potencia(num,2);
+    for (i = 0; i <= quanti; i++){
+        if (i % 2 == 0){
+            vetor[i] = pow(i,2);
         }else{
-            vetor[i] = potencia(num,3);
+            vetor[i] = pow(i,3);
         }
-        num++;
     }
 }
 
-int potencia(int num,int deci){
-    return pow(num,deci);
-}
-
-void imprimir(int vetor[], int quanti){
+void imprimir(int *vetor, int quanti){
     int i;
+    printf("\n%s\n", RESULTADO);
     for (i = 0; i < quanti; i++){
-        printf(" %d\n", vetor[i]);  
+        printf("%d,", vetor[i]);
     }
+    printf("\n%s\n", CORTE);
 }
 
-int main(){
-    printf("\n%s\n", INICIO);
+int main() {
+    SetConsoleOutputCP(65001);
     int vetor[MAX];
-    int quanti = 20;
-    acrescenta(vetor,quanti);
-    imprimir(vetor,quanti);
+    // int quanti = pedirQuanti(vetor);
+    preencherVetor(vetor,MAX);
+    imprimir(vetor,MAX);
     return 0;
 }
