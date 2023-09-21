@@ -7,58 +7,71 @@ DICA: utilize um contador para cada vetor.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <math.h>
+#include <ctype.h>
+#include <time.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define MAX 1000
+#define MAX 20
 
-int aleatorio (int max) {
-    return ( rand() % max) + 1;
+// int pedirQuanti(int *vetor){
+//     int num;
+//     int tamanho = sizeof(vetor)/sizeof(vetor[0]);
+//     do{
+//         printf("Digite o tamanho do vetor: ");
+//         scanf("%d", &num);
+//     } while ((num <= 0)||(num > tamanho));
+//     return num;
+// }
+int aletorio(int max) {
+    return (rand() % max) + 1;
 }
 
-int distribui(int vetorPadra[],int vetorPar[],int vetorImpar[],int quanti){
-    int i = 0, j = 0,k;
-    for (k = 0; k < quanti; k++){
-        if (vetorPadra[k] % 2 == 0){
-            vetorPar[i] = vetorPadra[k];
-            i++;
-        }else{
-            vetorPar[j] = vetorPadra[k];
+void preencherVetor(int *vetor, int quanti){
+    int i;
+    for (i = 0; i <= quanti; i++){
+        vetor[i] = aletorio(100); 
+    }
+}
+
+void distribuir(int *vetor, int *par, int *impar, int quanti){
+    int i, j = 0, k = 0;
+    for (i = 0; i < quanti; i++){
+        if (vetor[i] % 2 == 0){
+            par[j] = vetor[i];
             j++;
+        }else{
+            impar[k] = vetor[i];
+            k++;
         }
     }
-    return i;
 }
 
-void acrescenta(int vetor[],int quanti){
+void imprimir(int *vetor, int quanti){
     int i;
-    int num;
+    printf("\n%s\n", RESULTADO);
     for (i = 0; i < quanti; i++){
-        num = aleatorio(100);
-        vetor[i] = num;
-    }
-}
-
-void imprimir(int vetor[], int quanti){
-    int i;
-    for (i = 0; i < quanti; i++){
-        printf(" %d\n", vetor[i]);  
+        printf("%d,", vetor[i]);
     }
     printf("\n%s\n", CORTE);
 }
 
-int main(){
-    printf("\n%s\n", RESULTADO);
-    int vetorPadrao[MAX];
-    int vetorPar[MAX];
-    int vetorImpar[MAX];
-    int quanti1 = 20;
-    int quanti2;
-    acrescenta(vetorPadrao,quanti1);
-    quanti2 = distribui(vetorPadrao,vetorPar,vetorImpar,quanti1);
-    imprimir(vetorPar,quanti2);
-    imprimir(vetorImpar,20-quanti2);
+int main() {
+    SetConsoleOutputCP(65001);
+    srand((unsigned)time(NULL));
+    int vetor[MAX];
+    int pares[MAX/2];
+    int impares[MAX/2];
+    // int quanti = pedirQuanti(vetor);
+    preencherVetor(vetor,MAX);
+    distribuir(vetor,pares,impares,MAX);
+    imprimir(vetor,MAX);
+    printf("\n");
+    imprimir(pares,MAX/2);
+    printf("\n");
+    imprimir(impares,MAX/2);
     return 0;
 }
