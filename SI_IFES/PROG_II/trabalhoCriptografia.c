@@ -30,30 +30,30 @@ void primeiraEtapa(char *vetorMain, int quanti){
     for (i = 0; i < quanti; i++){
         if (vetorMain[i] == 'o'){
             vetorMain[i] = '0';
-        }
-        if (vetorMain[i] == '0'){
+        }else if (vetorMain[i] == '0'){
             vetorMain[i] = 'o';
         }
         if (vetorMain[i] == 'a'){
             vetorMain[i] = '@';
-        }
-        if (vetorMain[i] == '@'){
+        }else if (vetorMain[i] == '@'){
             vetorMain[i] = 'a';
         } 
     }
 }
 
 void segundaEtapa(char *vetorMain, int quanti, char *par, char *impar){
-    int i, j = quanti, k = 0;
+    int i, j = 0, k = (quanti / 2) - 1;
     for (i = 0; i < quanti; i++){
         if (i % 2 == 0){
             par[j] = vetorMain[i];
-            j--;
+            j++;
         }else{
             impar[k] = vetorMain[i];
-            k++;
+            k--;
         }
     }
+    par[j] = '\0'; 
+    impar[k] = '\0';
 }
 
 void terceitaEtapa(char *vetorRes, int quanti, char *par, char *impar){
@@ -67,6 +67,7 @@ void terceitaEtapa(char *vetorRes, int quanti, char *par, char *impar){
             k++;
         }
     }
+    vetorRes[quanti] = '\0';
 }
 
 int main() {
@@ -79,13 +80,20 @@ int main() {
     fgets(str, quanti, stdin);
     limparBuffer();
     res = strlen(str);
-    free(str);
-    char strPar[res/2];
-    char strImpar[res/2];
-    char strRes[quanti];
+    if (str[res-1] == '\n'){
+        str[--res] = '\0';
+    }
+    int tamanho = (res + 1) / 2; 
+    char *strPar = (char *)malloc(tamanho * sizeof(char));
+    char *strImpar = (char *)malloc(tamanho * sizeof(char));
+    char *strRes = (char *)malloc((res + 1) * sizeof(char));
     primeiraEtapa(str,res);
     segundaEtapa(str,res,strPar,strImpar);
     terceitaEtapa(strRes,res,strPar,strImpar);
     printf("A string final e: %s", strRes);
+    free(str);
+    free(strPar);
+    free(strImpar);
+    free(strRes);
     return 0;
 }
