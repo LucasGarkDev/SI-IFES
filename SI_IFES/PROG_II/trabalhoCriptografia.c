@@ -84,9 +84,6 @@ int main() {
     char strImpar[res/2];
     char strRes[quanti];
     primeiraEtapa(str,res);
-    if (res % 2 == 1){
-        res--;
-    }
     segundaEtapa(str,res,strPar,strImpar);
     terceitaEtapa(strRes,res,strPar,strImpar);
     printf("A string final e: %s", strRes);
