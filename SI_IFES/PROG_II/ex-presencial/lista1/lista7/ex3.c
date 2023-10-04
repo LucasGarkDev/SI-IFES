@@ -18,8 +18,8 @@ os elementos, imprimir uma matriz. */
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define TAM1 5
-#define TAM2 3
+#define TAM1 2000
+#define TAM2 1000
 
 char aleatorio() {
     char caracteres[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -40,8 +40,10 @@ void lerMatriz(char matriz[][TAM2]){
 void imprimirMatriz(char matriz[][TAM2]){
     int i, j;
     for (i = 0; i < TAM1; i++){
-        for (j = 0; j < TAM2; j++){
-            printf(" %d ", matriz[i][j]);
+        if ((matriz[i][j] == 'x')||(matriz[i][j] == 'X')){ 
+            for (j = 0; j < TAM2; j++){
+                printf(" %c ", matriz[i][j]);
+            }
         }
         printf("\n");
     }
