@@ -33,45 +33,60 @@ typedef struct Reta{
 }Reta ;
 
 
-float pedirXY(char letra){
+float pedirXY(char letra, int indicador){
     float num;
     do{
-        printf("Digite o valor do ponto %c:",letra);
+        printf("Digite o valor do ponto %c%d:",letra, indicador);
         scanf("%f", &num);
     } while (num <= 0);
     return num;
 }
 
-void lerCor(Ponto *cor){
-    printf("Digite a cor: ");
-    scanf(" %19[^\n]s", cor);
+void lerCor(Reta *cor1,Ponto *cor2, int desci){
+    if (desci == 1){
+        printf("Digite a cor da reta: ");
+        scanf(" %19[^\n]s", cor1);
+    }else{
+        printf("Digite a cor do ponto: ");
+        scanf(" %19[^\n]s", cor2);
+    }
 }
 
-void lerPonto(Ponto *p, char letra){
-    p->x = pedirXY('X');
-    p->y = pedirXY('Y');
-    lerCor(p->cor);
+void lerPonto(Reta *ret, Ponto *p, int indicador){
+    p->x = pedirXY('X',indicador);
+    p->y = pedirXY('Y',indicador);
+    lerCor(&ret,p->cor,0);
 }
 
 void lerReta(Reta *ret){
-    lerPonto((&ret->pt1),'A');
-    lerPonto((&ret->pt2),'B');
+    lerPonto(&ret,(&ret->pt1),1);
+    lerPonto(&ret,(&ret->pt2),2);
+    lerCor(&(ret->corReta),&(ret->corReta),1);
 }
 
-void imprimir(int cont, Ponto p){
+float calculoDist(Reta ret){
+    return ((ret.pt2.x-ret.pt1.x)*(ret.pt2.x-ret.pt1.x)+(ret.pt2.y-ret.pt1.y)*(ret.pt2.y-ret.pt1.y))/2;
+}
+
+void calcularDistanciaReta(Reta ret, float *res){
+    *res = calculoDist(ret);
+}
+
+void imprimir(Reta ret, float resultado){
     printf("\n%s\n", RESULTADO);
-    printf("O valor do ponto %d e:\n", cont);
-    printf("O ponto e: (%.2f,%.2f)\n", p.x, p.y);
-    printf("A cor do ponto e: %s\n", p.cor);
+    printf("Os pontos dessa reta sao: (%.2f/%.2f),(%.2f/%.2f)\n",ret.pt1.x,ret.pt1.y,ret.pt2.x,ret.pt2.y);
+    printf("O tamanho dessa reta é: %.2f\n", resultado);
+    printf("E a cor que essa reta esta desenhada é: %s",ret.corReta);
     printf("\n%s\n", CORTE);
 }
 
 int main() {
     SetConsoleOutputCP(65001);
     Reta reta1;
-    lerReta(&reta1);
+    float res;
     printf("\n%s\n", INICIO);
-    
+    lerReta(&reta1);
+    calcularDistanciaReta(reta1,&res);
+    imprimir(reta1,res);
     return 0;
-
 }
