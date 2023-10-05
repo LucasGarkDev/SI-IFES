@@ -44,8 +44,8 @@ void lerPonto(Ponto *p){
 void imprimir(int cont, Ponto p){
     printf("\n%s\n", RESULTADO);
     printf("O valor do ponto %d e:\n", cont);
-    printf("O ponto e: (%f,%f)", p.x, p.y);
-    printf("A cor do ponto e: %s", p.cor);
+    printf("O ponto e: (%.2f,%.2f)\n", p.x, p.y);
+    printf("A cor do ponto e: %s\n", p.cor);
     printf("\n%s\n", CORTE);
 }
 
