@@ -75,11 +75,11 @@ void lerReta(Reta *ret){
 }
 
 void lerCirculo(Circulo *circ){
-    printf("Digite o ponto em que o centro desse circulo esta: \n");
-    lerPonto((&circ->centro),1);
-    printf("Digite o valor do raio desse circulo: ");
-    scanf("%f", circ->raio);
-    lerCorC((&circ->corCirculo));
+    printf("Digite o ponto em que o centro desse círculo está: \n");
+    lerPonto(&(circ->centro), 1);
+    printf("Digite o valor do raio desse círculo: ");
+    scanf("%f", &(circ->raio)); // Correção aqui
+    lerCorC(&(circ->corCirculo));
 }
 
 float calculoDist(Reta ret){
