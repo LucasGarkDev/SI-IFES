@@ -30,15 +30,15 @@ float pedirXY(char letra){
     return num;
 }
 
-void lerCor(Ponto **cor){
+void lerCor(Ponto *cor){
     printf("Digite a cor: ");
     scanf(" %19[^\n]s", cor);
 }
 
-void lerPonto(Ponto x, Ponto y, Ponto cor[]){
-    x = pedirXY('X');
-    y = pedirXY('Y');
-    lerCor(&cor);
+void lerPonto(Ponto *p){
+    p->x = pedirXY('X');
+    p->y = pedirXY('Y');
+    lerCor(p->cor);
 }
 
 void imprimir(int cont, Ponto p){
@@ -53,8 +53,8 @@ int main() {
     SetConsoleOutputCP(65001);
     Ponto p1, p2;
     printf("\n%s\n", INICIO);
-    lerPonto(&p1.x,&p1.y,p1.cor);
-    lerPonto(&p2.x,&p2.y,p2.cor);
+    lerPonto(&p1);
+    lerPonto(&p2);
     imprimir(1,p1);
     imprimir(2,p2);
     return 0;
