@@ -182,7 +182,7 @@ int menu() {
 }
 
 int main() {
-	int op,i;
+    int op;
     Funcionario vetor[MAX];
     int quanti = 0;
     int res;
@@ -225,10 +225,6 @@ int main() {
 			case 7:
 				listar(vetor,quanti);
 				break;
-			case 8:
-			    for(i=0;i<100000000000;i++){
-			        printf("Jean vai se lascar!, com classe");
-			    }
 			default:
 				printf ("\n\nOpção inválida!\n\n");
 		}
