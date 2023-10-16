@@ -119,7 +119,7 @@ void aumentaSalario(Funcionario *vetor, int quanti, int matricula, float porcent
 	int i;
 	for (i = 0; i < quanti; i++){
 		if (i == localMatricula){
-			vetor[i].salario += vetor[i].salario * (porcentagem*0.01);  
+			vetor[i].salario += (vetor[i].salario * (porcentagem/100));  
 		}
 	}
 	printf("\n%s\n", RESULTADO);
@@ -208,9 +208,9 @@ int main() {
 				break;
 			case 4:
 				printf("Diga o numero da matricula: ");
-				scanf("%d\n", &res);
+				scanf("%d", &res);
 				printf("Diga a porcentagem de aumento: ");
-				scanf("%f\n", &porce);
+				scanf("%f", &porce);
 				aumentaSalario(vetor,quanti,res,porce);
 				break;
 			case 5:
@@ -218,7 +218,7 @@ int main() {
 				break;
 			case 6:
 				printf("Diga o numero da matricula que deseja remover: ");
-				scanf("%d\n", &res);
+				scanf("%d", &res);
 				remover(vetor,&quanti,res);
 				break;
 			case 7:
