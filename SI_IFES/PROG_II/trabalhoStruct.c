@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <windows.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
@@ -27,6 +26,16 @@ int pesquisar(Funcionario *vetor, int quanti, int pesq) {
     int i;
     for (i = 0; i < quanti; i++) {
         if (vetor[i].matricula == pesq) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int pesquisar2(Funcionario *vetor, int quanti, float pesq) {
+    int i;
+    for (i = 0; i < quanti; i++) {
+        if (vetor[i].salario == pesq) {
             return i;
         }
     }
@@ -110,7 +119,7 @@ void aumentaSalario(Funcionario *vetor, int quanti, int matricula, float porcent
 	int i;
 	for (i = 0; i < quanti; i++){
 		if (i == localMatricula){
-			vetor[i].salario += vetor[i].salario * (porcentagem/100);  
+			vetor[i].salario += vetor[i].salario * (porcentagem*0.01);  
 		}
 	}
 	printf("\n%s\n", RESULTADO);
@@ -127,7 +136,7 @@ void maiorSalario(Funcionario *vetor, int quanti){
 			maior = vetor[i].salario;
 		}
 	}
-	referencia = pesquisar(vetor,quanti,maior);
+	referencia = pesquisar2(vetor,quanti,maior);
 	printf("\n%s\n", RESULTADO);
 	printf("Nome: %s\n", vetor[referencia].individuo.nome);
 	printf("Telefone: %d\n", vetor[referencia].individuo.telefone);
@@ -153,7 +162,7 @@ void listar(Funcionario *vetor,int quanti){
 
 int menu() {
 	int op;
-	system("@cls||clear");  // LIMPA A TELA
+// 	system("@cls||clear");  // LIMPA A TELA
 	printf("\n\nSISTEMA FOLHA DE PAGAMENTO\n\n");
 	printf("1 - Inserir funcionario\n");
 	printf("2 - Pesquisar por matricula\n");
@@ -168,10 +177,10 @@ int menu() {
 		scanf(" %d", &op);
 	} while(op < 0 || op > 7);
 	return op;
+	
 }
 
 int main() {
-	SetConsoleOutputCP(65001);
 	int op;
     Funcionario vetor[MAX];
     int quanti = 0;
