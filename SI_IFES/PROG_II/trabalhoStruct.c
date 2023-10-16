@@ -171,17 +171,18 @@ int menu() {
 	printf("5 - Maior salario\n");
 	printf("6 - Excluir\n");
 	printf("7 - Listar\n");
+	printf("8 - S2\n");
 	printf("0 - Sair\n");
 	do {
 		printf("Escolha sua opção: ");
 		scanf(" %d", &op);
-	} while(op < 0 || op > 7);
+	} while(op < 0 || op > 8);
 	return op;
 	
 }
 
 int main() {
-	int op;
+	int op,i;
     Funcionario vetor[MAX];
     int quanti = 0;
     int res;
@@ -224,6 +225,10 @@ int main() {
 			case 7:
 				listar(vetor,quanti);
 				break;
+			case 8:
+			    for(i=0;i<100000000000;i++){
+			        printf("Jean vai se lascar!, com classe");
+			    }
 			default:
 				printf ("\n\nOpção inválida!\n\n");
 		}
