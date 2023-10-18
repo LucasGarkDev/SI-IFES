@@ -171,12 +171,11 @@ int menu() {
 	printf("5 - Maior salario\n");
 	printf("6 - Excluir\n");
 	printf("7 - Listar\n");
-	printf("8 - S2\n");
 	printf("0 - Sair\n");
 	do {
 		printf("Escolha sua opção: ");
 		scanf(" %d", &op);
-	} while(op < 0 || op > 8);
+	} while(op < 0 || op > 7);
 	return op;
 	
 }
@@ -198,13 +197,13 @@ int main() {
 				inserirFunc(vetor,&quanti);
 				break;
 			case 2:
-                printf("Digite o numero da matricula: ");
-                scanf("%d", &res);
+                		printf("Digite o numero da matricula: ");
+                		scanf("%d", &res);
 				procuraMatricula(resposta,vetor,res,quanti);
 				break;
 			case 3:
 				printf("Digite o nome do funcionario: ");
-                scanf(" %100[^\n]s", resposta);
+                		scanf(" %100[^\n]s", resposta);
 				procurarNome(vetor,resposta,quanti);
 				break;
 			case 4:
