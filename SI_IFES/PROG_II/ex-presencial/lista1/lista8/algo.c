@@ -36,9 +36,12 @@ int main() {
     printf("Digite a palavra que voce quer pesquisar: ");
     fgets(palavra,20,stdin);
     while (!feof(arquivo)){ 
-        fscanf(arquivo," %50[^\n]s",guarda);
+        fscanf(arquivo, " %19[^\n]s" , guarda);
+        if(strcmp(palavra, guarda) != feof(arquivo)){
+            cont++;
+        }
     }
-    printf("Foi contabilizado no : %d vezes que a palavras: %s apareçe no texto",cont,palavra);
+    printf("Foi contabilizado no : %d vezes que a palavra: %s apareçe no texto",cont,palavra);
     fclose(arquivo);
     printf("O processo foi executado com sucesso");    
     return 0;
