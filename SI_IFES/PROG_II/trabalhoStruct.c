@@ -22,6 +22,16 @@ struct Funcionario {
 };
 typedef struct Funcionario Funcionario;
 
+FILE * abrirArquivo(char * nomeArq, char * modo) {
+    FILE * arq;
+    arq = fopen( nomeArq, modo );
+    if ( arq == NULL) {
+        printf("ERRO ao abrir o arquivo.");
+        exit(-1);
+    }
+    return arq;
+}
+
 int pesquisar(Funcionario *vetor, int quanti, int pesq) {
     int i;
     for (i = 0; i < quanti; i++) {
@@ -196,14 +206,17 @@ int main() {
     char resposta[MAX];
 	do {
 		op = menu();
-        arquivo = abrirArquivo("../arquivos/estoque.txt", "r");
-        carregarArquivo(arquivo,vetor,&quanti);
 		switch ( op ) {
 			case 0:
+                arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "wb");
 				gravarArquivo(arquivo,vetor,quanti);
+                fclose(arquivo);
 				break;
 			case 1:
 				inserirFunc(vetor,&quanti);
+                arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "rb");
+                carregarArquivo(arquivo,vetor,&quanti);
+                fclose(arquivo);
 				break;
 			case 2:
                 printf("Digite o numero da matricula: ");
@@ -237,7 +250,6 @@ int main() {
 				printf ("\n\nOpção inválida!\n\n");
 		}
 	} while (op != 0);
-    fclose(arquivo);
 	return 0;
 }
 
