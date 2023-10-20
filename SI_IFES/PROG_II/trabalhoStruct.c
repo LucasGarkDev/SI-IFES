@@ -147,42 +147,24 @@ void maiorSalario(Funcionario *vetor, int quanti){
 }
 
 void gravarArquivo(FILE * arquivo, Funcionario * vetor, int qtde) {
-
     fwrite( &qtde, sizeof(int), 1, arquivo  );
-    fwrite( vetProd, sizeof(Produto), qtde, arquivo  );
-
+    fwrite( vetor, sizeof(Funcionario), qtde, arquivo  );
 }
 
 void listar(Funcionario * vetor, int qtde) {
     int i;
+    printf("\n%s\n", RESULTADO);
+    printf("Matricula|Nome                   |telefone|e-mail              |Salario   |");
     for( i=0; i < qtde; i++) {
-        printf("%3d|%-50s|%5d|%10.2f|\n", vetor[i]., vetProd[i].nome, 
-                    vetProd[i].qtde , vetProd[i].preco  );
+        printf("%3d|%-50s|%5d|%-20s|%10.2f|\n", vetor[i].matricula, vetor[i].individuo.nome, vetor[i].individuo.telefone, vetor[i].individuo.email,vetor[i].salario  );
     }
+    printf("\n%s\n", CORTE);
 }
 
-void carregarArquivo(FILE * arquivo, Produto * vetProd, int *qtde) {
-
+void carregarArquivo(FILE * arquivo, Funcionario * vetor, int *qtde) {
     fread( qtde, sizeof(int), 1, arquivo  );
-    fread( vetProd, sizeof(Produto), *qtde, arquivo  );
-    
-
+    fread( vetor, sizeof(Funcionario), *qtde, arquivo  );
 }
-
-
-void listar(Funcionario *vetor,int quanti){
-	int i;
-	printf("\n%s\n", RESULTADO);
-	for (i = 0; i < quanti; i++){
-		printf("Matrícula: %d\n", vetor[i].matricula);
-		printf("Nome: %s\n", vetor[i].individuo.nome);
-        printf("Telefone: %d\n", vetor[i].individuo.telefone);
-        printf("E-mail: %s\n", vetor[i].individuo.email);
-        printf("Salário: %.2f\n", vetor[i].salario);
-		printf("\n%s\n", CORTE);
-	}
-}
-
 
 int menu() {
 	int op;
@@ -206,6 +188,7 @@ int menu() {
 
 int main() {
     int op;
+    FILE * arquivo;
     Funcionario vetor[MAX];
     int quanti = 0;
     int res;
@@ -213,21 +196,23 @@ int main() {
     char resposta[MAX];
 	do {
 		op = menu();
+        arquivo = abrirArquivo("../arquivos/estoque.txt", "r");
+        carregarArquivo(arquivo,vetor,&quanti);
 		switch ( op ) {
 			case 0:
-				// SAIR. NÃO PRECISA FAZER NADA
+				gravarArquivo(arquivo,vetor,quanti);
 				break;
 			case 1:
 				inserirFunc(vetor,&quanti);
 				break;
 			case 2:
-                		printf("Digite o numero da matricula: ");
-                		scanf("%d", &res);
+                printf("Digite o numero da matricula: ");
+                scanf("%d", &res);
 				procuraMatricula(resposta,vetor,res,quanti);
 				break;
 			case 3:
 				printf("Digite o nome do funcionario: ");
-                		scanf(" %100[^\n]s", resposta);
+                scanf(" %100[^\n]s", resposta);
 				procurarNome(vetor,resposta,quanti);
 				break;
 			case 4:
@@ -252,6 +237,7 @@ int main() {
 				printf ("\n\nOpção inválida!\n\n");
 		}
 	} while (op != 0);
+    fclose(arquivo);
 	return 0;
 }
 
