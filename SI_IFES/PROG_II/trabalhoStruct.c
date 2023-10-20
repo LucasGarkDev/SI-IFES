@@ -146,6 +146,30 @@ void maiorSalario(Funcionario *vetor, int quanti){
 	printf("\n%s\n", CORTE);
 }
 
+void gravarArquivo(FILE * arquivo, Funcionario * vetor, int qtde) {
+
+    fwrite( &qtde, sizeof(int), 1, arquivo  );
+    fwrite( vetProd, sizeof(Produto), qtde, arquivo  );
+
+}
+
+void listar(Funcionario * vetor, int qtde) {
+    int i;
+    for( i=0; i < qtde; i++) {
+        printf("%3d|%-50s|%5d|%10.2f|\n", vetor[i]., vetProd[i].nome, 
+                    vetProd[i].qtde , vetProd[i].preco  );
+    }
+}
+
+void carregarArquivo(FILE * arquivo, Produto * vetProd, int *qtde) {
+
+    fread( qtde, sizeof(int), 1, arquivo  );
+    fread( vetProd, sizeof(Produto), *qtde, arquivo  );
+    
+
+}
+
+
 void listar(Funcionario *vetor,int quanti){
 	int i;
 	printf("\n%s\n", RESULTADO);

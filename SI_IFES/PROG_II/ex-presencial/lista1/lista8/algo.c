@@ -22,37 +22,26 @@ int main() {
     FILE *arquivo;
     char palavra[20];
     int cont = 0;
-    char guarda[100]; // Aumentamos o tamanho para acomodar linhas inteiras
+    char guarda[100]; 
     char texto[10000];
     int compara;
-    char *token;
-
     arquivo = abrirArquivo("../arquivos/redacao.txt", "w");
     printf("Digite o texto que voce deseja: ");
-    fgets(texto, 100, stdin);
-    fprintf(arquivo, "%s", texto);
+    scanf(" %s",texto);
+    fprintf(arquivo," %s", texto);
     fclose(arquivo);
-
     arquivo = abrirArquivo("../arquivos/redacao.txt", "r");
-
     printf("Digite a palavra que voce quer pesquisar: ");
-    fgets(palavra, 20, stdin);
-
-    while (fgets(guarda, sizeof(guarda), arquivo) != NULL) {
-        token = strtok(guarda, " "); 
-        while (token != NULL) {
-            compara = strcmp(token, palavra);
-            if (compara == 0) {
-                cont++;
-            }
-            token = strtok(NULL, " "); 
+    scanf(" %s",palavra);
+    while (!feof(arquivo)){
+        fscanf(arquivo, " %s", guarda);
+        if (strcmp(guarda, palavra) == 0) {
+            cont++;
         }
     }
-
     printf("Foi contabilizado: %d vezes que a palavra %s aparece no texto\n", cont, palavra);
     fclose(arquivo);
     printf("O processo foi executado com sucesso");
-
     return 0;
 }
 
