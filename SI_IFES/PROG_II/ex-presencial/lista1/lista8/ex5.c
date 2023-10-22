@@ -56,7 +56,7 @@ void inserirHorarios(Horario *vet){
     int i;
     for (i = 0; i < TAM2; i++){
         printf("Qual sera o %d horario de saida desse onibus: ", i+1);
-        scanf("%d", vet->hora);
+        scanf("%f", vet->hora);
     }
 }
 
@@ -119,7 +119,7 @@ int main() {
         case 3:
             perguntarInserir(deseja);
             while (deseja == "sim"){
-                pedirDados(&oni,cont);
+                pedirDados(&oni);
                 cont++;
                 perguntarInserir(deseja);  
             }
