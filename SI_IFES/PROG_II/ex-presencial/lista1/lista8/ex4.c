@@ -6,66 +6,110 @@ e chame as funções para ler e mostrar na tela os dados desse polígono.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <windows.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define MAX 100
+#define TAM 20
 
-struct Ponto {
+struct Ponto{
     float x;
     float y;
-    char cor[20];
+    char cor[TAM];
 };
-
 typedef struct Ponto Ponto;
 
-struct Poligono {
-    Ponto vetor[MAX];
+struct Reta{
+    Ponto xl;
+    Ponto xll;
+    char cor[TAM];
 };
+typedef struct Reta Reta;
 
+struct Poligono{
+    Ponto poli[TAM];
+};
 typedef struct Poligono Poligono;
 
-float pedirXY(char letra, int indicador) {
-    float num;
-    do {
-        printf("Digite o valor do ponto %c%d:", letra, indicador);
-        scanf("%f", &num);
-    } while (num <= 0);
-    return num;
-}
 
-int pedirQtde() {
+int pedirQtde(){
     int num;
-    do {
-        printf("Digite a quantidade de pontos no vetor: ");
+    do{
+        printf("Digite a quantidade de lados do seu poligono: ");
         scanf("%d", &num);
-    } while (num <= 0 || num > MAX);
+    } while ((num < 0)||(num > 30));
     return num;
 }
 
-void lerPonto(Ponto *vetor, int indicador) {
-    vetor->x = pedirXY('X', indicador + 1);
-    vetor->y = pedirXY('Y', indicador + 1);
+float pedirPonto(int cont, int desci){
+    float num;
+    if (desci == 1){
+        do{
+            printf("Digite o valor do ponto X%d: ", cont);
+            scanf("%f", &num);
+        } while ((num < 0) || (num > 100));
+        return num;
+    }else{
+        do{
+            printf("Digite o valor do ponto Y%d: ", cont);
+            scanf("%f", &num);
+        } while ((num < 0) || (num > 100));
+        return num;
+    }
 }
 
-void lerPoligono(Poligono *vet, int quanti) {
+void pedirCor(char *cor, int cont){
+    printf("Digite a cor do ponto %d: ", cont);
+    scanf(" %19[^\n]s", cor);
+}
+
+void pedirDadosPonto(Ponto *element, int cont){
+    element->x = pedirPonto(cont,1);
+    element->y = pedirPonto(cont,0);
+    pedirCor(element->cor,cont);
+}
+
+void pedirDadosPoligono(Poligono *polly, int quanti){
     int i;
-    for (i = 0; i < quanti; i++) {
-        lerPonto(&(vet->vetor[i]), i);
+    for (i = 0; i < quanti; i++){
+        pedirDadosPonto(&polly->poli[i],i+1);
     }
+    
+}
+
+float calculoDistancia(float x1, float x2, float y1, float y2){
+    return ((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))/2;
+}
+
+float calculaPerimetro(Poligono polly, int quanti){
+    int i;
+    float res = 0;
+    for (i = 0; i < quanti-1; i++){
+        res += calculoDistancia(polly.poli[i].x,polly.poli[i+1].x,polly.poli[i].y,polly.poli[i+1].y);    
+    }
+    return res;
+}
+
+void imprimir(Poligono polly, float perimetro, int quanti){
+    int i;
+    printf("\n%s\n", RESULTADO);
+    for (i = 0; i < quanti; i++){
+        printf("Esse e o ponto %d : (%2.1f,%2.1f)\n",i+1,polly.poli[i].x,polly.poli[i].y);
+        printf("\n%s\n", CORTE);
+    }
+    printf("O resultado do perimetro desse poligono e: %-2.2f",perimetro);
+    printf("\n%s\n", CORTE);
 }
 
 int main() {
-    Poligono vet;
-    int quanti = pedirQtde();
+    SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
-    lerPoligono(&vet, quanti);
-    int i;
-    for (i = 0; i < quanti; i++) {
-        printf("Ponto %d: (%.2f, %.2f)\n", i + 1, vet.vetor[i].x, vet.vetor[i].y);
-    }
-
+    int quanti = pedirQtde();
+    Poligono element;
+    pedirDadosPoligono(&element,quanti);
+    float res = calculaPerimetro(element,quanti);
+    imprimir(element,res,quanti);
     return 0;
 }
-
