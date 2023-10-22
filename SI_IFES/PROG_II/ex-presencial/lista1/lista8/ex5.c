@@ -45,7 +45,7 @@ void perguntarInserir(char *res){
     } while ((res != "nao")&&(res != "sim"));
 }
 
-void imprimirPoltronas(int *quantidadePol){
+void imprimirPoltronas(){
     int i;
     for (i = 0; i < POLTRONAS; i++){
         printf("%d | %d | %d \n",i,i+1,i+2);
@@ -54,21 +54,19 @@ void imprimirPoltronas(int *quantidadePol){
 
 void inserirHorarios(Horario *vet){
     int i;
-    float h;
-    char res;
     for (i = 0; i < TAM2; i++){
         printf("Qual sera o %d horario de saida desse onibus: ", i+1);
         scanf("%d", vet->hora);
     }
 }
 
-void pedirDados(Linhas *element, int cont){
+void pedirDados(Linhas *element){
     printf("Digite a cidade de origem dessa linha: ");
     scanf(" %19[^\n]s", element->cityOrigem);
     printf("Digite a cidade de origem dessa linha: ");
     scanf(" %19[^\n]s", element->cityDestino);
     printf("Digite a cidade de origem dessa linha: ");
-    inserirHorarios(&element->conjHorarios);
+    inserirHorarios(element->conjHorarios);
 }
 
 void realizarCompra(Linhas *element){
