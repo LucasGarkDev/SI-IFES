@@ -46,7 +46,7 @@ void pedirCor(char *cor, int cont){
 void pedirDados(Ponto *element, int cont){
     element->x = pedirPonto(cont,1);
     element->y = pedirPonto(cont,0);
-    pedirCor(&(element->cor),cont);
+    pedirCor(element->cor,cont);
 }
 
 void imprimir(Ponto pt, int cont){

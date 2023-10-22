@@ -17,7 +17,7 @@ dessa reta. */
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define TAM 3
+// #define TAM 3
 
 struct Ponto{
     float x;
@@ -26,67 +26,50 @@ struct Ponto{
 };
 typedef struct Ponto Ponto;
 
-typedef struct Reta{
-    Ponto pt1;
-    Ponto pt2;
-    char corReta[20];
-}Reta ;
-
-
-float pedirXY(char letra, int indicador){
+float pedirPonto(int cont, int desci){
     float num;
-    do{
-        printf("Digite o valor do ponto %c%d:",letra, indicador);
-        scanf("%f", &num);
-    } while (num <= 0);
-    return num;
-}
-
-void lerCor(Reta *cor1,Ponto *cor2, int desci){
     if (desci == 1){
-        printf("Digite a cor da reta: ");
-        scanf(" %19[^\n]s", cor1);
+        do{
+            printf("Digite o valor do ponto X%d: ", cont);
+            scanf("%f", &num);
+        } while ((num < 0) || (num > 100));
+        return num;
     }else{
-        printf("Digite a cor do ponto: ");
-        scanf(" %19[^\n]s", cor2);
+        do{
+            printf("Digite o valor do ponto Y%d: ", cont);
+            scanf("%f", &num);
+        } while ((num < 0) || (num > 100));
+        return num;
     }
 }
 
-void lerPonto(Reta *ret, Ponto *p, int indicador){
-    p->x = pedirXY('X',indicador);
-    p->y = pedirXY('Y',indicador);
-    lerCor(&ret,p->cor,0);
+void pedirCor(char *cor, int cont){
+    printf("Digite a cor do ponto %d: ", cont);
+    scanf(" %19[^\n]s", cor);
 }
 
-void lerReta(Reta *ret){
-    lerPonto(&ret,(&ret->pt1),1);
-    lerPonto(&ret,(&ret->pt2),2);
-    lerCor(&(ret->corReta),&(ret->corReta),1);
+void pedirDados(Ponto *element, int cont){
+    element->x = pedirPonto(cont,1);
+    element->y = pedirPonto(cont,0);
+    pedirCor(element->cor,cont);
 }
 
-float calculoDist(Reta ret){
-    return ((ret.pt2.x-ret.pt1.x)*(ret.pt2.x-ret.pt1.x)+(ret.pt2.y-ret.pt1.y)*(ret.pt2.y-ret.pt1.y))/2;
-}
-
-void calcularDistanciaReta(Reta ret, float *res){
-    *res = calculoDist(ret);
-}
-
-void imprimir(Reta ret, float resultado){
+void imprimir(Ponto pt, int cont){
     printf("\n%s\n", RESULTADO);
-    printf("Os pontos dessa reta sao: (%.2f/%.2f),(%.2f/%.2f)\n",ret.pt1.x,ret.pt1.y,ret.pt2.x,ret.pt2.y);
-    printf("O tamanho dessa reta é: %.2f\n", resultado);
-    printf("E a cor que essa reta esta desenhada é: %s",ret.corReta);
+    printf("O ponto %d e: (%2.1f,%2.1f)\n", cont,pt.x,pt.y);
+    printf("A cor do ponto %d: %s\n", cont, pt.cor);
     printf("\n%s\n", CORTE);
 }
 
 int main() {
     SetConsoleOutputCP(65001);
-    Reta reta1;
-    float res;
-    printf("\n%s\n", INICIO);
-    lerReta(&reta1);
-    calcularDistanciaReta(reta1,&res);
-    imprimir(reta1,res);
+    Ponto pt1 , pt2;
+    int cont = 1;
+    pedirDados(&pt1, cont);
+    cont++;
+    pedirDados(&pt2, cont);
+    imprimir(pt1,1);
+    imprimir(pt2,2);
     return 0;
 }
+
