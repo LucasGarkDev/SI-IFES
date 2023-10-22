@@ -34,6 +34,14 @@ struct Reta{
 };
 typedef struct Reta Reta;
 
+struct Circulo{
+    Ponto centro;
+    Reta raio;
+    char cor[TAM];
+};
+typedef struct Circulo Circulo;
+
+
 float pedirPonto(int cont, int desci){
     float num;
     if (desci == 1){
@@ -55,8 +63,11 @@ void pedirCor(char *cor, int cont, int desci){
     if (desci == 1){
         printf("Digite a cor do ponto %d: ", cont);
         scanf(" %19[^\n]s", cor);
-    }else{
+    }else if (desci == 0){
         printf("Digite a cor da reta %d: ", cont);
+        scanf(" %19[^\n]s", cor);
+    }else{
+        printf("Digite a cor do circulo %d: ", cont);
         scanf(" %19[^\n]s", cor);
     }
 }
@@ -67,38 +78,59 @@ void pedirDadosPonto(Ponto *element, int cont){
     pedirCor(element->cor,cont,1);
 }
 
-void pedirDadosReta(Reta *element, int cont){
-    pedirDadosPonto(&element->xl,cont);
-    cont++;
-    pedirDadosPonto(&element->xll,cont);
-    pedirCor(element->cor,cont-1,0);
+void pedirDadosReta(Reta *element, int cont,int desci){
+    if (desci == 0){
+        pedirDadosPonto(&element->xll,cont);
+    }else{
+        pedirDadosPonto(&element->xl,cont);
+        cont++;
+        pedirDadosPonto(&element->xll,cont);
+        pedirCor(element->cor,cont-1,0);
+    }
 }
 
 float calculoDistancia(float x1, float x2, float y1, float y2){
     return ((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))/2;
 }
 
-void imprimir(Reta ret, float distancia){
-    int cont1 = 1, cont2 = 1;
+void pedirDadosCirculo(Circulo *element, int cont){
+    float num1, num2;
+    do{
+        printf("Digite o ponto X do centro do circulo: ");
+        scanf("%f", &num1);
+    } while ((num1 < 0)||(num1 > 100));
+    do{
+        printf("Digite o ponto Y do centro do circulo: ");
+        scanf("%f", &num2);
+    } while ((num2 < 0)||(num2 > 100));
+    element->centro.x= num1;
+    element->centro.y= num2;
+    pedirDadosReta(&element->raio, cont, 0);
+    pedirCor(element->cor,cont,2);
+}
+
+float calcularArea(Circulo circ){
+    float raio = calculoDistancia(circ.centro.x,circ.raio.xll.x,circ.centro.y,circ.raio.xll.y);
+    return M_PI * (raio * raio);
+}
+
+void imprimir(Circulo ciri, float area){
+    int cont1 = 1;
     printf("\n%s\n", RESULTADO);
-    printf("O ponto %d da reta: (%2.1f,%2.1f)\n", cont1,ret.xl.x,ret.xl.y);
-    printf("A cor do ponto %d: %s\n", cont1, ret.xl.cor);
-    cont1++;
-    printf("O ponto %d da reta: (%2.1f,%2.1f)\n", cont1,ret.xll.x,ret.xll.y);
-    printf("A cor do ponto %d: %s\n", cont1, ret.xll.cor);
-    printf("O comprimento da reta e: %3.2f \n", distancia);
-    printf("A cor da reta %d: %s\n", cont2, ret.cor);
+    printf("O ponto onde se localiza o centro do circulo: (%2.1f,%2.1f)\n", ciri.centro.x,ciri.centro.y);
+    printf("O valor da area do circulo e : %2.2f\n", area);
+    printf("A cor do circulo e: %s", ciri.cor);
     printf("\n%s\n", CORTE);
 }
 
 int main() {
     SetConsoleOutputCP(65001);
     printf("\n%s\n", INICIO);
-    Reta funcao;
+    Circulo circ;
     int cont = 1;
-    float res;
-    pedirDadosReta(&funcao,cont);
-    res = calculoDistancia(funcao.xl.x,funcao.xll.x,funcao.xl.y,funcao.xll.y);
-    imprimir(funcao,res);
+    float area;
+    pedirDadosCirculo(&circ,cont);
+    area = calcularArea(circ);
+    imprimir(circ,area);
     return 0;
 }
