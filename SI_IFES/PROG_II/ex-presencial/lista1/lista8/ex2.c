@@ -17,14 +17,21 @@ dessa reta. */
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-// #define TAM 3
+#define TAM 20
 
 struct Ponto{
     float x;
     float y;
-    char cor[20];
+    char cor[TAM];
 };
 typedef struct Ponto Ponto;
+
+struct Reta{
+    Ponto xl;
+    Ponto xll;
+    char cor[TAM];
+};
+typedef struct Reta Reta;
 
 float pedirPonto(int cont, int desci){
     float num;
@@ -43,33 +50,55 @@ float pedirPonto(int cont, int desci){
     }
 }
 
-void pedirCor(char *cor, int cont){
-    printf("Digite a cor do ponto %d: ", cont);
-    scanf(" %19[^\n]s", cor);
+void pedirCor(char *cor, int cont, int desci){
+    if (desci == 1){
+        printf("Digite a cor do ponto %d: ", cont);
+        scanf(" %19[^\n]s", cor);
+    }else{
+        printf("Digite a cor da reta %d: ", cont);
+        scanf(" %19[^\n]s", cor);
+    }
 }
 
-void pedirDados(Ponto *element, int cont){
+void pedirDadosPonto(Ponto *element, int cont){
     element->x = pedirPonto(cont,1);
     element->y = pedirPonto(cont,0);
-    pedirCor(element->cor,cont);
+    pedirCor(element->cor,cont,1);
 }
 
-void imprimir(Ponto pt, int cont){
+void pedirDadosReta(Reta *element, int cont){
+    pedirDadosPonto(&element->xl,cont);
+    cont++;
+    pedirDadosPonto(&element->xll,cont);
+    pedirCor(element->cor,cont-1,0);
+}
+
+float calculoDistancia(float x1, float x2, float y1, float y2){
+    return ((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))/2;
+}
+
+void imprimir(Reta ret, float distancia){
+    int cont1 = 1, cont2 = 1;
     printf("\n%s\n", RESULTADO);
-    printf("O ponto %d e: (%2.1f,%2.1f)\n", cont,pt.x,pt.y);
-    printf("A cor do ponto %d: %s\n", cont, pt.cor);
+    printf("O ponto %d da reta: (%2.1f,%2.1f)\n", cont1,ret.xl.x,ret.xl.y);
+    printf("A cor do ponto %d: %s\n", cont1, ret.xl.cor);
+    cont1++;
+    printf("O ponto %d da reta: (%2.1f,%2.1f)\n", cont1,ret.xll.x,ret.xll.y);
+    printf("A cor do ponto %d: %s\n", cont1, ret.xll.cor);
+    printf("O comprimento da reta e: %3.2f \n", distancia);
+    printf("A cor da reta %d: %s\n", cont2, ret.cor);
     printf("\n%s\n", CORTE);
 }
 
 int main() {
     SetConsoleOutputCP(65001);
-    Ponto pt1 , pt2;
+    printf("\n%s\n", INICIO);
+    Reta funcao;
     int cont = 1;
-    pedirDados(&pt1, cont);
-    cont++;
-    pedirDados(&pt2, cont);
-    imprimir(pt1,1);
-    imprimir(pt2,2);
+    float res;
+    pedirDadosReta(&funcao,cont);
+    res = calculoDistancia(funcao.xl.x,funcao.xll.x,funcao.xl.y,funcao.xll.y);
+    imprimir(funcao,res);
     return 0;
 }
 
