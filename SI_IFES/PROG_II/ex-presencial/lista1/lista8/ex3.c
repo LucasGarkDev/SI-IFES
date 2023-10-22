@@ -115,7 +115,6 @@ float calcularArea(Circulo circ){
 }
 
 void imprimir(Circulo ciri, float area){
-    int cont1 = 1;
     printf("\n%s\n", RESULTADO);
     printf("O ponto onde se localiza o centro do circulo: (%2.1f,%2.1f)\n", ciri.centro.x,ciri.centro.y);
     printf("O valor da area do circulo e : %2.2f\n", area);
