@@ -21,42 +21,49 @@ struct Ponto{
 };
 typedef struct Ponto Ponto;
 
-float pedirXY(char letra){
+float pedirPonto(int cont, int desci){
     float num;
-    do{
-        printf("Digite o valor do ponto %c:",letra);
-        scanf("%f", &num);
-    } while (num <= 0);
-    return num;
+    if (desci == 1){
+        do{
+            printf("Digite o valor do ponto X%d: ", cont);
+            scanf("%f", &num);
+        } while ((num < 0) || (num > 100));
+        return num;
+    }else{
+        do{
+            printf("Digite o valor do ponto Y%d: ", cont);
+            scanf("%f", &num);
+        } while ((num < 0) || (num > 100));
+        return num;
+    }
 }
 
-void lerCor(Ponto *cor){
-    printf("Digite a cor: ");
+void pedirCor(char *cor, int cont){
+    printf("Digite a cor do ponto %d: ", cont);
     scanf(" %19[^\n]s", cor);
 }
 
-void lerPonto(Ponto *p){
-    p->x = pedirXY('X');
-    p->y = pedirXY('Y');
-    lerCor(p->cor);
+void pedirDados(Ponto *element, int cont){
+    element->x = pedirPonto(cont,1);
+    element->y = pedirPonto(cont,0);
+    pedirCor(&(element->cor),cont);
 }
 
-void imprimir(int cont, Ponto p){
+void imprimir(Ponto pt, int cont){
     printf("\n%s\n", RESULTADO);
-    printf("O valor do ponto %d e:\n", cont);
-    printf("O ponto e: (%.2f,%.2f)\n", p.x, p.y);
-    printf("A cor do ponto e: %s\n", p.cor);
+    printf("O ponto %d e: (%2.1f,%2.1f)\n", cont,pt.x,pt.y);
+    printf("A cor do ponto %d: %s\n", cont, pt.cor);
     printf("\n%s\n", CORTE);
 }
 
 int main() {
     SetConsoleOutputCP(65001);
-    Ponto p1, p2;
-    printf("\n%s\n", INICIO);
-    lerPonto(&p1);
-    lerPonto(&p2);
-    imprimir(1,p1);
-    imprimir(2,p2);
+    Ponto pt1 , pt2;
+    int cont = 1;
+    pedirDados(&pt1, cont);
+    cont++;
+    pedirDados(&pt2, cont);
+    imprimir(pt1,1);
+    imprimir(pt2,2);
     return 0;
-
 }

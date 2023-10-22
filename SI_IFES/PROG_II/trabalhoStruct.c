@@ -214,9 +214,6 @@ int main() {
 				break;
 			case 1:
 				inserirFunc(vetor,&quanti);
-                arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "rb");
-                carregarArquivo(arquivo,vetor,&quanti);
-                fclose(arquivo);
 				break;
 			case 2:
                 printf("Digite o numero da matricula: ");
@@ -244,6 +241,9 @@ int main() {
 				remover(vetor,&quanti,res);
 				break;
 			case 7:
+                arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "rb");
+                carregarArquivo(arquivo,vetor,&quanti);
+                fclose(arquivo);
 				listar(vetor,quanti);
 				break;
 			default:
