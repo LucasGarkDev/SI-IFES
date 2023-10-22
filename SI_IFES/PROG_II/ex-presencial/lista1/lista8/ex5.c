@@ -90,10 +90,10 @@ void realizarCompra(Linhas *element){
 int menuCompra(){
     int num;
     printf("\n%s\n", INICIO);
-    printf("1 - MOSTRAR POLTRONAS DISPONIVEIS");
-    printf("2 - RESERVAR UM ASSENTO");
-    printf("3 - ADICIONAR UMA NOVA LINHA");
-    printf("4 - SAIR");
+    printf("1 - MOSTRAR POLTRONAS DISPONIVEIS\n");
+    printf("2 - RESERVAR UM ASSENTO\n");
+    printf("3 - ADICIONAR UMA NOVA LINHA\n");
+    printf("4 - SAIR\n");
     printf("\n%s\n", CORTE);
     printf("Digite a sua opçao: ");
     scanf("%d", &num);
