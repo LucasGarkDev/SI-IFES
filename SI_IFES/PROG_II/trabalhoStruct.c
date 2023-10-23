@@ -203,6 +203,7 @@ int main() {
     int quanti = 0;
     int res;
 	float porce;
+	arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "rb");
     char resposta[MAX];
 	do {
 		op = menu();
@@ -241,9 +242,7 @@ int main() {
 				remover(vetor,&quanti,res);
 				break;
 			case 7:
-                arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "rb");
                 carregarArquivo(arquivo,vetor,&quanti);
-                fclose(arquivo);
 				listar(vetor,quanti);
 				break;
 			default:
