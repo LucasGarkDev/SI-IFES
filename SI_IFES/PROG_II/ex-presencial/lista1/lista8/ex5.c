@@ -14,7 +14,7 @@ se a poltrona foi vendida e 0 caso contrário. */
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
-#define TAM 20
+#define TAM 30
 #define TAM2 5
 #define POLTRONAS 45
 
@@ -31,6 +31,31 @@ struct Linhas{
 };
 typedef struct Linhas Linhas;
 
+int pesquisar(int *vetor, int qtde, int pesq){ 
+    int i; 
+    for(i = 0; i < qtde; i++){ 
+        if(vetor[i] == pesq){ 
+            return i; 
+        } 
+    }
+    return-1; 
+}
+
+int imprimirOnibus(Linhas *vet, int quanti){
+    int i, x;
+    for (i = 0; i < quanti; i++){
+        printf("Onibus %d :\n", i+1);
+        printf("\n%s\n", CORTE);
+        printf("Horario de saida: %.2f h",vet[i].conjHorarios[0].hora);
+        printf("Horario de saida: %.2f h",vet[i].conjHorarios[1].hora);
+        printf("Horario de saida: %.2f h",vet[i].conjHorarios[2].hora);
+        printf("Horario de saida: %.2f h",vet[i].conjHorarios[3].hora);
+        printf("Horario de saida: %.2f h",vet[i].conjHorarios[4].hora);
+        imprimirPoltronas(&vet->conjHorarios->numPoltronas);
+        printf("\n%s\n", CORTE);
+    }
+}
+
 void ativarOnibus(Linhas *linha){
     int i;
     for (i = 0; i < POLTRONAS; i++){
@@ -45,50 +70,52 @@ void perguntarInserir(char *res){
     } while ((res != "nao")&&(res != "sim"));
 }
 
-void imprimirPoltronas(){
-    int i;
-    for (i = 0; i < POLTRONAS; i++){
-        printf("%d | %d | %d \n",i,i+1,i+2);
+void imprimirPoltronas(int *vet){
+    int i, j;
+    for (i = 0; i < 3; i++){
+        printf("|");
+        for (j = 0; j < POLTRONAS; j++){
+            if (vet[j] == 0){
+                printf("x");
+                printf("|");    
+            }else{
+                printf("%d", j);
+                printf("|");
+            }
+        }
+        printf("\n");
     }
 }
 
 void inserirHorarios(Horario *vet){
-    int i;
-    for (i = 0; i < TAM2; i++){
-        printf("Qual sera o %d horario de saida desse onibus: ", i+1);
-        scanf("%f", vet->hora);
-    }
+    printf("Qual sera o horario de saida desse onibus: ");
+    scanf("%f", vet->hora);
 }
 
-void pedirDados(Linhas *element){
+void pedirDados(Linhas *element, int *quanti){
     printf("Digite a cidade de origem dessa linha: ");
-    scanf(" %19[^\n]s", element->cityOrigem);
+    scanf(" %29[^\n]s", element->cityOrigem);
     printf("Digite a cidade de origem dessa linha: ");
-    scanf(" %19[^\n]s", element->cityDestino);
+    scanf(" %29[^\n]s", element->cityDestino);
     printf("Digite a cidade de origem dessa linha: ");
     inserirHorarios(element->conjHorarios);
+    *(quanti)++;
 }
 
 void realizarCompra(Linhas *element){
-    int num, i;
+    int numOnibus;
     do{
-        printf("Digite o numero da poltrona que deseja: ");
-        scanf("%d", &num);
-    } while ((num < 0)||(num > 45));
-    for (i = 0; i < POLTRONAS; i++){
-        if ((num == i) &&(element->conjHorarios->numPoltronas[i] != 1)){
-            element->conjHorarios->numPoltronas[i] = 0;
-            printf("A sua compra foi efetuada com sucesso!!!");
-        }else{
-            printf("Desculpe mais essa poltrona ja foi comprada.");
-        }
-    }
+        printf("Digite o numero do onibus que deseja embarcar: ");
+        scanf("%d", &numOnibus-1);
+    } while ((numOnibus < 0)||(numOnibus > 45));
+    
+    
 }
 
 int menuCompra(){
     int num;
     printf("\n%s\n", INICIO);
-    printf("1 - MOSTRAR POLTRONAS DISPONIVEIS\n");
+    printf("1 - MOSTRAR ONIBUS E POLTRONAS DISPONIVEIS\n");
     printf("2 - RESERVAR UM ASSENTO\n");
     printf("3 - ADICIONAR UMA NOVA LINHA\n");
     printf("4 - SAIR\n");
@@ -100,16 +127,19 @@ int menuCompra(){
 
 int main() {
     SetConsoleOutputCP(65001);
-    printf("\n%s\n", INICIO);
-    Linhas oni;
-    char deseja[4];
-    int cont = 0, op, repete = 0;
+    Linhas oni[10];
+    int quantiLinhas = 0;
+    int cont = 0, op, repete = 0, x;
     ativarOnibus(&oni);
     do{
         op = menuCompra();
         switch (op){
         case 1:
-            imprimirPoltronas(&oni.conjHorarios->numPoltronas);
+            if(quantiLinhas == 0){
+                printf("Nao existe linhas disponiveis no momento");
+            }else{
+                x = imprimirOnibus(oni,quantiLinhas);
+            }
             break;
     
         case 2:
@@ -117,12 +147,7 @@ int main() {
             break;
 
         case 3:
-            perguntarInserir(deseja);
-            while (deseja == "sim"){
-                pedirDados(&oni);
-                cont++;
-                perguntarInserir(deseja);  
-            }
+            pedirDados(&oni,&quantiLinhas);
             break;
 
         case 4:
