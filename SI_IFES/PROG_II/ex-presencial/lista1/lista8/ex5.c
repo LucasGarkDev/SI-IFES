@@ -76,7 +76,7 @@ void realizarCompra(Linhas *element){
         scanf("%d", &num);
     } while ((num < 0)||(num > 45));
     for (i = 0; i < POLTRONAS; i++){
-        if ((num == i) &&(element->conjHorarios->numPoltronas[i] != 0)){
+        if ((num == i) &&(element->conjHorarios->numPoltronas[i] != 1)){
             element->conjHorarios->numPoltronas[i] = 0;
             printf("A sua compra foi efetuada com sucesso!!!");
         }else{
