@@ -102,7 +102,12 @@ void procuraMatricula(char *resposta, Funcionario *vetor, int pesq, int quanti) 
         if (vetor[i].matricula == pesq) {
             strcpy(resposta, vetor[i].individuo.nome);
             printf("\n%s\n", RESULTADO);
-            printf("Para essa matricula, consta no sistema o funcionario: %s", resposta);
+            printf("Para essa matricula, consta no sistema o funcionario:\n");
+            printf("Nome: %s\n", resposta);
+            printf("Telefone: %d\n", vetor[i].individuo.telefone);
+            printf("E-mail: %s\n", vetor[i].individuo.email);
+            printf("Matrícula: %d\n", vetor[i].matricula);
+            printf("Salário: %.2f\n", vetor[i].salario);
             printf("\n%s\n", CORTE);
         }
     }
@@ -127,14 +132,16 @@ void procurarNome(Funcionario *vetor, char pesq[], int quanti) {
 void aumentaSalario(Funcionario *vetor, int quanti, int matricula, float porcentagem){
 	int localMatricula = pesquisar(vetor,quanti,matricula);
 	int i;
+	float x;
 	for (i = 0; i < quanti; i++){
 		if (i == localMatricula){
-			vetor[i].salario += (vetor[i].salario * (porcentagem/100));  
+			vetor[i].salario += (vetor[i].salario * (porcentagem/100));
+			x = vetor[i].salario;
 		}
 	}
 	printf("\n%s\n", RESULTADO);
 	printf("O salario do individuo: %s\n", vetor[i].individuo.nome);
-	printf("Foi reajustado para: %.2f",vetor[i].salario);
+	printf("Foi reajustado para: %.2f",x);
 	printf("\n%s\n", CORTE);
 }
 
@@ -251,4 +258,3 @@ int main() {
 	} while (op != 0);
 	return 0;
 }
-
