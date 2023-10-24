@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <windows.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
@@ -53,21 +54,31 @@ int pesquisar2(Funcionario *vetor, int quanti, float pesq) {
 }
 
 void remover(Funcionario *vetor, int *qtde, int pos) {
-    int i;
-    if ((pos >= 0) &&(pos < *qtde)){
-        for (i = pos; i < *qtde - 1; i++){
-            vetor[i] = vetor[i + 1];
+    int matriculaARemover, i, anterior, quanti = *qtde;
+    if (pos >= 0 ) {
+        matriculaARemover = pesquisar(vetor,quanti,pos);
+        if (matriculaARemover != -1){
+            anterior = vetor[matriculaARemover].matricula;
+            for (i = matriculaARemover; i < (*qtde - 1); i++) {
+                vetor[i] = vetor[i + 1];
+            }
+            (*qtde)--;
+            vetor[*qtde].matricula = 0; 
+            vetor[*qtde].salario = 0.0; 
+            strcpy(vetor[*qtde].individuo.nome, ""); 
+            vetor[*qtde].individuo.telefone = 0; 
+            strcpy(vetor[*qtde].individuo.email, ""); 
+            printf("\n%s\n", RESULTADO);
+            printf("Funcionário com a matrícula %d removido com sucesso.\n",anterior);
+            printf("\n%s\n", CORTE);
         }
-        (*qtde)--;
-        printf("\n%s\n", RESULTADO);
-        printf("Funcionário removido com sucesso.\n");
-        printf("\n%s\n", CORTE);
-    }else{
+    } else {
         printf("\n%s\n", RESULTADO);
         printf("A matrícula informada não corresponde a um funcionário válido.\n");
         printf("\n%s\n", CORTE);
     }
 }
+
 
 void inserirFunc(Funcionario *vetor, int *quanti) {
     printf("\n%s\n", INICIO);
@@ -213,6 +224,7 @@ int menu() {
 }
 
 int main() {
+    SetConsoleOutputCP(65001);
     int op;
     FILE * arquivo;
     Funcionario vetor[MAX];
