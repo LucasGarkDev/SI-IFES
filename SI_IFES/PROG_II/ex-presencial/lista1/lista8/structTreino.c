@@ -23,6 +23,100 @@ struct Funcionario{
 };
 typedef struct Funcionario Funcionario;
 
+int pesquisar(Funcionario *vetor,int quanti, int pesq, int desci){
+    int i;
+    if (desci == 1){
+        for (i = 0; i < quanti; i++){
+            if (vetor[i].matricula == pesq){
+                return i;
+            }
+        }
+        return -1;
+    }else if (desci == 2){
+        for (i = 0; i < quanti; i++){
+            if (vetor[i].individuo.telefone == pesq){
+                return i;
+            }
+        }
+        return -1;
+    }else{
+        for (i = 0; i < quanti; i++){
+            if (vetor[i].salario == pesq){
+                return i;
+            }
+        }
+        return -1;
+    }    
+}
+
+int pesquisar2(Funcionario *vetor, int quanti, char *palavra, int desci){
+    int i, aponta;
+    if (desci == 1){
+        for (i = 0; i < quanti; i++){
+            aponta = strcmp(vetor[i].individuo.nome,palavra);
+            if ( aponta == 0){
+                return i;
+            }
+        }
+        return -1;
+    }else{
+        for (i = 0; i < quanti; i++){
+            aponta = strcmp(vetor[i].individuo.email,palavra);
+            if ( aponta == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+void inserirFuncionario(Funcionario *vet, int *quanti){
+    printf("\n%s\n", INICIO);
+    int matricula;
+    char nome[MAX];
+    int telefone;
+    char email[MAX];
+    float salario;
+    do{
+        printf("Digite o nome do funcionario: ");
+        scanf(" %100[^\n]s", nome);
+    } while (pesquisar2(vet,*quanti,nome,1) != -1);
+    do{
+        printf("Digite a matricula do funcionario: ");
+        scanf("%d", &matricula);
+    } while (pesquisar(vet,*quanti,matricula,1) != -1);
+    do{
+        printf("Digite o telefone do funcionario: ");
+        scanf("%d", &telefone);
+    } while (pesquisar(vet,*quanti,telefone,2) != -1);
+    do{
+        printf("Digite o e-mail do funcionario: ");
+        scanf(" %100[^\n]s", email);
+    } while (pesquisar2(vet,*quanti,email,2) != -1);
+    do{
+        printf("Digite o salario do funcionario: ");
+        scanf("%f", &salario);
+    } while (pesquisar(vet,*quanti,salario,0) != -1);
+    vet[*quanti].matricula = matricula;
+    vet[*quanti].individuo.telefone = telefone;
+    vet[*quanti].salario = salario;
+    strcpy(vet[*quanti].individuo.nome, nome);
+    strcpy(vet[*quanti].individuo.email, email);
+    (*quanti)++;
+    printf("\n%s\n", CORTE);
+}
+
+void listar(Funcionario * vetor, int qtde) {
+    int i;
+    printf("\n%s\n", RESULTADO);
+    printf("Matricula|Nome                   |telefone|e-mail              |Salario   |\n");
+    for( i=0; i < qtde; i++) {
+        printf("%9d|%-23s|%8d|%-20s|%10.2f|\n", vetor[i].matricula, vetor[i].individuo.nome, vetor[i].individuo.telefone, vetor[i].individuo.email,vetor[i].salario  );
+    }
+    printf("\n%s\n", CORTE);
+}
+
+
 int menu() {
 	int op;
 // 	system("@cls||clear");  // LIMPA A TELA
@@ -44,7 +138,8 @@ int menu() {
 
 int main(){
     SetConsoleOutputCP(65001);
-    int op;
+    int op, quanti = 0;
+    Funcionario funcVet[MAX];
     do{
         op = menu();
         switch (op){
@@ -53,7 +148,7 @@ int main(){
                 break;
             
             case 1:
-                /* code */
+                inserirFuncionario(funcVet,&quanti);
                 break;
             
             case 2:
@@ -77,7 +172,7 @@ int main(){
                 break;
             
             case 7:
-                /* code */
+                listar(funcVet,quanti);
                 break;
             
             default:
