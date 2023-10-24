@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <windows.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
@@ -106,6 +105,10 @@ void inserirFuncionario(Funcionario *vet, int *quanti){
     printf("\n%s\n", CORTE);
 }
 
+void procurarNome(){
+    
+}
+
 void listar(Funcionario * vetor, int qtde) {
     int i;
     printf("\n%s\n", RESULTADO);
@@ -137,7 +140,6 @@ int menu() {
 }
 
 int main(){
-    SetConsoleOutputCP(65001);
     int op, quanti = 0;
     Funcionario funcVet[MAX];
     do{
