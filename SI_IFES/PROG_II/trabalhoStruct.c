@@ -54,10 +54,19 @@ int pesquisar2(Funcionario *vetor, int quanti, float pesq) {
 
 void remover(Funcionario *vetor, int *qtde, int pos) {
     int i;
-    for (i = pos; i < *qtde - 1; i++) {
-        vetor[i] = vetor[i + 1];
+    if ((pos >= 0) &&(pos < *qtde)){
+        for (i = pos; i < *qtde - 1; i++){
+            vetor[i] = vetor[i + 1];
+        }
+        (*qtde)--;
+        printf("\n%s\n", RESULTADO);
+        printf("Funcionário removido com sucesso.\n");
+        printf("\n%s\n", CORTE);
+    }else{
+        printf("\n%s\n", RESULTADO);
+        printf("A matrícula informada não corresponde a um funcionário válido.\n");
+        printf("\n%s\n", CORTE);
     }
-    (*qtde)--;
 }
 
 void inserirFunc(Funcionario *vetor, int *quanti) {
