@@ -29,18 +29,18 @@ FILE * abrirArquivo(char * nomeArq, char * modo) {
     return arq;
 }
 
-// void gravarArquivo(FILE * arquivo, char * string) {
-//     //fwrite( &qtde, sizeof(int), 1, arquivo  );
-//     fprintf(arquivo,string);
-// }
+void gravarArquivo(FILE * arquivo, char * string) {
+    //fwrite( &qtde, sizeof(int), 1, arquivo  );
+    fprintf(arquivo,string);
+}
 
-// void pedirPalavras(FILE *arquivo, char *texto, int *quanti){
-//     printf("Digite o texto: ");
-//     scanf(" %99[^\n]s", texto);
-//     arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","w");
-//     gravarArquivo(arquivo,texto);
-//     *quanti = strlen(texto);
-// }
+void pedirPalavras(FILE *arquivo, char *texto, int *quanti){
+    printf("Digite o texto: ");
+    scanf(" %99[^\n]s", texto);
+    arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","w");
+    gravarArquivo(arquivo,texto);
+    *quanti = strlen(texto);
+}
 
 int pesquisar(char vet[][50],char elemento[],int tamanho){
     int i;
