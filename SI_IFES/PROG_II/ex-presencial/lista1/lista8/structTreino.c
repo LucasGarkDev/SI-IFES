@@ -106,6 +106,112 @@ void inserirFuncionario(Funcionario *vet, int *quanti){
     printf("\n%s\n", CORTE);
 }
 
+void procuraMatricula(Funcionario *vet, int quanti){
+    int pesq, i;
+    printf("Digite o numero da matricula:");
+    scanf("%d", &pesq);
+    i = pesquisar(vet,quanti,pesq,1);
+    if (i != -1){
+        printf("\n%s\n", RESULTADO);
+        printf("O funcionario com essa matricula corresponde a....\n");
+        printf("Nome: %s\n", vet[i].individuo.nome);
+        printf("Matricula: %d\n", vet[i].matricula);
+        printf("E-mail: %s\n", vet[i].individuo.email);
+        printf("Telefone: %d\n", vet[i].individuo.telefone);
+        printf("Salario: %.2f\n", vet[i].salario);
+        printf("%s\n", CORTE);
+    }else{
+        printf("\n%s\n", RESULTADO);
+        printf("Nenhum funcionario consta com essa matricula.\n");
+        printf("%s\n", CORTE);
+    }
+}
+
+void procuraNome(Funcionario *vet, int quanti){
+    char nome[MAX];
+    int i;
+    printf("Digite o nome do funcionario: ");
+    scanf(" %100[^\n]s", nome);
+    i = pesquisar2(vet,quanti,nome,1);
+    if (i != -1){
+        printf("\n%s\n", RESULTADO);
+        printf("O funcionario com esse nome corresponde a....\n");
+        printf("Nome: %s\n", vet[i].individuo.nome);
+        printf("Matricula: %d\n", vet[i].matricula);
+        printf("E-mail: %s\n", vet[i].individuo.email);
+        printf("Telefone: %d\n", vet[i].individuo.telefone);
+        printf("Salario: %.2f\n", vet[i].salario);
+        printf("%s\n", CORTE);
+    }else{
+        printf("\n%s\n", RESULTADO);
+        printf("Nenhum funcionario consta com esse nome.\n");
+        printf("%s\n", CORTE);
+    }
+}
+
+void aumentaSalario(Funcionario *vet, int quanti){
+    int matri, i;
+    float porcentagem;
+    do{
+        printf("Digite o numero da matricula do funcionario: ");
+        scanf("%d", &matri);
+    } while (pesquisar(vet,quanti,matri,1) == -1);
+    do{
+        printf("Digite a porcentagem de aumento: ");
+        scanf("%f", &porcentagem);
+    } while (isalpha(porcentagem) != 0);
+    i = pesquisar(vet,quanti,matri,1);
+    vet[i].salario += ((porcentagem * vet[i].salario)/100); 
+    printf("\n%s\n", RESULTADO);
+    printf("O salario do funcionario '%s' aumentou para: %.2f\n", vet[i].individuo.nome,vet[i].salario);
+    printf("%s\n", CORTE);
+}
+
+void maiorSalario(Funcionario *vet, int quanti){
+    float maior = 0.0;
+    int i, ref;
+    for (i = 0; i < quanti; i++){
+        if (vet[i].salario >= maior){
+            maior = vet[i].salario;
+            ref = i;
+        }
+    }
+    printf("\n%s\n", RESULTADO);
+    printf("Nome: %s\n", vet[ref].individuo.nome);
+    printf("Matricula: %d\n", vet[ref].matricula);
+    printf("E-mail: %s\n", vet[ref].individuo.email);
+    printf("Telefone: %d\n", vet[ref].individuo.telefone);
+    printf("Salario: %.2f\n", vet[ref].salario);
+    printf("%s\n", CORTE);
+}
+
+void excluir(Funcionario *vet, int *quanti){
+    int matri, i, x, armazena;
+    printf("Digite o numero da matricula do funcionario: ");
+    scanf("%d", &matri);
+    x = pesquisar(vet,*quanti,matri,1);
+    if ( x != -1){
+        for (i = 0; i < *quanti; i++){
+            if (i == x){
+                armazena = vet[i].matricula;
+                vet[i].matricula = vet[i+1].matricula;
+                strcpy(vet[i].individuo.nome,vet[i+1].individuo.nome);
+                vet[i].salario = vet[i+1].salario;
+                vet[i].individuo.telefone= vet[i+1].individuo.telefone;
+                strcpy(vet[i].individuo.email,vet[i+1].individuo.email);
+            }
+        }
+        (*quanti)--;
+        printf("\n%s\n", RESULTADO);
+        printf("Funcionário com a matrícula %d removido com sucesso.\n",armazena);
+        printf("\n%s\n", CORTE);
+    }else{
+        printf("\n%s\n", RESULTADO);
+        printf("A matricula não foi encontrada.");
+        printf("\n%s\n", CORTE);
+    }
+}
+
 void listar(Funcionario * vetor, int qtde) {
     int i;
     printf("\n%s\n", RESULTADO);
@@ -152,23 +258,23 @@ int main(){
                 break;
             
             case 2:
-                /* code */
+                procuraMatricula(funcVet,quanti);
                 break;
 
             case 3:
-                /* code */
+                procuraNome(funcVet,quanti);
                 break;
             
             case 4:
-                /* code */
+                aumentaSalario(funcVet,quanti);
                 break;
             
             case 5:
-                /* code */
+                maiorSalario(funcVet,quanti);
                 break;
             
             case 6:
-                /* code */
+                excluir(funcVet,&quanti);
                 break;
             
             case 7:
