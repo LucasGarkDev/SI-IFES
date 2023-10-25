@@ -42,23 +42,23 @@ void pedirPalavras(FILE *arquivo, char *texto, int *quanti){
     *quanti = strlen(texto);
 }
 
-void substitui(FILE * arquivo, char palavrasProibi[][50], int quanti){
-    int j, i;
-    arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","r");
+void substitui(FILE * arquivo1, char palavrasProibi[][50], int quanti,char *texto){
+    arquivo1 = abrirArquivo("../arquivos/palavrasConjuntoMod.txt","r");
+    int cont = 0;
+    char guarda;
     char *texto[MAX];
-    for (i = 0; i < 100; i++){
-        if (strcmp(palavrasProibi[i],texto) == 0){
-            for (j = 0; j < quanti; j++){
-                texto[j] = '*';
-            }
-        } 
+    while (!(feof(arquivo1))){
+        fscanf(arquivo1,"%c",guarda);
+        
     }
+    
 }
 
-void transcreve(char *texto,char palavrasProibi[][50], FILE *arq2, int quanti){
+void transcreve(char palavrasProibi[][50], FILE *arq2, int quanti, FILE *arq1){
+    char texto[MAX];
     arq2 = abrirArquivo("../arquivos/palavrasConjuntoMod.txt","w");
-    substitui(texto,palavrasProibi,quanti);
-    gravarArquivo(arq2,texto);
+    substitui(arq1,palavrasProibi,quanti,texto);
+    // gravarArquivo(arq2,texto);
 }
 
 int main(){
@@ -67,6 +67,6 @@ int main(){
     char palavrasProibidas[100][50] = {"sexo","erótico","golpe","ladrão","rapariga","rebelião","darth","vader","skywalker","jedi","flamengo"};
     char texto[MAX];
     int quanti = 0;
-    // pedirPalavras(arq1,texto,&quanti);
-    transcreve(arq1,palavrasProibidas,arq2,quanti);
+    pedirPalavras(arq1,texto,&quanti);
+    transcreve(palavrasProibidas,arq2,quanti,arq1);
 }
