@@ -46,10 +46,19 @@ void substitui(FILE * arquivo1, char palavrasProibi[][50], int quanti,char *text
     arquivo1 = abrirArquivo("../arquivos/palavrasConjuntoMod.txt","r");
     int cont = 0;
     char guarda;
-    char *texto[MAX];
+    char armazena;
+    int j;
     while (!(feof(arquivo1))){
         fscanf(arquivo1,"%c",guarda);
-        
+        for (j = 0; j < 50; j++){
+            armazena = palavrasProibi[cont][j];
+        }
+        if (armazena == guarda){
+            texto[cont] = '*';
+        }else{
+            texto[cont] = guarda;
+        }
+        cont++;
     }
     
 }
