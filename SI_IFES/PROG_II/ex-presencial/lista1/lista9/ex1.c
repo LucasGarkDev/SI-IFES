@@ -66,8 +66,8 @@ int main(){
     "jedi", "flamengo"};
     char palavra[50]; 
     int a,b,i;
-    FILE *arquivo= abrirArquivo("arquivo.txt","r");
-    FILE *censurado=abrirArquivo("censurado.txt","w");
+    FILE *arquivo= abrirArquivo("../arquivos/palavrasConjunto.txt","r");
+    FILE *censurado=abrirArquivo("../arquivos/palavrasConjunto.txt","w");
     while(!feof(arquivo)){
         fscanf(arquivo,"%s",palavra);
         if((a=pesquisar(palavrasProibidas,palavra,11)) != -1){
