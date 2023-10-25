@@ -52,13 +52,13 @@ void substitui(FILE * arquivo1, char palavrasProibi[][50], int quanti,char *text
         fscanf(arquivo1,"%c",guarda);
         for (j = 0; j < 50; j++){
             armazena = palavrasProibi[cont][j];
+            if (armazena == guarda){
+                texto[cont] = '*';
+            }else{
+                texto[cont] = guarda;
+            }
+            cont++;
         }
-        if (armazena == guarda){
-            texto[cont] = '*';
-        }else{
-            texto[cont] = guarda;
-        }
-        cont++;
     }
     
 }
@@ -67,7 +67,7 @@ void transcreve(char palavrasProibi[][50], FILE *arq2, int quanti, FILE *arq1){
     char texto[MAX];
     arq2 = abrirArquivo("../arquivos/palavrasConjuntoMod.txt","w");
     substitui(arq1,palavrasProibi,quanti,texto);
-    // gravarArquivo(arq2,texto);
+    gravarArquivo(arq2,texto);
 }
 
 int main(){
