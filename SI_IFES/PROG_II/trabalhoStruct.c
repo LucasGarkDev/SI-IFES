@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <windows.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
@@ -224,7 +223,6 @@ int menu() {
 }
 
 int main() {
-    SetConsoleOutputCP(65001);
     int op;
     FILE * arquivo;
     Funcionario vetor[MAX];
