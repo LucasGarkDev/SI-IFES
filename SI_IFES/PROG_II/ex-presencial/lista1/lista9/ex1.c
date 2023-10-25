@@ -29,11 +29,6 @@ FILE * abrirArquivo(char * nomeArq, char * modo) {
     return arq;
 }
 
-void carregarArquivo(FILE * arquivo, char * string, int *qtde) {
-    //fread( qtde, sizeof(int), 1, arquivo  );
-    fread( string, sizeof(char), *qtde, arquivo  );
-}
-
 void gravarArquivo(FILE * arquivo, char * string) {
     //fwrite( &qtde, sizeof(int), 1, arquivo  );
     fprintf(arquivo,string);
@@ -47,23 +42,23 @@ void pedirPalavras(FILE *arquivo, char *texto, int *quanti){
     *quanti = strlen(texto);
 }
 
-void substitui(char *texto, char *palavrasProibi){
-    int j, k , quanti;
-    for (j = 0; j < 50; j++){
-        if (strcmp(palavrasProibi,texto) == 0){
-            quanti = strlen(palavrasProibi);
-            for (k = j; k < quanti; k++){
-                texto[k] = '*';
+void substitui(FILE * arquivo, char palavrasProibi[][50], int quanti){
+    int j, i;
+    arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","r");
+    char *texto[MAX];
+    for (i = 0; i < 100; i++){
+        if (strcmp(palavrasProibi[i],texto) == 0){
+            for (j = 0; j < quanti; j++){
+                texto[j] = '*';
             }
         } 
-    } 
+    }
 }
 
-void imprimir(FILE * arquivo, char *texto, int quanti){
-    int i;
-    arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","r");
-    carregarArquivo
-    
+void transcreve(char *texto,char palavrasProibi[][50], FILE *arq2, int quanti){
+    arq2 = abrirArquivo("../arquivos/palavrasConjuntoMod.txt","w");
+    substitui(texto,palavrasProibi,quanti);
+    gravarArquivo(arq2,texto);
 }
 
 int main(){
@@ -71,11 +66,7 @@ int main(){
     FILE * arq2;
     char palavrasProibidas[100][50] = {"sexo","erótico","golpe","ladrão","rapariga","rebelião","darth","vader","skywalker","jedi","flamengo"};
     char texto[MAX];
-    int quanti = 0, i;
-    pedirPalavras(arq1,texto,&quanti);
-    for (i = 0; i < 100; i++){
-        substitui(texto,palavrasProibidas[i]);
-    }
-
-    
+    int quanti = 0;
+    // pedirPalavras(arq1,texto,&quanti);
+    transcreve(arq1,palavrasProibidas,arq2,quanti);
 }
