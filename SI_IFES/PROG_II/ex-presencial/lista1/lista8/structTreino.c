@@ -265,12 +265,12 @@ int main(){
     int op, quanti = 0;
     FILE * arquivo;
     Funcionario funcVet[MAX];
-    arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "rb");
+    arquivo = abrirArquivo("../arquivos/listaFuncionarios3.bin", "rb");
     do{
         op = menu();
         switch (op){
             case 0:
-                arquivo = abrirArquivo("../arquivos/listaFuncionarios.bin", "wb");
+                arquivo = abrirArquivo("../arquivos/listaFuncionarios3.bin", "wb");
 				gravarArquivo(arquivo,funcVet,quanti);
                 fclose(arquivo);
                 break;
