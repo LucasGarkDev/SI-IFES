@@ -81,28 +81,24 @@ FILE * abrirArquivo(char * nomeArq, char * modo) {
 // }
 
 void designarMatriculas(FILE *arquivo, int *leds, int *leter, int *robotica, int *q1, int *q2, int *q3){
-    int matricula, i = 0;
-    char guarda[3];
-    char desci[3];
-    char lixo[9];
+    int matricula, i = 0, j = 0, k = 0;
+    char guarda[8];
     while (!(feof(arquivo))){
-        fscanf(arquivo,"%d  ",&matricula);
-        fscanf(arquivo, "%2[^\n]s",guarda);
-        if (strcmp(guarda,"Ro") == 0){
+        fscanf(arquivo,"%d ",&matricula);
+        fscanf(arquivo, "%10[^\n]s",guarda);
+        if (strcmp(guarda,"Robotica  ") == 0){
             robotica[i] = matricula;
+            i++;
             (*q3)++;
-        }else if (strcmp(guarda,"LE") == 0){
-            fscanf(arquivo,"%2[^\n]s", desci);
-            if (strcmp(guarda,"TE") == 0){
-                leter[i] = matricula;
-                (*q2)++;
-            }else{
-                leds[i] = matricula;
-                (*q1)++;
-            }
+        }else if (strcmp(guarda,"LETER     ") == 0){
+            leter[j] = matricula;
+            j++;
+            (*q2)++;
+        }else if (strcmp(guarda,"LEDS      ") == 0){
+            leds[k] = matricula;
+            k++;
+            (*q1)++;
         }
-        fscanf(arquivo,"%8[^\n]s",lixo);
-        i++;
     }
 }
 
