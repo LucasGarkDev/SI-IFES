@@ -86,14 +86,14 @@ void designarMatriculas(FILE *arquivo, int *leds, int *leter, int *robotica, int
     char desci[3];
     char lixo[9];
     while (!(feof(arquivo))){
-        fscanf(arquivo,"%d",&matricula);
+        fscanf(arquivo,"%d  ",&matricula);
         fscanf(arquivo, "%2[^\n]s",guarda);
-        if (strcmp(guarda," R") == 0){
+        if (strcmp(guarda,"Ro") == 0){
             robotica[i] = matricula;
             (*q3)++;
-        }else if (strcmp(guarda," L") == 0){
+        }else if (strcmp(guarda,"LE") == 0){
             fscanf(arquivo,"%2[^\n]s", desci);
-            if (strcmp(guarda,"ET") == 0){
+            if (strcmp(guarda,"TE") == 0){
                 leter[i] = matricula;
                 (*q2)++;
             }else{
