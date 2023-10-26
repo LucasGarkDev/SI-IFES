@@ -34,13 +34,13 @@ void gravarArquivo(FILE * arquivo, char * string) {
     fprintf(arquivo,string);
 }
 
-void pedirPalavras(FILE *arquivo, char *texto, int *quanti){
-    printf("Digite o texto: ");
-    scanf(" %99[^\n]s", texto);
-    arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","w");
-    gravarArquivo(arquivo,texto);
-    *quanti = strlen(texto);
-}
+// void pedirPalavras(FILE *arquivo, char *texto, int *quanti){
+//     printf("Digite o texto: ");
+//     scanf(" %99[^\n]s", texto);
+//     arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","w");
+//     gravarArquivo(arquivo,texto);
+//     *quanti = strlen(texto);
+// }
 
 int pesquisar(char vet[][50],char elemento[],int tamanho){
     int i;
@@ -49,40 +49,32 @@ int pesquisar(char vet[][50],char elemento[],int tamanho){
             return i;
         }
     }
-    
     return -1;
 }
 
-// void transcreve(char palavrasProibi[][50], FILE *arq2, int quanti, FILE *arq1){
-//     char texto[MAX];
-//     arq2 = abrirArquivo("../arquivos/palavrasConjuntoMod.txt","w");
-//     substitui(arq1,palavrasProibi,quanti,texto);
-//     gravarArquivo(arq2,texto);
-// }
+void transcreve(char palavrasProibi[][50], FILE *arq2, FILE *arq1){
+    char palavra[50];
+    int quanti;
+    int i, j; 
+    while (!(feof(arq1))){
+        fscanf(arq1,"%10[^\n]s",palavra);
+        quanti = strlen(palavra);
+        i = pesquisar(palavrasProibi,palavra,quanti);
+        if (i != -1){
+            fprintf(arq2,"*****");
+        }else{
+            fprintf(arq2,palavra);
+        }
+    }
+}
 
 int main(){
     char palavrasProibidas[11][50] = {"sexo", "erótico", "golpe",
     "ladrão", "rapariga", "rebelião", "darth", "vader", "skywalker",
     "jedi", "flamengo"};
-    char palavra[50]; 
-    int a,b,i;
-    FILE *arquivo= abrirArquivo("../arquivos/palavrasConjunto.txt","r");
-    FILE *censurado=abrirArquivo("../arquivos/palavrasConjunto.txt","w");
-    while(!feof(arquivo)){
-        fscanf(arquivo,"%s",palavra);
-        if((a=pesquisar(palavrasProibidas,palavra,11)) != -1){
-            for(i=0; i < strlen(palavra);i++){
-                palavra[i]= '*';
-                
-            }
-            
-            fprintf(censurado,"%s",palavra);
-        }
-        else{
-            fprintf(censurado,"%s ",palavra);
-        }
-        
-    }
+    FILE *arquivo = abrirArquivo("../arquivos/palavrasConjunto.txt","r");
+    FILE *censurado = abrirArquivo("../arquivos/palavrasConjunto2.txt","w");
+    transcreve(palavrasProibidas,censurado,arquivo);
     fclose(arquivo);
     fclose(censurado);
     return 0;
