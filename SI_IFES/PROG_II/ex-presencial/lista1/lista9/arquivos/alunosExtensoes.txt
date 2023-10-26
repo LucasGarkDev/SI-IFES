@@ -1,12 +1,12 @@
-713 LETER Robotica 
-158 LETER *** 
-352 *** Robotica 
-509 LETER *** ***
-485 *** Robotica 
-144 LETER *** ***
-756 LETER Robotica ***
-795 LETER Robotica ***
-870 *** Robotica ***
-233 *** Robotica 
-878 *** Robotica ***
-337 *** *** 
+713 LETER     Robotica           
+158 LETER     ***                
+352 ***       Robotica           
+509 LETER     ***       ***      
+485 ***       Robotica           
+144 LETER     ***       ***      
+756 LETER     Robotica  ***      
+795 LETER     Robotica  ***      
+870 ***       Robotica  ***      
+233 ***       Robotica           
+878 ***       Robotica  ***      
+337 ***       ***                 
