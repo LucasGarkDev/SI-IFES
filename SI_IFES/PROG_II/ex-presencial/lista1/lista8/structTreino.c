@@ -300,6 +300,7 @@ int main(){
                 break;
             
             case 7:
+                carregarArquivo(arquivo,funcVet,&quanti);
                 listar(funcVet,quanti);
                 break;
             
