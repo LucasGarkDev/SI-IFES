@@ -35,41 +35,55 @@ FILE * abrirArquivo(char * nomeArq, char * modo) {
     return arq;
 }
 
-int pedirDados(int cont, char *mes){
-    int num;
-    do{
-        printf("Digite a quantidade de motores M%d no mes de %s: ", cont, mes);
-        scanf("%d", &num);
-    } while ((num < 0)||(num > 100));
-    return num;
-}
+// int pedirDados(int cont, char *mes){
+//     int num;
+//     do{
+//         printf("Digite a quantidade de motores M%d no mes de %s: ", cont, mes);
+//         scanf("%d", &num);
+//     } while ((num < 0)||(num > 100));
+//     return num;
+// }
 
-void gravarArquivo(FILE *arquivo, Motores *vetor, int quanti) {
-    int i;
+// void gravarArquivo(FILE *arquivo, Motores *vetor, int quanti) {
+//     int i;
+//     char meses[12][14] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+//     for (i = 0; i < quanti; i++) {
+//         vetor[i].custo = pedirDados(1, meses[i]);
+//         vetor[i].lucro = pedirDados(2, meses[i]);
+//         fprintf(arquivo, "%d %d\n", vetor[i].custo, vetor[i].lucro);
+//     }
+// }
+
+// void pedirPalavras(FILE *arquivo, Motores *vetor, int quanti){
+//     arquivo = abrirArquivo("../arquivos/motoresProduzidos2.txt","w");
+//     gravarArquivo(arquivo,vetor, quanti);
+// }
+
+void calculo(FILE *arquivo1, FILE *arquivo2) {
+    int m1, m2, r1, r2, calculo;
     char meses[12][14] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
-    for (i = 0; i < quanti; i++) {
-        vetor[i].custo = pedirDados(1, meses[i]);
-        vetor[i].lucro = pedirDados(2, meses[i]);
-        fprintf(arquivo, "%d %d\n", vetor[i].custo, vetor[i].lucro);
+    int i = 0;
+    while (fscanf(arquivo1, "%d %d", &m1, &m2) != EOF && fscanf(arquivo2, "%d %d", &r1, &r2) != EOF) {
+        calculo = (m1 * r1) + (m2 * r2);
+        printf("O resultado do mês de %s é: %d\n", meses[i], calculo);
+        i++;
     }
 }
-
-void pedirPalavras(FILE *arquivo, Motores *vetor, int quanti){
-    arquivo = abrirArquivo("../arquivos/motoresProduzidos2.txt","w");
-    gravarArquivo(arquivo,vetor, quanti);
-}
-
-
 
 int main(){
     FILE *arq1;
     FILE *arq2;
-    int quanti = 12;
+    arq1 = abrirArquivo("../arquivos/motoresProduzidos.txt","r");
+    arq2 = abrirArquivo("../arquivos/motoresProduzidos2.txt","r");
+    calculo(arq1,arq2);
+    // int quanti = 12;
     // Motores vet[12];
     // Motores vet2[12];
     // pedirPalavras(arq2,vet2,quanti);
     // fclose(arq1);
     // fclose(arq2);
+    fclose(arq1);
+    fclose(arq2);
     
     return 0;
 }
