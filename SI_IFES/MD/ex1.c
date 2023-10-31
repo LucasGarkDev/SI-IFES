@@ -9,10 +9,10 @@ de uma base x elevada a um expoente y. */
 #define CORTE "-------------------------------------"
 
 int potencia(int base, int expoente){
-    if (base == 0){
+    if (expoente == 0){
         return 1;
-    }else {
-        return base * potencia(base,expoente-1); 
+    } else {
+        return base * potencia(base, expoente - 1);
     }
 }
 
