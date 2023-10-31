@@ -9,19 +9,21 @@ de uma base x elevada a um expoente y. */
 #define CORTE "-------------------------------------"
 
 int potencia(int base, int expoente){
-    if (expoente == 1){
+    if (base == 0){
         return 1;
     }else {
-        return base+potencia(base,expoente+1); 
+        return base * potencia(base,expoente-1); 
     }
 }
 
 int main(){
-    int n, e;
+    int n, m, e;
     printf("Base: ");
     scanf("%d", &n);
     printf("Expoente: ");
-    scanf("%d", &e);
-    printf("%d\n", potencia(e,n));
+    scanf("%d", &m);
+    e = potencia(n,m);
+    printf("\n%s\n", RESULTADO);
+    printf("X elevado a y e: %d\n", e);
     return 0;
 }
