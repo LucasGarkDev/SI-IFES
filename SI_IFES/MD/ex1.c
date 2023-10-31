@@ -8,18 +8,20 @@ de uma base x elevada a um expoente y. */
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int potencia(int cont){
-    if (cont == 1){
-        return cont;
+int potencia(int base, int expoente){
+    if (expoente == 1){
+        return 1;
     }else {
-        return cont*potencia(cont+1); 
+        return base+potencia(base,expoente+1); 
     }
 }
 
 int main(){
-    int n;
-    printf("Numeros:");
+    int n, e;
+    printf("Base: ");
     scanf("%d", &n);
-    printf("%d\n", potencia(n));
+    printf("Expoente: ");
+    scanf("%d", &e);
+    printf("%d\n", potencia(e,n));
     return 0;
 }
