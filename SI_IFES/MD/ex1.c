@@ -24,6 +24,6 @@ int main(){
     scanf("%d", &m);
     e = potencia(n,m);
     printf("\n%s\n", RESULTADO);
-    printf("X elevado a y e: %d\n", e);
+    printf("%d elevado a %d e: %d\n",n,m,e);
     return 0;
 }
