@@ -20,7 +20,7 @@ int soma(int n){
 //     }
 // }
 
-main(){
+int main(){
     int n;
     printf("Numeros:");
     scanf("%d", &n);
