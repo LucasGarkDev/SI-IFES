@@ -13,7 +13,7 @@ int maiorVet(int *vet, int tam){
     if (tam == 1){
         return vet[0];
     } else {
-        return ;
+        return maiorVet(vet,tam-1);
     }
 }
 
