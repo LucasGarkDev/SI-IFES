@@ -11,11 +11,11 @@ e 1, e os demais são a soma dos dois termos anteriores
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int fibonaci(int n, int valor){
+int fibonaci(int n){
     if (n == 1|| n == 2){
         return 1;
     } else {
-        return fibonaci(n-1,valor)+fibonaci(n-2,valor);
+        return fibonaci(n-1)+fibonaci(n-2);
     }
 }
 
@@ -24,7 +24,7 @@ int main(){
     printf("\n%s\n", INICIO);
     printf("Base: ");
     scanf("%d", &n);
-    e = fibonaci(n,e);
+    e = fibonaci(n);
     printf("\n%s\n", RESULTADO);
     printf("O fibonaci de %d e: %d\n",n,e);
     printf("\n%s\n", CORTE);
