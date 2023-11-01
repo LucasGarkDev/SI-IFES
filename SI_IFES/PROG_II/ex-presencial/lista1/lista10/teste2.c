@@ -9,17 +9,16 @@ elemento de um vetor de números inteiros*/
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int maiorVet(int *vet, int tam){
-    int resto, maior;
-    maior = vet[0];
-    if (tam == 1){
+int maiorVet(int *vet, int tam) {
+    int maior, resto;
+    if (tam == 1) {
         return vet[0];
     } else {
-        resto = maiorVet(vet,tam-1);
-        if (vet[tam] > resto){
-            maior = vet[tam];
-        }else{
-            maior = resto;
+        resto = maiorVet(vet, tam - 1);
+        if (vet[tam-1] > resto) {
+            return vet[tam - 1]; 
+        } else {
+            return resto; 
         }
     }
 }
