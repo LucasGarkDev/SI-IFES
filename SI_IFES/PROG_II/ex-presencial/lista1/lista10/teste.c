@@ -1,5 +1,3 @@
-/*Escreva uma função recursiva para calcular o valor
-de uma base x elevada a um expoente y. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -8,22 +6,20 @@ de uma base x elevada a um expoente y. */
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int potencia(int base, int expoente){
-    if (expoente == 0){
+int fatorial(int base){
+    if (base == 0){
         return 1;
     } else {
-        return base * potencia(base, expoente - 1);
+        return base*fatorial(base-1);
     }
 }
 
 int main(){
-    int n, m, e;
+    int n, e;
     printf("Base: ");
     scanf("%d", &n);
-    printf("Expoente: ");
-    scanf("%d", &m);
-    e = potencia(n,m);
+    e = fatorial(n);
     printf("\n%s\n", RESULTADO);
-    printf("%d elevado a %d e: %d\n",n,m,e);
+    printf("O fatorial de %d e: %d\n",n,e);
     return 0;
 }
