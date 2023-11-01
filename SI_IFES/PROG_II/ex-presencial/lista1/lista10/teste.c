@@ -16,10 +16,12 @@ int fatorial(int base){
 
 int main(){
     int n, e;
+    printf("\n%s\n", INICIO);
     printf("Base: ");
     scanf("%d", &n);
     e = fatorial(n);
     printf("\n%s\n", RESULTADO);
     printf("O fatorial de %d e: %d\n",n,e);
+    printf("\n%s\n", CORTE);
     return 0;
 }
