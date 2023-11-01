@@ -9,8 +9,8 @@ elemento de um vetor de números inteiros*/
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int percorreVet(int *vet, int i){
-    if (i == 0){
+int maiorVet(int *vet, int tam){
+    if (tam == 1){
         return vet[0];
     } else {
         return ;
@@ -18,10 +18,10 @@ int percorreVet(int *vet, int i){
 }
 
 int main(){
-    int res, maior = 0, i = 5;
-    int vetor[5] = {1,76,43,12,23};
+    int res,i = 5;
+    int vetor[5] = {9,76,43,12,23};
     printf("\n%s\n", INICIO);
-    res = fibonaci(vetor, i);
+    res = maiorVet(vetor, i);
     printf("\n%s\n", RESULTADO);
     printf("O maior do vetor e: %d\n",res);
     printf("\n%s\n", CORTE);
