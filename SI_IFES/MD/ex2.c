@@ -1,27 +1,28 @@
 /*Escrever uma função recursiva que retorna o
 tamanho de um string, tamstring(char s[]) */
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <string.h>
 
 #define INICIO "--------INICIO--------"
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int string(char *s, int tam){
-    if (tam == 0){
-        return tam;
-    }else{
-        return tam*string(s,tam-1);
+int string(char *s, int tam) {
+    if (tam == 0) {
+        return 0; 
+    } else {
+        return 1 + string(s + 1, tam - 1);
     }
 }
 
-int main(){
+int main() {
     int tam;
     char str[50];
-    scanf("%49[^\n]s", str);
+    printf("\n%s\n", INICIO);
+    printf("Digite a frase: ");
+    fgets(str, sizeof(str), stdin);
+    tam = string(str, strlen(str) - 1); 
     printf("\n%s\n", RESULTADO);
-    //local de chamada
-    printf("O tamanho da string e: %d", tam);
+    printf("O tamanho da string e: %d\n", tam);
     return 0;
 }
