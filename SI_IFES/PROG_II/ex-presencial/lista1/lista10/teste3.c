@@ -11,25 +11,19 @@ diferentes permutações. Por exemplo, para n = 4, existem cinco maneiras de rep
 #define RESULTADO "-----------RESULTADO-----------"
 #define CORTE "-------------------------------------"
 
-int maiorVet(int *vet, int tam) {
-    int maior, resto;
-    if (tam == 1) {
-        return vet[0];
-    } else {
-        resto = maiorVet(vet, tam - 1);
-        if (vet[tam-1] > resto) {
-            return vet[tam - 1]; 
-        } else {
-            return resto; 
-        }
+int contagemDeModo(int n){
+    n--;
+    if (n == 1){
+        return n;
+    }else{
+        return n + contagemDeModo(n-1);
     }
 }
 
 int main(){
-    int res,i = 5;
-    int vetor[5] = {9,76,43,12,23};
+    int res,n;
     printf("\n%s\n", INICIO);
-    res = maiorVet(vetor, i);
+    res = contagemDeModo(n);
     printf("\n%s\n", RESULTADO);
     printf("O maior do vetor e: %d\n",res);
     printf("\n%s\n", CORTE);
