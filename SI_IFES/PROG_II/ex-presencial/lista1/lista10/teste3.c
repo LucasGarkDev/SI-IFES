@@ -25,7 +25,7 @@ int main(){
     printf("\n%s\n", INICIO);
     res = contagemDeModo(n);
     printf("\n%s\n", RESULTADO);
-    printf("O maior do vetor e: %d\n",res);
+    printf("O numero de modos do numero %d: %d\n",n,res);
     printf("\n%s\n", CORTE);
     return 0;
 }
