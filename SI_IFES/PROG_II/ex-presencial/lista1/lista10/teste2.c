@@ -25,7 +25,7 @@ int maiorVet(int *vet, int tam) {
 
 int main(){
     int res,i = 5;
-    int vetor[5] = {9,76,43,92,23};
+    int vetor[5] = {105,76,43,92,23};
     printf("\n%s\n", INICIO);
     res = maiorVet(vetor, i);
     printf("\n%s\n", RESULTADO);
