@@ -10,7 +10,7 @@ elemento de um vetor de números inteiros*/
 #define CORTE "-------------------------------------"
 
 int maiorVet(int *vet, int tam) {
-    int maior, resto;
+    int resto;
     if (tam == 1) {
         return vet[0];
     } else {
