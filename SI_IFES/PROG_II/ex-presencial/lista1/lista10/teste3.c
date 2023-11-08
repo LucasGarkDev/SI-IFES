@@ -12,7 +12,6 @@ diferentes permutações. Por exemplo, para n = 4, existem cinco maneiras de rep
 #define CORTE "-------------------------------------"
 
 int contagemDeModo(int n){
-    n--;
     if (n == 1){
         return n;
     }else{
@@ -22,6 +21,8 @@ int contagemDeModo(int n){
 
 int main(){
     int res,n;
+    printf("Digite o valor de n: ");
+    scanf("%d", &n);
     printf("\n%s\n", INICIO);
     res = contagemDeModo(n);
     printf("\n%s\n", RESULTADO);
